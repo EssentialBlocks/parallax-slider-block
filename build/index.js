@@ -3581,8 +3581,7 @@ var attributes = {
     type: "string"
   },
   titleFontWeight: {
-    type: "string",
-    "default": "px"
+    type: "string"
   },
   titleFontSize: {
     type: "number"
@@ -3621,8 +3620,7 @@ var attributes = {
     type: "string"
   },
   btnFontWeight: {
-    type: "string",
-    "default": "px"
+    type: "string"
   },
   btnFontSize: {
     type: "number"

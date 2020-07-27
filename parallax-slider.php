@@ -17,6 +17,10 @@
  *
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
+
+require_once __DIR__ . '/includes/font-loader.php';
+require_once __DIR__ . '/includes/post-meta.php';
+
 function create_block_parallax_slider_block_init() {
 	$dir = dirname( __FILE__ );
 
@@ -73,9 +77,11 @@ function create_block_parallax_slider_block_init() {
     true
   );
 
-	register_block_type( 'create-block/parallax-slider', array(
-		'editor_script' => 'create-block-parallax-slider-block-editor',
-		'style'         => 'create-block-parallax-slider-block',
-	) );
+	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/parallax-slider' ) ) {
+    register_block_type( 'create-block/parallax-slider', array(
+      'editor_script' => 'create-block-parallax-slider-block-editor',
+      'style'         => 'create-block-parallax-slider-block',
+    ) );
+  }
 }
 add_action( 'init', 'create_block_parallax_slider_block_init' );

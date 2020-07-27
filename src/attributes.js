@@ -61,7 +61,6 @@ const attributes = {
 	},
 	titleFontWeight: {
 		type: "string",
-		default: "px",
 	},
 	titleFontSize: {
 		type: "number",
@@ -101,7 +100,6 @@ const attributes = {
 	},
 	btnFontWeight: {
 		type: "string",
-		default: "px",
 	},
 	btnFontSize: {
 		type: "number",

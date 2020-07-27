@@ -1,13 +1,16 @@
-const Save = ({ attributes }) => {
+/**
+ * WordPress dependencies
+ */
+const { createRef } = wp.element;
+
+const Slide = ({ slide, position, handleSlideClick, attributes }) => {
 	const {
-		sliderData,
 		current,
 		intensity,
-		startIndex,
 		titleColor,
+		titleFontFamily,
 		titleFontSize,
 		titleSizeUnit,
-		titleFontFamily,
 		titleFontWeight,
 		titleTextDecoration,
 		titleTextTransform,
@@ -17,9 +20,9 @@ const Save = ({ attributes }) => {
 		titleLineHeightUnit,
 		btnColor,
 		btnBackgroundColor,
-		btnFontFamily,
 		btnFontSize,
 		btnSizeUnit,
+		btnFontFamily,
 		btnFontWeight,
 		btnTextDecoration,
 		btnTextTransform,
@@ -42,10 +45,37 @@ const Save = ({ attributes }) => {
 		btnPaddingBottom,
 		btnPaddingLeft,
 		btnPaddingUnit,
-		prevIcon,
-		nextIcon,
-		iconColor,
 	} = attributes;
+	let slideRef = createRef();
+
+	const handleMouseMove = (event) => {
+		const el = slideRef.current;
+		const r = el.getBoundingClientRect();
+		el.style.setProperty(
+			"--x",
+			event.clientX - (r.left + Math.floor(r.width / 2))
+		);
+		el.style.setProperty(
+			"--y",
+			event.clientY - (r.top + Math.floor(r.height / 2))
+		);
+		el.style.setProperty("--d", intensity || 50);
+	};
+
+	const handleMouseLeave = (event) => {
+		slideRef.current.style.setProperty("--x", 0);
+		slideRef.current.style.setProperty("--y", 0);
+		slideRef.current.style.setProperty("--y", 50);
+	};
+
+	const imageLoaded = (event) => (event.target.style.opacity = 1);
+
+	const handleButtonClick = (link) => {
+		// Redirect to button link
+		if (link) {
+			window.location = link;
+		}
+	};
 
 	// Style objects
 	const titleStyles = {
@@ -85,51 +115,43 @@ const Save = ({ attributes }) => {
 		padding: `${btnPaddingTop}${btnPaddingUnit} ${btnPaddingRight}${btnPaddingUnit} ${btnPaddingBottom}${btnPaddingUnit} ${btnPaddingLeft}${btnPaddingUnit} `,
 	};
 
-	const iconStyles = {
-		color: iconColor || "gray",
-	};
+	let classNames = "slide";
+	if (current === position) classNames += " slide--current";
+	else if (current - 1 === position) classNames += " slide--previous";
+	else if (current + 1 === position) classNames += " slide--next";
 
 	return (
-		<div
-			className="eb-parallax-container"
-			data-start-index={startIndex}
-			data-intensity={intensity}
-			data-shadow={hasBtnShadow}
+		<li
+			ref={slideRef}
+			className={classNames}
+			onClick={() => handleSlideClick(position)}
+			onMouseMove={handleMouseMove}
+			onMouseLeave={handleMouseLeave}
 		>
-			<div className="eb-parallax-slider">
-				<ul className="eb-parallax-wrapper">
-					{sliderData.map((slide, index) => (
-						<li key={index} className="slide">
-							<div className="slide__image-wrapper">
-								<img
-									className="slide__image"
-									src={slide.src}
-									alt={slide.alt}
-									style={{ opacity: 1 }}
-								/>
-							</div>
-							<article className="slide__content">
-								<h2 className="slide__headline" style={titleStyles}>
-									{slide.title}
-								</h2>
-								<button
-									className="slide__action btn"
-									style={buttonStyles}
-									data-link={slide.link}
-								>
-									{slide.btnText}
-								</button>
-							</article>
-						</li>
-					))}
-				</ul>
-				<div className="eb-slider__controls">
-					<div className={`btn btn--previous ${prevIcon}`} style={iconStyles} />
-					<div className={`btn btn--next ${nextIcon}`} style={iconStyles} />
-				</div>
+			<div className="slide__image-wrapper">
+				<img
+					className="slide__image"
+					alt="img"
+					src={slide.src}
+					onLoad={imageLoaded}
+				/>
 			</div>
-		</div>
+			<article className="slide__content">
+				<h2 className="slide__headline" style={titleStyles}>
+					{slide.title}
+				</h2>
+				<button
+					onClick={() => handleButtonClick(slide.link)}
+					className={`slide__action btn ${
+						hasBtnShadow ? "btn-has-shadow" : ""
+					} `}
+					style={buttonStyles}
+				>
+					{slide.btnText}
+				</button>
+			</article>
+		</li>
 	);
 };
 
-export default Save;
+export default Slide;

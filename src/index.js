@@ -8,7 +8,7 @@ import attributes from "./attributes";
 import icon from "./icon";
 
 registerBlockType("block/parallax-slider", {
-	title: __("Parallax Slider", "create-block"),
+	title: __("Parallax Slider", "parallax-slider"),
 	description: __(
 		"Create A Captivating Visual Experience & Impress Your Audience",
 		"parallax-slider"

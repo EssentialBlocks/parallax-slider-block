@@ -1,33 +1,126 @@
 /**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
+ * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+const { __ } = wp.i18n;
+const { BlockControls, MediaPlaceholder, MediaUpload } = wp.blockEditor;
+const { Button, Toolbar } = wp.components;
+const { useEffect, Fragment } = wp.element;
 
 /**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
+ * Internal dependencies
  */
-import './editor.scss';
+import Slider from "./slider";
+import Inspector from "./inspector";
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#edit
- *
- * @param {Object} [props]           Properties passed from the editor.
- * @param {string} [props.className] Class name generated for the block.
- *
- * @return {WPElement} Element to render.
- */
-export default function Edit( { className } ) {
-	return (
-		<p className={ className }>
-			{ __( 'Parallax Slider – hello from the editor!', 'create-block' ) }
-		</p>
-	);
+function getPreviousImgData(previousData, image) {
+	let prevTitle, prevBtnText, prevLink;
+	previousData.map((item) => {
+		if (item.id === image.id) {
+			prevTitle = item.title;
+			prevBtnText = item.btnText;
+			prevLink = item.link;
+		}
+	});
+
+	return [prevTitle, prevBtnText, prevLink];
 }
+
+const Edit = ({ attributes, setAttributes, isSelected }) => {
+	const { sliderData, startIndex, current, preview } = attributes;
+	const hasImages = !!sliderData.length;
+
+	// Change start index if image is removed from gallery
+	useEffect(() => {
+		if (startIndex > sliderData.length) {
+			setAttributes({ startIndex: sliderData.length });
+		}
+	}, [startIndex, sliderData]);
+
+	const onImageSelect = (images) => {
+		if (!images.length) {
+			return null;
+		}
+
+		// Store images with slider data
+		let sliderData = [];
+		let previousData = [...attributes.sliderData];
+
+		images.map((image) => {
+			let item = {};
+
+			// Get previous image info after updating gallary
+			let [prevTitle, prevBtnText, prevLink] = getPreviousImgData(
+				previousData,
+				image
+			);
+
+			item.id = image.id;
+			item.src = image.url;
+			item.alt = image.alt;
+			item.title = prevTitle || "Header Text";
+			item.btnText = prevBtnText || "Button";
+			item.link = prevLink || "";
+
+			sliderData.push(item);
+		});
+		setAttributes({ sliderData });
+	};
+
+	if (preview) {
+		return (
+			<img src="https://raw.githubusercontent.com/rupok/essential-blocks-templates/dev/previews/parallax-slider-preview.png" />
+		);
+	}
+
+	if (!hasImages) {
+		// Show placeholder at the beginning
+		return (
+			<MediaPlaceholder
+				labels={{
+					title: __("Images"),
+					instructions: __(
+						"Drag images, upload new ones or select files from your library."
+					),
+				}}
+				onSelect={(images) => onImageSelect(images)}
+				accept="image/*"
+				allowedTypes={["image"]}
+				multiple
+			/>
+		);
+	}
+
+	return (
+		<Fragment>
+			<BlockControls>
+				<Toolbar>
+					<MediaUpload
+						onSelect={(images) => onImageSelect(images)}
+						allowedTypes={["image"]}
+						multiple
+						gallery
+						value={sliderData.map((img) => img.id)}
+						render={({ open }) => (
+							<Button
+								className="components-toolbar__control"
+								label={__("Edit gallery")}
+								icon="edit"
+								onClick={open}
+							/>
+						)}
+					/>
+				</Toolbar>
+			</BlockControls>
+			{isSelected && (
+				<Inspector attributes={attributes} setAttributes={setAttributes} />
+			)}
+			<Slider
+				slides={sliderData}
+				attributes={attributes}
+				setAttributes={setAttributes}
+			/>
+		</Fragment>
+	);
+};
+
+export default Edit;

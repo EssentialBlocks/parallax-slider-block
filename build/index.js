@@ -170,6 +170,236 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/attributes.js":
+/*!***************************!*\
+  !*** ./src/attributes.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var attributes = {
+  sliderData: {
+    type: "array",
+    source: "query",
+    selector: ".slide",
+    query: {
+      src: {
+        type: "string",
+        selector: "img",
+        source: "attribute",
+        attribute: "src"
+      },
+      alt: {
+        type: "string",
+        selector: "img",
+        source: "attribute",
+        attribute: "alt"
+      },
+      title: {
+        type: "string",
+        selector: "h2",
+        source: "text",
+        default: "Add header text here"
+      },
+      btnText: {
+        type: "string",
+        selector: "button",
+        source: "text",
+        default: "Add Text"
+      },
+      link: {
+        type: "string",
+        selector: "button",
+        source: "attribute",
+        attribute: "data-link",
+        default: ""
+      }
+    },
+    default: []
+  },
+  intensity: {
+    type: "string",
+    selector: ".eb-parallax-container",
+    source: "attribute",
+    attribute: "data-intensity",
+    default: "50"
+  },
+  startIndex: {
+    type: "string",
+    selector: ".eb-parallax-container",
+    source: "attribute",
+    attribute: "data-start-index",
+    default: "1"
+  },
+  current: {
+    type: "number",
+    default: 0
+  },
+  titleFontFamily: {
+    type: "string"
+  },
+  titleFontWeight: {
+    type: "string",
+    default: "px"
+  },
+  titleFontSize: {
+    type: "number"
+  },
+  titleSizeUnit: {
+    type: "string",
+    default: "px"
+  },
+  titleTextDecoration: {
+    type: "string"
+  },
+  titleTextTransform: {
+    type: "string"
+  },
+  titleLetterSpacing: {
+    type: "number"
+  },
+  titleLetterSpacingUnit: {
+    type: "string",
+    default: "px"
+  },
+  titleLineHeight: {
+    type: "number"
+  },
+  titleLineHeightUnit: {
+    type: "string",
+    default: "px"
+  },
+  titleColor: {
+    type: "string"
+  },
+  titleBackgroundColor: {
+    type: "string"
+  },
+  btnFontFamily: {
+    type: "string"
+  },
+  btnFontWeight: {
+    type: "string",
+    default: "px"
+  },
+  btnFontSize: {
+    type: "number"
+  },
+  btnSizeUnit: {
+    type: "string",
+    default: "px"
+  },
+  btnTextDecoration: {
+    type: "string"
+  },
+  btnTextTransform: {
+    type: "string"
+  },
+  btnLetterSpacing: {
+    type: "number"
+  },
+  btnLetterSpacingUnit: {
+    type: "string",
+    default: "px"
+  },
+  btnLineHeight: {
+    type: "number"
+  },
+  btnLineHeightUnit: {
+    type: "string",
+    default: "px"
+  },
+  btnBorderColor: {
+    type: "string"
+  },
+  btnBorderWidth: {
+    type: "number"
+  },
+  btnBorderStyle: {
+    type: "string",
+    default: "solid"
+  },
+  btnBorderRadius: {
+    type: "number"
+  },
+  hasBtnShadow: {
+    type: "string",
+    selector: ".eb-parallax-container",
+    source: "attribute",
+    attribute: "data-shadow",
+    default: false
+  },
+  btnMarginTop: {
+    type: "number",
+    default: 0
+  },
+  btnMarginRight: {
+    type: "number",
+    default: 0
+  },
+  btnMarginBottom: {
+    type: "number",
+    default: 0
+  },
+  btnMarginLeft: {
+    type: "number",
+    default: 0
+  },
+  btnMarginUnit: {
+    type: "string",
+    default: "px"
+  },
+  btnPaddingTop: {
+    type: "number",
+    default: 0
+  },
+  btnPaddingRight: {
+    type: "number",
+    default: 0
+  },
+  btnPaddingBottom: {
+    type: "number",
+    default: 0
+  },
+  btnPaddingLeft: {
+    type: "number",
+    default: 0
+  },
+  btnPaddingUnit: {
+    type: "string",
+    default: "px"
+  },
+  prevIcon: {
+    type: "string",
+    default: "fas fa-chevron-left"
+  },
+  nextIcon: {
+    type: "string",
+    default: "fas fa-chevron-right"
+  },
+  iconColor: {
+    type: "string",
+    selector: ".eb-parallax-container",
+    source: "attribute",
+    attribute: "data-icon-color"
+  },
+  preview: {
+    type: "boolean",
+    default: false
+  },
+  btnBackgroundColor: {
+    type: "string"
+  },
+  btnColor: {
+    type: "string"
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (attributes);
+
+/***/ }),
+
 /***/ "./src/edit.js":
 /*!*********************!*\
   !*** ./src/edit.js ***!
@@ -251,6 +481,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/save.js");
+/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./attributes */ "./src/attributes.js");
+
 
 
 
@@ -261,6 +493,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])("blo
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Create A Captivating Visual Experience & Impress Your Audience", "parallax-slider"),
   category: "widgets",
   icon: "smiley",
+  attributes: _attributes__WEBPACK_IMPORTED_MODULE_6__["default"],
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"]
 });

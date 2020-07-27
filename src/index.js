@@ -5,6 +5,7 @@ import "./style.scss";
 import Edit from "./edit";
 import save from "./save";
 import attributes from "./attributes";
+import icon from "./icon";
 
 registerBlockType("block/parallax-slider", {
 	title: __("Parallax Slider", "create-block"),
@@ -13,7 +14,7 @@ registerBlockType("block/parallax-slider", {
 		"parallax-slider"
 	),
 	category: "widgets",
-	icon: "smiley",
+	icon,
 	attributes,
 	edit: Edit,
 	save,

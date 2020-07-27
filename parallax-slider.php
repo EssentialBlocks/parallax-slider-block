@@ -65,6 +65,14 @@ function create_block_parallax_slider_block_init() {
 	);
 
 
+  $frontend_js = 'src/frontend.js';
+  wp_enqueue_script(
+    'essential-blocks-parallax-slider-frontend',
+    plugins_url($frontend_js, __FILE__),
+    array("wp-editor"),
+    true
+  );
+
 	register_block_type( 'create-block/parallax-slider', array(
 		'editor_script' => 'create-block-parallax-slider-block-editor',
 		'style'         => 'create-block-parallax-slider-block',

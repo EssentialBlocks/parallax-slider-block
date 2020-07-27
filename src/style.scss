@@ -41,7 +41,6 @@
 	border-radius: 0.125rem;
 	color: white;
 	cursor: pointer;
-	font-family: inherit;
 	font-size: inherit;
 	padding: 1rem 2.5rem 1.125rem;
 	transition: all 200ms ease-in-out;
@@ -244,4 +243,10 @@
 
 .parallax-st4 {
 	fill: url(#SVGID_PARA_5);
+}
+
+// Typography style
+.eb-typography-base div {
+	display: flex;
+	justify-content: space-between;
 }

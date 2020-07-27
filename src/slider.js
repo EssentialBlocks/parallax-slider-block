@@ -12,7 +12,7 @@ import SliderControl from "./slide-control";
 const Slider = ({ slides, attributes, setAttributes }) => {
 	const { current, prevIcon, nextIcon, iconColor } = attributes;
 
-	const handleSlideClick = current => setAttributes({ current });
+	const handleSlideClick = (current) => setAttributes({ current });
 
 	const handlePreviousClick = () => {
 		const previous = current - 1;
@@ -27,12 +27,12 @@ const Slider = ({ slides, attributes, setAttributes }) => {
 	};
 
 	const wrapperTransform = {
-		transform: `translateX(-${current * (100 / slides.length)}%)`
+		transform: `translateX(-${current * (100 / slides.length)}%)`,
 	};
 
 	const sliderStyles = {
 		color: iconColor || "gray",
-		fontSize: 32
+		fontSize: 32,
 	};
 
 	return (

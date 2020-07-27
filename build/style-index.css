@@ -40,7 +40,6 @@
   border-radius: 0.125rem;
   color: white;
   cursor: pointer;
-  font-family: inherit;
   font-size: inherit;
   padding: 1rem 2.5rem 1.125rem;
   transition: all 200ms ease-in-out; }
@@ -243,6 +242,10 @@
 
 .parallax-st4 {
   fill: url(#SVGID_PARA_5); }
+
+.eb-typography-base div {
+  display: flex;
+  justify-content: space-between; }
 
 .eb-unit-control-btn-group {
   margin: 0px 0px -20px 0px;

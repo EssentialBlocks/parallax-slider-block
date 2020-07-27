@@ -1,0 +1,18 @@
+import { registerBlockType } from "@wordpress/blocks";
+import { __ } from "@wordpress/i18n";
+import "./style.scss";
+
+import Edit from "./edit";
+import save from "./save";
+
+registerBlockType("block/parallax-slider", {
+	title: __("Parallax Slider", "create-block"),
+	description: __(
+		"Create A Captivating Visual Experience & Impress Your Audience",
+		"parallax-slider"
+	),
+	category: "widgets",
+	icon: "smiley",
+	edit: Edit,
+	save,
+});

@@ -1,0 +1,10 @@
+{
+	"name": "block/parallax-slider",
+	"title": "Parallax Slider",
+	"category": "widgets",
+	"description": "Create A Captivating Visual Experience & Impress Your Audience",
+	"textdomain": "parallax-slider",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}

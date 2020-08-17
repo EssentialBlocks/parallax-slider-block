@@ -78,7 +78,7 @@ function create_block_parallax_slider_block_init() {
   );
 
 	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/parallax-slider' ) ) {
-    register_block_type( 'create-block/parallax-slider', array(
+    register_block_type( 'block/parallax-slider', array(
       'editor_script' => 'create-block-parallax-slider-block-editor',
       'style'         => 'create-block-parallax-slider-block',
     ) );

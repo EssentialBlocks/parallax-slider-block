@@ -1,57 +1,98 @@
-=== Parallax Slider ===
-Contributors:      The WordPress Contributors
-Tags:              block
-Requires at least: 5.3.2
-Tested up to:      5.4.1
-Stable tag:        0.1.0
-Requires PHP:      7.0.0
-License:           GPL-2.0-or-later
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+=== Parallax Slider Block ===
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, alam789
+Tags: gutenberg, block, blocks, editor, progress, progress bar, skill bar, responsive progress bar, animated skillbar, animated progress bar, skill-bars, percentage bar, chart bar, graph bar, gutenberg blocks
+Requires at least: 5.0
+Tested up to: 5.5
+Stable tag: 1.0.0
+License: GPLv3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Example block written with ESNext standard and JSX support – build step required.
+Create A Captivating Visual Experience & Impress Your Audience
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+**Parallax Slider** is a great way to create a captivating visual experience for your website visitors. It will help you to impress your audience with an amazing effect and also reduce page scroll time.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+Using parallax scrolling effect in the slider, you can add to the sense of immersion in the virtual experience. You don’t need any coding to create parallax slider effect just install this block plugin & use this animation from **Block Editor**
+
+
+**Completely Customizable:** You can customize the images, speed, effect etc. to make it suitable for your website design
+
+**Super Light-weight:** No extra resources used and it's highly optimized for super fast loading & instant Live editing.
+
+**Dedicated Support:** We’ve an extraordinary support team ready to help you. Ask your questions in the support forum, we’ll get back to you immediately.
+
+
+## 🚀 BACKED BY A TRUSTED TEAM ## 
+
+This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team behind the most popular elements library [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) (used by almost 700,000 happy users from 180+ countries).
+
+## 👨‍💻 DOCUMENTATION AND SUPPORT ##
+
+- For documentation and tutorials go to our [documentation](https://essential-blocks.com/docs/)
+- To report issue and contribution visit [Github](https://github.com/EssentialBlocks/parallax-slider-block).
+- If you have any more questions, visit our support on the [Plugin's Forum](https://wordpress.org/support/plugin/parallax-slider-block).
+- For more information about features, FAQs and documentation, check out our website at [WPDeveloper](https://wpdeveloper.net/).
+
+## 🙌 JOIN THE COMMUNITY ##
+
+🎦 Subscribe to our [Youtube Channel](https://www.youtube.com/wpdevelopernet/?sub_confirmation=1) to watch video tutorials on WordPress.
+
+🤝 Join our [Facebook Community](https://www.facebook.com/groups/wpdeveloper.net/) & get connected with expert web creators like yourself.
+
+🧡 LOVED Parallax Slider Block Block? Rate us on [WordPress Repository](https://wordpress.org/support/plugin/parallax-slider-block/reviews/#new-post)
+
+🔥 GET FREEBIES FOR YOUR WORDPRESS SITE
+
+Consider checking out our other WordPress solutions & boost your WordPress website:
+
+🔝 [Essential Addons For Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/): Most popular Elementor addons with 70+ widgets & ready blocks
+
+☁ [Templately](https://wordpress.org/plugins/templately/): Free templates library for Elementor & Gutenberg along with the cloud collaboration for WordPress
+
+🔔 [NotificationX](https://wordpress.org/plugins/notificationx/): Best Social Proof & FOMO Marketing Solution to increase conversion rates
+
+📚 [BetterDocs](https://wordpress.org/plugins/betterdocs/): Best Documentation & Knowledge Base Plugin for WordPress reduce manual support tickets & improve user experience.
+
+⏰ [WP Scheduled Posts](https://wordpress.org/plugins/wp-scheduled-posts/): Advanced editorial calendar & complete solution for WordPress Post Scheduling, social sharing, missed scheduled alerts and more.
+
+⭐ [ReviewX](https://wordpress.org/plugins/reviewx/): WooCommerce Product review plugin that allows users to submit product reviews with multiple criteria, photos, video and more
+
+⚡ [Flexia](http://wordpress.org/plugins/flexia): Most lightweight, customizable & multi purpose theme for WordPress
+
+
+Visit [WPDeveloper](https://wpdeveloper.net/) to learn more about how to do better in WordPress with [Help Tutorial, Tips & Tricks](https://wpdeveloper.net/blog).
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+= Modern Way: =
+1. Go to the WordPress Block/Gutenberg Editor
+2. Search For "Slider Block". 
+3. Install in 1-click
 
-e.g.
-
-1. Upload the plugin files to the `/wp-content/plugins/parallax-slider` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
+= Old Way: =
+1. Upload `parallax-slider-block` to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Follow the [Documentation](https://essential-blocks.com/docs/)
 
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Does it work with any WordPress theme? =
 
-An answer to that question.
+Yes, it will work with any standard WordPress theme.
 
-= What about foo bar? =
-
-Answer to foo bar dilemma.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
 
 == Changelog ==
 
-= 0.1.0 =
-* Release
 
-== Arbitrary section ==
+= 1.0.0 - 23-08-2020 =
 
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
+* Initial release
+
+
+== Upgrade Notice ==
+

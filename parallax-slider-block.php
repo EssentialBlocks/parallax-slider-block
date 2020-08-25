@@ -1,14 +1,15 @@
 <?php
 /**
- * Plugin Name:     Parallax Slider
+ * Plugin Name:     Parallax Slider Block
  * Description:     Create A Captivating Visual Experience & Impress Your Audience
- * Version:         0.1.0
- * Author:          The WordPress Contributors
- * License:         GPL-2.0-or-later
- * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:     parallax-slider
+ * Version:         1.0.0
+ * Author:          WPDeveloper
+ * Author URI: 		https://wpdeveloper.net
+ * License:         GPL-3.0-or-later
+ * License URI:     https://www.gnu.org/licenses/gpl-3.0.html
+ * Text Domain:     parallax-slider-block
  *
- * @package         parallax-slider
+ * @package         parallax-slider-block
  */
 
 /**
@@ -27,7 +28,7 @@ function create_block_parallax_slider_block_init() {
 	$script_asset_path = "$dir/build/index.asset.php";
 	if ( ! file_exists( $script_asset_path ) ) {
 		throw new Error(
-			'You need to run `npm start` or `npm run build` for the "create-block/parallax-slider" block first.'
+			'You need to run `npm start` or `npm run build` for the "parallax-slider-block/parallax-slider-block" block first.'
 		);
 	}
 	$index_js     = 'build/index.js';
@@ -78,7 +79,7 @@ function create_block_parallax_slider_block_init() {
   );
 
 	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/parallax-slider' ) ) {
-    register_block_type( 'block/parallax-slider', array(
+    register_block_type( 'parallax-slider-block/parallax-slider-block', array(
       'editor_script' => 'create-block-parallax-slider-block-editor',
       'style'         => 'create-block-parallax-slider-block',
     ) );

@@ -7,7 +7,7 @@ import save from "./save";
 import attributes from "./attributes";
 import icon from "./icon";
 
-registerBlockType("block/parallax-slider", {
+registerBlockType("parallax-slider-block/parallax-slider-block", {
 	title: __("Parallax Slider", "parallax-slider"),
 	description: __(
 		"Create A Captivating Visual Experience & Impress Your Audience",

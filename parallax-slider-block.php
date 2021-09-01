@@ -48,35 +48,14 @@ function create_block_parallax_slider_block_init() {
 		filemtime( "$dir/$style_css" )
 	);
 
-	$fontpicker_theme = 'src/css/fonticonpicker.base-theme.react.css';
-	wp_enqueue_style(
-		'fontpicker-default-theme',
-		plugins_url( $fontpicker_theme, __FILE__),
-		array()
+
+	$frontend_js = 'src/frontend.js';
+	wp_enqueue_script(
+		'essential-blocks-parallax-slider-frontend',
+		plugins_url($frontend_js, __FILE__),
+		array("wp-editor"),
+		true
 	);
-
-	$fontpicker_material_theme = 'src/css/fonticonpicker.material-theme.react.css';
-	wp_enqueue_style(
-		'fontpicker-matetial-theme',
-		plugins_url( $fontpicker_material_theme, __FILE__),
-		array()
-	);
-
-	$fontawesome_css = 'src/css/font-awesome5.css';
-	wp_enqueue_style(
-		'fontawesome-frontend-css',
-		plugins_url( $fontawesome_css, __FILE__),
-		array()
-	);
-
-
-  $frontend_js = 'src/frontend.js';
-  wp_enqueue_script(
-    'essential-blocks-parallax-slider-frontend',
-    plugins_url($frontend_js, __FILE__),
-    array("wp-editor"),
-    true
-  );
 
 	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/parallax-slider' ) ) {
     register_block_type( 'parallax-slider-block/parallax-slider-block', array(

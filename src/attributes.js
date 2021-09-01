@@ -1,4 +1,28 @@
 const attributes = {
+	resOption: {
+		type: "string",
+		default: "Desktop",
+	},
+
+	// blockId attribute for making unique className and other uniqueness
+	blockId: {
+		type: "string",
+	},
+	blockRoot: {
+		type: "string",
+		default: "essential_block",
+	},
+	blockMeta: {
+		type: "object",
+	},
+	sliderStyle: {
+		type: "string",
+		default: "style-1"
+	},
+	images: {
+		type: "array",
+		default: [],
+	},
 	sliderData: {
 		type: "array",
 		source: "query",

@@ -3515,6 +3515,29 @@ var classNamesShape =  true ? prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var attributes = {
+  resOption: {
+    type: "string",
+    "default": "Desktop"
+  },
+  // blockId attribute for making unique className and other uniqueness
+  blockId: {
+    type: "string"
+  },
+  blockRoot: {
+    type: "string",
+    "default": "essential_block"
+  },
+  blockMeta: {
+    type: "object"
+  },
+  sliderStyle: {
+    type: "string",
+    "default": "style-1"
+  },
+  images: {
+    type: "array",
+    "default": []
+  },
   sliderData: {
     type: "array",
     source: "query",
@@ -3830,46 +3853,28 @@ var TEXT_DECORATION = [{
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slider */ "./src/slider.js");
-/* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inspector */ "./src/inspector.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Edit; });
+/* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./inspector */ "./src/inspector.js");
 /**
  * WordPress dependencies
  */
 var __ = wp.i18n.__;
+var useEffect = wp.element.useEffect;
 var _wp$blockEditor = wp.blockEditor,
-    BlockControls = _wp$blockEditor.BlockControls,
+    MediaUpload = _wp$blockEditor.MediaUpload,
     MediaPlaceholder = _wp$blockEditor.MediaPlaceholder,
-    MediaUpload = _wp$blockEditor.MediaUpload;
+    BlockControls = _wp$blockEditor.BlockControls,
+    useBlockProps = _wp$blockEditor.useBlockProps;
 var _wp$components = wp.components,
-    Button = _wp$components.Button,
-    Toolbar = _wp$components.Toolbar;
-var _wp$element = wp.element,
-    useEffect = _wp$element.useEffect,
-    Fragment = _wp$element.Fragment;
+    ToolbarGroup = _wp$components.ToolbarGroup,
+    ToolbarItem = _wp$components.ToolbarItem,
+    ToolbarButton = _wp$components.ToolbarButton,
+    Button = _wp$components.Button;
+var select = wp.data.select;
 /**
  * Internal dependencies
  */
-
+// import Slider from "./slider";
 
 
 
@@ -3885,61 +3890,73 @@ function getPreviousImgData(previousData, image) {
   return [prevTitle, prevBtnText, prevLink];
 }
 
-var Edit = function Edit(_ref) {
-  var attributes = _ref.attributes,
-      setAttributes = _ref.setAttributes,
-      isSelected = _ref.isSelected;
-  var sliderData = attributes.sliderData,
+function Edit(props) {
+  var attributes = props.attributes,
+      setAttributes = props.setAttributes,
+      clientId = props.clientId,
+      isSelected = props.isSelected;
+  var resOption = attributes.resOption,
+      blockId = attributes.blockId,
+      blockMeta = attributes.blockMeta,
+      sliderStyle = attributes.sliderStyle,
+      images = attributes.images,
+      sliderData = attributes.sliderData,
       startIndex = attributes.startIndex,
       current = attributes.current,
       preview = attributes.preview;
-  var hasImages = !!sliderData.length; // Change start index if image is removed from gallery
+  var hasImages = !!images.length;
+  var blockProps = useBlockProps({
+    className: "eb-guten-block-main-parent-wrapper"
+  });
+  console.log("Images", images); // Change start index if image is removed from gallery
+  // useEffect(() => {
+  // 	if (startIndex > sliderData.length) {
+  // 		setAttributes({ startIndex: sliderData.length });
+  // 	}
+  // }, [startIndex, sliderData]);
 
-  useEffect(function () {
-    if (startIndex > sliderData.length) {
-      setAttributes({
-        startIndex: sliderData.length
-      });
-    }
-  }, [startIndex, sliderData]);
-
-  var onImageSelect = function onImageSelect(images) {
-    if (!images.length) {
-      return null;
-    } // Store images with slider data
-
-
-    var sliderData = [];
-
-    var previousData = _toConsumableArray(attributes.sliderData);
-
-    images.map(function (image) {
-      var item = {}; // Get previous image info after updating gallary
-
-      var _getPreviousImgData = getPreviousImgData(previousData, image),
-          _getPreviousImgData2 = _slicedToArray(_getPreviousImgData, 3),
-          prevTitle = _getPreviousImgData2[0],
-          prevBtnText = _getPreviousImgData2[1],
-          prevLink = _getPreviousImgData2[2];
-
-      item.id = image.id;
-      item.src = image.url;
+  var onImageSelect = function onImageSelect(uploads) {
+    var updatedImages = [];
+    uploads.map(function (image, index) {
+      var item = {};
+      item.url = image.url;
       item.alt = image.alt;
-      item.title = prevTitle || "Header Text";
-      item.btnText = prevBtnText || "Button";
-      item.link = prevLink || "";
-      sliderData.push(item);
+      item.id = image.id;
+      updatedImages.push(item);
     });
     setAttributes({
-      sliderData: sliderData
+      images: updatedImages
     });
-  };
+  }; // const onImageSelect = (images) => {
+  // 	if (!images.length) {
+  // 		return null;
+  // 	}
+  // 	// Store images with slider data
+  // 	let sliderData = [];
+  // 	let previousData = [...attributes.sliderData];
+  // 	images.map((image) => {
+  // 		let item = {};
+  // 		// Get previous image info after updating gallary
+  // 		let [prevTitle, prevBtnText, prevLink] = getPreviousImgData(
+  // 			previousData,
+  // 			image
+  // 		);
+  // 		item.id = image.id;
+  // 		item.src = image.url;
+  // 		item.alt = image.alt;
+  // 		item.title = prevTitle || "Header Text";
+  // 		item.btnText = prevBtnText || "Button";
+  // 		item.link = prevLink || "";
+  // 		sliderData.push(item);
+  // 	});
+  // 	setAttributes({ sliderData });
+  // };
+  // if (preview) {
+  // 	return (
+  // 		<img src="https://raw.githubusercontent.com/rupok/essential-blocks-templates/dev/previews/parallax-slider-preview.png" />
+  // 	);
+  // }
 
-  if (preview) {
-    return /*#__PURE__*/React.createElement("img", {
-      src: "https://raw.githubusercontent.com/rupok/essential-blocks-templates/dev/previews/parallax-slider-preview.png"
-    });
-  }
 
   if (!hasImages) {
     // Show placeholder at the beginning
@@ -3957,36 +3974,43 @@ var Edit = function Edit(_ref) {
     });
   }
 
-  return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(Toolbar, null, /*#__PURE__*/React.createElement(MediaUpload, {
-    onSelect: function onSelect(images) {
-      return onImageSelect(images);
-    },
-    allowedTypes: ["image"],
-    multiple: true,
-    gallery: true,
-    value: sliderData.map(function (img) {
-      return img.id;
-    }),
-    render: function render(_ref2) {
-      var open = _ref2.open;
-      return /*#__PURE__*/React.createElement(Button, {
-        className: "components-toolbar__control",
-        label: __("Edit gallery"),
-        icon: "edit",
-        onClick: open
-      });
-    }
-  }))), isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return [isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_0__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
-  }), /*#__PURE__*/React.createElement(_slider__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    slides: sliderData,
-    attributes: attributes,
-    setAttributes: setAttributes
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Edit);
+  }), /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarItem, null, function () {
+    return /*#__PURE__*/React.createElement(MediaUpload, {
+      onSelect: function onSelect(images) {
+        return onImageSelect(images);
+      },
+      allowedTypes: ["image"],
+      multiple: true,
+      gallery: true,
+      value: images.map(function (img) {
+        return img.id;
+      }),
+      render: function render(_ref) {
+        var open = _ref.open;
+        return /*#__PURE__*/React.createElement(ToolbarButton, {
+          className: "components-toolbar__control",
+          label: __("Edit gallery"),
+          icon: "edit",
+          onClick: open
+        });
+      }
+    });
+  }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+    "class": "eb-parallax-slider"
+  }, /*#__PURE__*/React.createElement("div", {
+    "class": "ring"
+  }, images.map(function (image) {
+    return /*#__PURE__*/React.createElement("div", {
+      "class": "img"
+    }, /*#__PURE__*/React.createElement("img", {
+      src: image.url
+    }));
+  }))))];
+}
+;
 
 /***/ }),
 
@@ -4913,268 +4937,6 @@ var Save = function Save(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Save);
-
-/***/ }),
-
-/***/ "./src/slide-control.js":
-/*!******************************!*\
-  !*** ./src/slide-control.js ***!
-  \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var SliderControl = function SliderControl(_ref) {
-  var type = _ref.type,
-      style = _ref.style,
-      icon = _ref.icon,
-      handleClick = _ref.handleClick;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "btn btn--".concat(type, " ").concat(icon),
-    onClick: handleClick,
-    style: style
-  });
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (SliderControl);
-
-/***/ }),
-
-/***/ "./src/slide.js":
-/*!**********************!*\
-  !*** ./src/slide.js ***!
-  \**********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/**
- * WordPress dependencies
- */
-var createRef = wp.element.createRef;
-
-var Slide = function Slide(_ref) {
-  var slide = _ref.slide,
-      position = _ref.position,
-      handleSlideClick = _ref.handleSlideClick,
-      attributes = _ref.attributes;
-  var current = attributes.current,
-      intensity = attributes.intensity,
-      titleColor = attributes.titleColor,
-      titleFontFamily = attributes.titleFontFamily,
-      titleFontSize = attributes.titleFontSize,
-      titleSizeUnit = attributes.titleSizeUnit,
-      titleFontWeight = attributes.titleFontWeight,
-      titleTextDecoration = attributes.titleTextDecoration,
-      titleTextTransform = attributes.titleTextTransform,
-      titleLetterSpacing = attributes.titleLetterSpacing,
-      titleLetterSpacingUnit = attributes.titleLetterSpacingUnit,
-      titleLineHeight = attributes.titleLineHeight,
-      titleLineHeightUnit = attributes.titleLineHeightUnit,
-      btnColor = attributes.btnColor,
-      btnBackgroundColor = attributes.btnBackgroundColor,
-      btnFontSize = attributes.btnFontSize,
-      btnSizeUnit = attributes.btnSizeUnit,
-      btnFontFamily = attributes.btnFontFamily,
-      btnFontWeight = attributes.btnFontWeight,
-      btnTextDecoration = attributes.btnTextDecoration,
-      btnTextTransform = attributes.btnTextTransform,
-      btnLetterSpacing = attributes.btnLetterSpacing,
-      btnLetterSpacingUnit = attributes.btnLetterSpacingUnit,
-      btnLineHeight = attributes.btnLineHeight,
-      btnLineHeightUnit = attributes.btnLineHeightUnit,
-      btnBorderColor = attributes.btnBorderColor,
-      btnBorderWidth = attributes.btnBorderWidth,
-      btnBorderStyle = attributes.btnBorderStyle,
-      btnBorderRadius = attributes.btnBorderRadius,
-      hasBtnShadow = attributes.hasBtnShadow,
-      btnMarginTop = attributes.btnMarginTop,
-      btnMarginRight = attributes.btnMarginRight,
-      btnMarginBottom = attributes.btnMarginBottom,
-      btnMarginLeft = attributes.btnMarginLeft,
-      btnMarginUnit = attributes.btnMarginUnit,
-      btnPaddingTop = attributes.btnPaddingTop,
-      btnPaddingRight = attributes.btnPaddingRight,
-      btnPaddingBottom = attributes.btnPaddingBottom,
-      btnPaddingLeft = attributes.btnPaddingLeft,
-      btnPaddingUnit = attributes.btnPaddingUnit;
-  var slideRef = createRef();
-
-  var handleMouseMove = function handleMouseMove(event) {
-    var el = slideRef.current;
-    var r = el.getBoundingClientRect();
-    el.style.setProperty("--x", event.clientX - (r.left + Math.floor(r.width / 2)));
-    el.style.setProperty("--y", event.clientY - (r.top + Math.floor(r.height / 2)));
-    el.style.setProperty("--d", intensity || 50);
-  };
-
-  var handleMouseLeave = function handleMouseLeave(event) {
-    slideRef.current.style.setProperty("--x", 0);
-    slideRef.current.style.setProperty("--y", 0);
-    slideRef.current.style.setProperty("--y", 50);
-  };
-
-  var imageLoaded = function imageLoaded(event) {
-    return event.target.style.opacity = 1;
-  };
-
-  var handleButtonClick = function handleButtonClick(link) {
-    // Redirect to button link
-    if (link) {
-      window.location = link;
-    }
-  }; // Style objects
-
-
-  var titleStyles = {
-    color: titleColor,
-    fontFamily: titleFontFamily,
-    fontSize: titleFontSize + titleSizeUnit,
-    fontWeight: titleFontWeight,
-    textTransform: titleTextTransform,
-    textDecoration: titleTextDecoration,
-    letterSpacing: titleLetterSpacing ? "".concat(titleLetterSpacing).concat(titleLetterSpacingUnit) : undefined,
-    lineHeight: titleLineHeight ? "".concat(titleLineHeight).concat(titleLineHeightUnit) : undefined
-  };
-  var buttonStyles = {
-    color: btnColor,
-    backgroundColor: btnBackgroundColor,
-    fontFamily: btnFontFamily,
-    fontSize: btnFontSize + btnSizeUnit,
-    fontWeight: btnFontWeight,
-    textTransform: btnTextTransform,
-    textDecoration: btnTextDecoration,
-    letterSpacing: btnLetterSpacing ? "".concat(btnLetterSpacing).concat(btnLetterSpacingUnit) : undefined,
-    lineHeight: btnLineHeight ? "".concat(btnLineHeight).concat(btnLineHeightUnit) : undefined,
-    border: "".concat(btnBorderWidth || 0, "px ").concat(btnBorderStyle, " ").concat(btnBorderColor || "black"),
-    borderRadius: btnBorderRadius + "px",
-    margin: "".concat(btnMarginTop).concat(btnMarginUnit, " ").concat(btnMarginRight).concat(btnMarginUnit, " ").concat(btnMarginBottom).concat(btnMarginUnit, " ").concat(btnMarginLeft).concat(btnMarginUnit),
-    padding: "".concat(btnPaddingTop).concat(btnPaddingUnit, " ").concat(btnPaddingRight).concat(btnPaddingUnit, " ").concat(btnPaddingBottom).concat(btnPaddingUnit, " ").concat(btnPaddingLeft).concat(btnPaddingUnit, " ")
-  };
-  var classNames = "slide";
-  if (current === position) classNames += " slide--current";else if (current - 1 === position) classNames += " slide--previous";else if (current + 1 === position) classNames += " slide--next";
-  return /*#__PURE__*/React.createElement("li", {
-    ref: slideRef,
-    className: classNames,
-    onClick: function onClick() {
-      return handleSlideClick(position);
-    },
-    onMouseMove: handleMouseMove,
-    onMouseLeave: handleMouseLeave
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "slide__image-wrapper"
-  }, /*#__PURE__*/React.createElement("img", {
-    className: "slide__image",
-    alt: "img",
-    src: slide.src,
-    onLoad: imageLoaded
-  })), /*#__PURE__*/React.createElement("article", {
-    className: "slide__content"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "slide__headline",
-    style: titleStyles
-  }, slide.title), /*#__PURE__*/React.createElement("button", {
-    onClick: function onClick() {
-      return handleButtonClick(slide.link);
-    },
-    className: "slide__action btn ".concat(hasBtnShadow ? "btn-has-shadow" : "", " "),
-    style: buttonStyles
-  }, slide.btnText)));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Slide);
-
-/***/ }),
-
-/***/ "./src/slider.js":
-/*!***********************!*\
-  !*** ./src/slider.js ***!
-  \***********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _slide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slide */ "./src/slide.js");
-/* harmony import */ var _slide_control__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slide-control */ "./src/slide-control.js");
-/**
- * WordPress dependencies
- */
-var useState = wp.element.useState;
-/**
- * Internal dependencies
- */
-
-
-
-
-var Slider = function Slider(_ref) {
-  var slides = _ref.slides,
-      attributes = _ref.attributes,
-      setAttributes = _ref.setAttributes;
-  var current = attributes.current,
-      prevIcon = attributes.prevIcon,
-      nextIcon = attributes.nextIcon,
-      iconColor = attributes.iconColor;
-
-  var handleSlideClick = function handleSlideClick(current) {
-    return setAttributes({
-      current: current
-    });
-  };
-
-  var handlePreviousClick = function handlePreviousClick() {
-    var previous = current - 1;
-    var updateCurrent = previous < 0 ? slides.length - 1 : previous;
-    handleSlideClick(updateCurrent);
-  };
-
-  var handleNextClick = function handleNextClick() {
-    var next = current + 1;
-    var updateCurrent = next === slides.length ? 0 : next;
-    handleSlideClick(updateCurrent);
-  };
-
-  var wrapperTransform = {
-    transform: "translateX(-".concat(current * (100 / slides.length), "%)")
-  };
-  var sliderStyles = {
-    color: iconColor || "gray",
-    fontSize: 32
-  };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "eb-parallax-container"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "eb-parallax-slider"
-  }, /*#__PURE__*/React.createElement("ul", {
-    className: "eb-parallax-wrapper",
-    style: wrapperTransform
-  }, slides.map(function (slide, index) {
-    return /*#__PURE__*/React.createElement(_slide__WEBPACK_IMPORTED_MODULE_0__["default"], {
-      key: index,
-      position: index,
-      slide: slide,
-      handleSlideClick: handleSlideClick,
-      attributes: attributes
-    });
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "eb-slider__controls"
-  }, /*#__PURE__*/React.createElement(_slide_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "previous",
-    style: sliderStyles,
-    icon: prevIcon,
-    handleClick: handlePreviousClick
-  }), /*#__PURE__*/React.createElement(_slide_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    type: "next",
-    style: sliderStyles,
-    icon: nextIcon,
-    handleClick: handleNextClick
-  }))));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Slider);
 
 /***/ }),
 

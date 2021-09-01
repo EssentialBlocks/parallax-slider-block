@@ -36,21 +36,20 @@ function create_block_parallax_slider_block_init() {
 	$index_js = 'build/index.js';
 	$script_asset = require( $script_asset_path );
 	wp_register_script(
-		'create-block-parallax-slider-block-editor',
+		'parallax-slider-block-parallax-slider-block-editor',
 		plugins_url( $index_js, __FILE__ ),
 		array(
 			'wp-blocks',
 			'wp-i18n',
 			'wp-element',
 			'wp-block-editor',
-      		'essential-blocks-slickjs',
 		),
 		$script_asset['version']
 	);
 
 	$style_css = 'build/style-index.css';
 	wp_register_style(
-		'create-block-parallax-slider-block',
+		'parallax-slider-block-parallax-slider-block',
 		plugins_url( $style_css, __FILE__ ),
 		array(),
 		filemtime( "$dir/$style_css" )
@@ -59,7 +58,7 @@ function create_block_parallax_slider_block_init() {
 
 	$frontend_js = 'src/frontend.js';
 	wp_enqueue_script(
-		'essential-blocks-parallax-slider-frontend',
+		'parallax-slider-block-parallax-slider-frontend',
 		plugins_url($frontend_js, __FILE__),
 		array("wp-editor"),
 		true

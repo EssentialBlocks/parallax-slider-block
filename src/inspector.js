@@ -1,24 +1,27 @@
 /**
  * WordPress dependencies
  */
-import { __ } from "@wordpress/i18n";
-import {
+const { __ } = wp.i18n;
+const { InspectorControls, PanelColorSettings } = wp.blockEditor;
+const {
+	Panel,
 	PanelBody,
-	RangeControl,
+	PanelRow,
 	SelectControl,
 	ToggleControl,
-	TextControl,
-	BaseControl,
 	Button,
+	ButtonGroup,
+	BaseControl,
+	TabPanel,
+	RangeControl,
+	TextControl,
+	TextareaControl,
+	ColorPalette,
 	Dropdown,
-} from "@wordpress/components";
-import { InspectorControls, PanelColorSettings } from "@wordpress/block-editor";
-
-/**
- * External dependencies
- */
-import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
-import FontPicker from "../util/typography-control/FontPicker";
+	ColorPicker,
+} = wp.components;
+const { useEffect } = wp.element;
+const { select } = wp.data;
 
 /**
  * Internal dependencies
@@ -26,63 +29,88 @@ import FontPicker from "../util/typography-control/FontPicker";
 import UnitControl from "../util/unit-control";
 import DimensionsControl from "../util/dimensions-control";
 import {
-	BORDER_STYLES,
-	PREVIOUS_ICONS,
-	NEXT_ICONS,
-	FONT_WEIGHT,
-	TEXT_TRANSFORM,
-	TEXT_DECORATION,
-} from "./constants";
+	WRAPPER_BG,
+	WRAPPER_MARGIN,
+	WRAPPER_PADDING,
+	WRAPPER_BORDER_SHADOW,
+	TITLE_MARGIN,
+	BUTTON_MARGIN,
+	BUTTON_PADDING,
+	BUTTON_BORDER_SHADOW,
+	SLIDE_TO_SHOW,
+	CUSTOM_HEIGHT,
+	SLIDES_GAP,
+	NORMAL_HOVER,
+	VERTICAL_ALIGN,
+	TEXT_ALIGN,
+	UNIT_TYPES,
+	COLORS,
+} from "./constants/constants";
+import { TITLE_TYPOGRAPHY, BUTTON_TYPOGRAPHY } from "./constants/typography-constant";
+
+import {
+	mimmikCssForResBtns,
+	mimmikCssOnPreviewBtnClickWhileBlockSelected,
+} from "../util/helpers";
+import ResponsiveDimensionsControl from "../util/dimensions-control-v2";
+import TypographyDropdown from "../util/typography-control-v2";
+import BorderShadowControl from "../util/border-shadow-control";
+import ResponsiveRangeController from "../util/responsive-range-control";
+import BackgroundControl from "../util/background-control";
 import ColorControl from "../util/color-control";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
+		resOption,
 		sliderData,
 		current,
 		intensity,
 		startIndex,
+		isCustomHeight,
 		titleColor,
-		titleFontSize,
-		titleSizeUnit,
-		titleFontFamily,
-		titleFontWeight,
-		titleTextDecoration,
-		titleTextTransform,
-		titleLetterSpacing,
-		titleLetterSpacingUnit,
-		titleLineHeight,
-		titleLineHeightUnit,
-		btnColor,
-		btnBackgroundColor,
-		btnFontSize,
-		btnSizeUnit,
-		btnFontFamily,
-		btnFontWeight,
-		btnTextDecoration,
-		btnTextTransform,
-		btnLetterSpacing,
-		btnLetterSpacingUnit,
-		btnLineHeight,
-		btnLineHeightUnit,
-		btnBorderColor,
-		btnBorderWidth,
-		btnBorderStyle,
-		btnBorderRadius,
-		hasBtnShadow,
-		btnMarginTop,
-		btnMarginRight,
-		btnMarginBottom,
-		btnMarginLeft,
-		btnMarginUnit,
-		btnPaddingTop,
-		btnPaddingRight,
-		btnPaddingBottom,
-		btnPaddingLeft,
-		btnPaddingUnit,
+		titleBackgroundColor,
+		buttonColorType,
+		buttonColor,
+		buttonHoverColor,
+		buttonBackgroundColor,
+		buttonHoverBackgroundColor,
 		prevIcon,
 		nextIcon,
 		iconColor,
 	} = attributes;
+
+	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
+	useEffect(() => {
+		setAttributes({
+			resOption: select("core/edit-post").__experimentalGetPreviewDeviceType(),
+		});
+	}, []);
+
+	// this useEffect is for mimmiking css for all the eb blocks on resOption changing
+	useEffect(() => {
+		mimmikCssForResBtns({
+			domObj: document,
+			resOption,
+		});
+	}, [resOption]);
+
+	// this useEffect is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
+	useEffect(() => {
+		const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
+			domObj: document,
+			select,
+			setAttributes,
+		});
+		return () => {
+			cleanUp();
+		};
+	}, []);
+
+	const resRequiredProps = {
+		setAttributes,
+		resOption,
+		attributes,
+	};
 
 	const handleTextChange = (type, value, index) => {
 		let updatedData = [...sliderData];
@@ -96,450 +124,236 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setAttributes({ current: updatedIndex });
 	};
 
-	const TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
-	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
-
-	const TITLE_SPACING_MAX = titleLetterSpacingUnit === "em" ? 10 : 100;
-	const TITLE_SPACING_STEP = titleLetterSpacingUnit === "em" ? 0.1 : 1;
-
-	const TITLE_LINE_HEIGHT_MAX = titleLineHeightUnit === "em" ? 10 : 100;
-	const TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
-
-	const BTN_SIZE_MAX = btnSizeUnit === "em" ? 10 : 100;
-	const BTN_SIZE_STEP = btnSizeUnit === "em" ? 0.1 : 1;
-
-	const BTN_SPACING_MAX = btnLetterSpacingUnit === "em" ? 10 : 100;
-	const BTN_SPACING_STEP = btnLetterSpacingUnit === "em" ? 0.1 : 1;
-
-	const BTN_LINE_HEIGHT_MAX = btnLineHeightUnit === "em" ? 10 : 100;
-	const BTN_LINE_HEIGHT_STEP = btnLineHeightUnit === "em" ? 0.1 : 1;
-
 	return (
 		<InspectorControls key="controls">
-			<PanelBody title={__("General")}>
-				<RangeControl
-					label={__("Starting Slide")}
-					value={startIndex}
-					allowReset
-					onChange={(startIndex) => setAttributes({ startIndex })}
-					min={1}
-					max={sliderData.length}
-				/>
-
-				<RangeControl
-					label={__("Parallax Softness")}
-					value={intensity}
-					allowReset
-					onChange={(intensity) => setAttributes({ intensity })}
-					min={0}
-					max={100}
-				/>
-			</PanelBody>
-			{sliderData.map((slide, index) => (
-				<PanelBody
-					key={index}
-					title={`Slide ${index + 1} Settings`}
-					initialOpen={false}
-					onToggle={() => handlePanelClick(index)}
-				>
-					<TextControl
-						label={__("Title Text")}
-						value={slide.title}
-						onChange={(title) => handleTextChange("title", title, index)}
-					/>
-
-					<TextControl
-						label={__("Button Text")}
-						value={slide.btnText}
-						onChange={(btnText) => handleTextChange("btnText", btnText, index)}
-					/>
-
-					<TextControl
-						label={__("Button Link")}
-						value={slide.link}
-						onChange={(link) => handleTextChange("link", link, index)}
-					/>
-				</PanelBody>
-			))}
-			<PanelColorSettings
-				title={__("Title Color")}
-				initialOpen={false}
-				colorSettings={[
-					{
-						value: titleColor,
-						onChange: (titleColor) => setAttributes({ titleColor }),
-						label: "",
-					},
-				]}
-			/>
-
-			<PanelBody title={__("Button Style")} initialOpen={false}>
-				<ToggleControl
-					label={__("Button Shadow")}
-					checked={hasBtnShadow}
-					onChange={(hasBtnShadow) => setAttributes({ hasBtnShadow })}
-				/>
-
-				<ColorControl
-					label={__("Button Background")}
-					color={btnBackgroundColor}
-					onChange={(btnBackgroundColor) =>
-						setAttributes({ btnBackgroundColor })
-					}
-				/>
-
-				<ColorControl
-					label={__("Button Text")}
-					color={btnColor}
-					onChange={(btnColor) => setAttributes({ btnColor })}
-				/>
-
-				<PanelBody title={__("Button Border")} initialOpen={false}>
-					<ColorControl
-						label={__("Border Color")}
-						color={btnBorderColor}
-						onChange={(btnBorderColor) => setAttributes({ btnBorderColor })}
-					/>
-
-					<RangeControl
-						label={__("Border Width")}
-						value={btnBorderWidth}
-						allowReset
-						onChange={(btnBorderWidth) => setAttributes({ btnBorderWidth })}
-						min={0}
-						max={10}
-					/>
-
-					<SelectControl
-						label={__("Border Style")}
-						value={btnBorderStyle}
-						options={BORDER_STYLES}
-						onChange={(btnBorderStyle) => setAttributes({ btnBorderStyle })}
-					/>
-
-					<RangeControl
-						label={__("Border Radius")}
-						value={btnBorderRadius}
-						allowReset
-						onChange={(btnBorderRadius) => setAttributes({ btnBorderRadius })}
-						min={0}
-						max={100}
-					/>
-				</PanelBody>
-
-				<PanelBody title={__("Button Margin & Padding")} initialOpen={false}>
-					<UnitControl
-						selectedUnit={btnMarginUnit}
-						unitTypes={[
-							{ label: "px", value: "px" },
-							{ label: "em", value: "em" },
-							{ label: "%", value: "%" },
-						]}
-						onClick={(btnMarginUnit) => setAttributes({ btnMarginUnit })}
-					/>
-
-					<DimensionsControl
-						label={__("Margin")}
-						top={btnMarginTop}
-						right={btnMarginRight}
-						bottom={btnMarginBottom}
-						left={btnMarginLeft}
-						onChange={({ top, right, bottom, left }) =>
-							setAttributes({
-								btnMarginTop: top,
-								btnMarginRight: right,
-								btnMarginBottom: bottom,
-								btnMarginLeft: left,
-							})
-						}
-					/>
-
-					<UnitControl
-						selectedUnit={btnPaddingUnit}
-						unitTypes={[
-							{ label: "px", value: "px" },
-							{ label: "em", value: "em" },
-							{ label: "%", value: "%" },
-						]}
-						onClick={(btnPaddingUnit) => setAttributes({ btnPaddingUnit })}
-					/>
-
-					<DimensionsControl
-						label={__("Padding")}
-						top={btnPaddingTop}
-						right={btnPaddingRight}
-						bottom={btnPaddingBottom}
-						left={btnPaddingLeft}
-						onChange={({ top, right, bottom, left }) =>
-							setAttributes({
-								btnPaddingTop: top,
-								btnPaddingRight: right,
-								btnPaddingBottom: bottom,
-								btnPaddingLeft: left,
-							})
-						}
-					/>
-				</PanelBody>
-			</PanelBody>
-
-			<PanelBody title={__("Typography")} initialOpen={false}>
-				<BaseControl label={__("Title")} className="eb-typography-base">
-					<Dropdown
-						className="eb-typography-dropdown"
-						contentClassName="my-popover-content-classname"
-						position="bottom right"
-						renderToggle={({ isOpen, onToggle }) => (
-							<Button
-								isSmall
-								onClick={onToggle}
-								aria-expanded={isOpen}
-								icon="edit"
-							></Button>
-						)}
-						renderContent={() => (
-							<div style={{ padding: "1rem" }}>
-								<FontPicker
-									label={__("Font Family")}
-									onChange={(titleFontFamily) =>
-										setAttributes({ titleFontFamily })
-									}
-								/>
-
-								<UnitControl
-									selectedUnit={titleSizeUnit}
-									unitTypes={[
-										{ label: "px", value: "px" },
-										{ label: "em", value: "em" },
-										{ label: "%", value: "%" },
-									]}
-									onClick={(titleSizeUnit) => setAttributes({ titleSizeUnit })}
-								/>
-
-								<RangeControl
-									label={__("Font Size")}
-									value={titleFontSize}
-									onChange={(titleFontSize) => setAttributes({ titleFontSize })}
-									min={0}
-									max={TITLE_SIZE_MAX}
-									step={TITLE_SIZE_STEP}
-								/>
-
-								<SelectControl
-									label={__("Font Weight")}
-									value={titleFontWeight}
-									options={FONT_WEIGHT}
-									onChange={(titleFontWeight) =>
-										setAttributes({ titleFontWeight })
-									}
-								/>
-
-								<SelectControl
-									label={__("Text Decoration")}
-									value={titleTextDecoration}
-									options={TEXT_DECORATION}
-									onChange={(titleTextDecoration) =>
-										setAttributes({ titleTextDecoration })
-									}
-								/>
-
-								<SelectControl
-									label={__("Text Transform")}
-									value={titleTextTransform}
-									options={TEXT_TRANSFORM}
-									onChange={(titleTextTransform) =>
-										setAttributes({ titleTextTransform })
-									}
-								/>
-
-								<UnitControl
-									selectedUnit={titleLetterSpacingUnit}
-									unitTypes={[
-										{ label: "px", value: "px" },
-										{ label: "em", value: "em" },
-									]}
-									onClick={(titleLetterSpacingUnit) =>
-										setAttributes({ titleLetterSpacingUnit })
-									}
-								/>
-
-								<RangeControl
-									label={__("Letter Spacing")}
-									value={titleLetterSpacing}
-									onChange={(titleLetterSpacing) =>
-										setAttributes({ titleLetterSpacing })
-									}
-									min={0}
-									max={TITLE_SPACING_MAX}
-									step={TITLE_SPACING_STEP}
-								/>
-
-								<UnitControl
-									selectedUnit={titleLineHeightUnit}
-									unitTypes={[
-										{ label: "px", value: "px" },
-										{ label: "em", value: "em" },
-									]}
-									onClick={(titleLineHeightUnit) =>
-										setAttributes({ titleLineHeightUnit })
-									}
-								/>
-
-								<RangeControl
-									label={__("Line Height")}
-									value={titleLineHeight}
-									onChange={(titleLineHeight) =>
-										setAttributes({ titleLineHeight })
-									}
-									min={0}
-									max={TITLE_LINE_HEIGHT_MAX}
-									step={TITLE_LINE_HEIGHT_STEP}
-								/>
-							</div>
-						)}
-					/>
-				</BaseControl>
-
-				<BaseControl label={__("Button")} className="eb-typography-base">
-					<Dropdown
-						className="eb-typography-dropdown"
-						contentClassName="my-popover-content-classname"
-						position="bottom right"
-						renderToggle={({ isOpen, onToggle }) => (
-							<Button
-								isSmall
-								onClick={onToggle}
-								aria-expanded={isOpen}
-								icon="edit"
-							></Button>
-						)}
-						renderContent={() => (
-							<div style={{ padding: "1rem" }}>
-								<FontPicker
-									label={__("Font Family")}
-									onChange={(btnFontFamily) => setAttributes({ btnFontFamily })}
-								/>
-
-								<UnitControl
-									selectedUnit={btnSizeUnit}
-									unitTypes={[
-										{ label: "px", value: "px" },
-										{ label: "em", value: "em" },
-										{ label: "%", value: "%" },
-									]}
-									onClick={(btnSizeUnit) => setAttributes({ btnSizeUnit })}
-								/>
-
-								<RangeControl
-									label={__("Font Size")}
-									value={btnFontSize}
-									onChange={(btnFontSize) => setAttributes({ btnFontSize })}
-									min={0}
-									max={BTN_SIZE_MAX}
-									step={BTN_SIZE_STEP}
-								/>
-
-								<SelectControl
-									label={__("Font Weight")}
-									value={btnFontWeight}
-									options={FONT_WEIGHT}
-									onChange={(btnFontWeight) => setAttributes({ btnFontWeight })}
-								/>
-
-								<SelectControl
-									label={__("Text Decoration")}
-									value={btnTextDecoration}
-									options={TEXT_DECORATION}
-									onChange={(btnTextDecoration) =>
-										setAttributes({ btnTextDecoration })
-									}
-								/>
-
-								<SelectControl
-									label={__("Text Transform")}
-									value={btnTextTransform}
-									options={TEXT_TRANSFORM}
-									onChange={(btnTextTransform) =>
-										setAttributes({ btnTextTransform })
-									}
-								/>
-
-								<UnitControl
-									selectedUnit={btnLetterSpacingUnit}
-									unitTypes={[
-										{ label: "px", value: "px" },
-										{ label: "em", value: "em" },
-									]}
-									onClick={(btnLetterSpacingUnit) =>
-										setAttributes({ btnLetterSpacingUnit })
-									}
-								/>
-
-								<RangeControl
-									label={__("Letter Spacing")}
-									value={btnLetterSpacing}
-									onChange={(btnLetterSpacing) =>
-										setAttributes({ btnLetterSpacing })
-									}
-									min={0}
-									max={BTN_SPACING_MAX}
-									step={BTN_SPACING_STEP}
-								/>
-
-								<UnitControl
-									selectedUnit={btnLineHeightUnit}
-									unitTypes={[
-										{ label: "px", value: "px" },
-										{ label: "em", value: "em" },
-									]}
-									onClick={(btnLineHeightUnit) =>
-										setAttributes({ btnLineHeightUnit })
-									}
-								/>
-
-								<RangeControl
-									label={__("Line Height")}
-									value={btnLineHeight}
-									onChange={(btnLineHeight) => setAttributes({ btnLineHeight })}
-									min={0}
-									max={BTN_LINE_HEIGHT_MAX}
-									step={BTN_LINE_HEIGHT_STEP}
-								/>
-							</div>
-						)}
-					/>
-				</BaseControl>
-			</PanelBody>
-
-			<PanelBody title={__("Icon Style")} initialOpen={false}>
-				<BaseControl label={__("Previous Icon")}>
-					<FontIconPicker
-						icons={PREVIOUS_ICONS}
-						value={prevIcon}
-						onChange={(prevIcon) => setAttributes({ prevIcon })}
-						appendTo="body"
-					/>
-				</BaseControl>
-
-				<BaseControl label={__("Next Icon")}>
-					<FontIconPicker
-						icons={NEXT_ICONS}
-						value={nextIcon}
-						onChange={(nextIcon) => setAttributes({ nextIcon })}
-						appendTo="body"
-					/>
-				</BaseControl>
-
-				<PanelColorSettings
-					title={__("Icon Color")}
-					colorSettings={[
+			<div className="eb-panel-control">
+				<TabPanel
+					className="eb-parent-tab-panel"
+					activeClass="active-tab"
+					// onSelect={onSelect}
+					tabs={[
 						{
-							value: iconColor,
-							onChange: (iconColor) => setAttributes({ iconColor }),
-							label: "",
+							name: "general",
+							title: "General",
+							className: "eb-tab general",
+						},
+						{
+							name: "styles",
+							title: "Styles",
+							className: "eb-tab styles",
+						},
+						{
+							name: "advance",
+							title: "Advance",
+							className: "eb-tab advance",
 						},
 					]}
-				/>
-			</PanelBody>
+				>
+					{(tab) => (
+						<div className={"eb-tab-controls" + tab.name}>
+							{tab.name === "general" && (
+								<>
+									<PanelBody title={__("General")}>
+										<RangeControl
+											label={__("Starting Slide")}
+											value={startIndex}
+											allowReset
+											onChange={(startIndex) => setAttributes({ startIndex })}
+											min={1}
+											max={sliderData.length}
+										/>
+
+										<RangeControl
+											label={__("Parallax Softness")}
+											value={intensity}
+											allowReset
+											onChange={(intensity) => setAttributes({ intensity })}
+											min={0}
+											max={100}
+										/>
+										<ToggleControl
+											label={__("Custom Height")}
+											checked={isCustomHeight}
+											onChange={() => setAttributes({ isCustomHeight: !isCustomHeight })}
+										/>
+
+										{isCustomHeight && (
+											<ResponsiveRangeController
+												baseLabel={__("Slider Height", "slider-block")}
+												controlName={CUSTOM_HEIGHT}
+												resRequiredProps={resRequiredProps}
+												units={UNIT_TYPES}
+												min={1}
+												max={500}
+												step={1}
+											/>
+										)}
+									</PanelBody>
+									<PanelBody title={__("Slides")} initialOpen={false}>
+										{sliderData.map((slide, index) => (
+											<PanelBody
+												key={index}
+												title={`Slide ${index + 1} Settings`}
+												initialOpen={false}
+												onToggle={() => handlePanelClick(index)}
+												className="eb-slider-item-single-panel"
+											>
+												<TextControl
+													label={__("Title Text")}
+													value={slide.title}
+													onChange={(title) => handleTextChange("title", title, index)}
+												/>
+
+												<TextControl
+													label={__("Button Text")}
+													value={slide.btnText}
+													onChange={(btnText) => handleTextChange("btnText", btnText, index)}
+												/>
+
+												<TextControl
+													label={__("Button Link")}
+													value={slide.link}
+													onChange={(link) => handleTextChange("link", link, index)}
+												/>
+											</PanelBody>
+										))}
+									</PanelBody>
+								</>
+							)}
+
+							{tab.name === "styles" && (
+								<>
+									<PanelBody title={__("Title Style")} initialOpen={false}>
+										<PanelRow>Color</PanelRow>
+										<ColorPalette
+											colors={COLORS}
+											value={ titleColor }
+											onChange={ ( color ) => setAttributes({ titleColor: color })}
+										/>
+										<ColorControl
+											label={__("Background Color")}
+											color={titleBackgroundColor}
+											onChange={(color) => setAttributes({ titleBackgroundColor: color })}
+										/>
+
+										<TypographyDropdown
+											baseLabel={__("Typography")}
+											typographyPrefixConstant={TITLE_TYPOGRAPHY}
+											resRequiredProps={resRequiredProps}
+										/>
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={TITLE_MARGIN}
+											baseLabel="Margin"
+										/>
+									</PanelBody>
+
+									<PanelBody title={__("Button Styles")} initialOpen={false}>
+										<ButtonGroup className="eb-inspector-btn-group">
+											{NORMAL_HOVER.map((item) => (
+												<Button
+													isLarge
+													isPrimary={buttonColorType === item.value}
+													isSecondary={buttonColorType !== item.value}
+													onClick={() => setAttributes({ buttonColorType: item.value })}
+												>
+													{item.label}
+												</Button>
+											))}
+										</ButtonGroup>
+
+										{buttonColorType === "normal" && (
+											<>
+												<PanelRow>Color</PanelRow>
+												<ColorPalette
+													colors={COLORS}
+													value={ buttonColor }
+													onChange={ ( color ) => setAttributes({ buttonColor: color })}
+												/>
+												<ColorControl
+													label={__("Background Color")}
+													color={buttonBackgroundColor}
+													onChange={(color) => setAttributes({ buttonBackgroundColor: color })}
+												/>
+											</>
+										)}
+
+										{buttonColorType === "hover" && (
+											<>
+												<PanelRow>Hover Color</PanelRow>
+												<ColorPalette
+													colors={COLORS}
+													value={ buttonHoverColor }
+													onChange={ ( color ) => setAttributes({ buttonHoverColor: color })}
+												/>
+												<ColorControl
+													label={__("Hover Background Color")}
+													color={buttonHoverBackgroundColor}
+													onChange={(color) => setAttributes({ buttonHoverBackgroundColor: color })}
+												/>
+											</>
+										)}
+										<PanelRow>Button Border & Shadow</PanelRow>
+										<BorderShadowControl
+											controlName={BUTTON_BORDER_SHADOW}
+											resRequiredProps={resRequiredProps}
+											// noShadow
+											// noBorder
+										/>
+										<TypographyDropdown
+											baseLabel={__("Typography")}
+											typographyPrefixConstant={BUTTON_TYPOGRAPHY}
+											resRequiredProps={resRequiredProps}
+										/>
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={BUTTON_MARGIN}
+											baseLabel="Margin"
+										/>
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={BUTTON_PADDING}
+											baseLabel="Padding"
+										/>
+									</PanelBody>
+								</>
+							)}
+
+							{tab.name === "advance" && (
+								<>
+									<PanelBody>
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={WRAPPER_MARGIN}
+											baseLabel="Margin"
+										/>
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={WRAPPER_PADDING}
+											baseLabel="Padding"
+										/>
+									</PanelBody>
+									<PanelBody title={__("Background")} initialOpen={false}>
+										<BackgroundControl
+											controlName={WRAPPER_BG}
+											resRequiredProps={resRequiredProps}
+											noOverlay
+										/>
+									</PanelBody>
+									<PanelBody title={__("Border & Shadow")} initialOpen={false}>
+										<BorderShadowControl
+											controlName={WRAPPER_BORDER_SHADOW}
+											resRequiredProps={resRequiredProps}
+											// noShadow
+											// noBorder
+										/>
+									</PanelBody>
+								</>
+							)}
+						</div>
+					)}
+				</TabPanel>
+			</div>
 		</InspectorControls>
 	);
 };

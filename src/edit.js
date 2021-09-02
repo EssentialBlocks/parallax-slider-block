@@ -14,9 +14,10 @@
 
 /**
  * Internal dependencies
- */
-// import Slider from "./slider";
+ */ 
+import Slider from "./slider";
 import Inspector from "./inspector";
+import "./editor.scss";
 
 function getPreviousImgData(previousData, image) {
 	let prevTitle, prevBtnText, prevLink;
@@ -44,70 +45,49 @@ export default function Edit(props) {
 		current, 
 		preview 
 	} = attributes;
-	const hasImages = !!images.length;
 
 	const blockProps = useBlockProps({
 		className: `eb-guten-block-main-parent-wrapper`,
 	});
 
-	console.log("Images", images)
-
 	// Change start index if image is removed from gallery
-	// useEffect(() => {
-	// 	if (startIndex > sliderData.length) {
-	// 		setAttributes({ startIndex: sliderData.length });
-	// 	}
-	// }, [startIndex, sliderData]);
+	useEffect(() => {
+		if (startIndex > sliderData.length) {
+			setAttributes({ startIndex: sliderData.length });
+		}
+	}, [startIndex, sliderData]);
 
-	const onImageSelect = (uploads) => {
-		let updatedImages = [];
-		uploads.map((image, index) => {
+	const onImageSelect = (images) => {
+		if (!images.length) {
+			return null;
+		}
+
+		// Store images with slider data
+		let sliderData = [];
+		let previousData = [...attributes.sliderData];
+
+		images.map((image) => {
 			let item = {};
-			item.url = image.url;
-			item.alt = image.alt;
+
+			// Get previous image info after updating gallary
+			let [prevTitle, prevBtnText, prevLink] = getPreviousImgData(
+				previousData,
+				image
+			);
+
 			item.id = image.id;
-			updatedImages.push(item);
+			item.src = image.url;
+			item.alt = image.alt;
+			item.title = prevTitle || "Slider Title";
+			item.btnText = prevBtnText || "Button";
+			item.link = prevLink || "";
+
+			sliderData.push(item);
 		});
-		setAttributes({ images: updatedImages });
-	}
+		setAttributes({ sliderData });
+	};
 
-	// const onImageSelect = (images) => {
-	// 	if (!images.length) {
-	// 		return null;
-	// 	}
-
-	// 	// Store images with slider data
-	// 	let sliderData = [];
-	// 	let previousData = [...attributes.sliderData];
-
-	// 	images.map((image) => {
-	// 		let item = {};
-
-	// 		// Get previous image info after updating gallary
-	// 		let [prevTitle, prevBtnText, prevLink] = getPreviousImgData(
-	// 			previousData,
-	// 			image
-	// 		);
-
-	// 		item.id = image.id;
-	// 		item.src = image.url;
-	// 		item.alt = image.alt;
-	// 		item.title = prevTitle || "Header Text";
-	// 		item.btnText = prevBtnText || "Button";
-	// 		item.link = prevLink || "";
-
-	// 		sliderData.push(item);
-	// 	});
-	// 	setAttributes({ sliderData });
-	// };
-
-	// if (preview) {
-	// 	return (
-	// 		<img src="https://raw.githubusercontent.com/rupok/essential-blocks-templates/dev/previews/parallax-slider-preview.png" />
-	// 	);
-	// }
-
-	if (!hasImages) {
+	if (!sliderData.length) {
 		// Show placeholder at the beginning
 		return (
 			<MediaPlaceholder
@@ -141,7 +121,7 @@ export default function Edit(props) {
 							allowedTypes={["image"]}
 							multiple
 							gallery
-							value={images.map((img) => img.id)}
+							value={sliderData.map((img) => img.id)}
 							render={({ open }) => (
 								<ToolbarButton
 									className="components-toolbar__control"
@@ -156,21 +136,11 @@ export default function Edit(props) {
 			</ToolbarGroup>
 		</BlockControls>,
 		<div {...blockProps}>
-			<div class="eb-parallax-slider">
-				<div class="ring">
-					{images.map((image) => (
-						<div class="img">
-							<img src={image.url} />
-						</div>
-					))}
-				</div>
-			</div>
-			
-			{/* <Slider
+			<Slider
 				slides={sliderData}
 				attributes={attributes}
 				setAttributes={setAttributes}
-			/> */}
+			/>
 		</div>
 	]
 };

@@ -43,25 +43,34 @@ function create_block_parallax_slider_block_init() {
 			'wp-i18n',
 			'wp-element',
 			'wp-block-editor',
+			'parallax-slider-block-parallax-slider-frontend'
 		),
 		$script_asset['version']
 	);
 
+	$editor_css = 'build/index.css';
+	wp_register_style(
+		'parallax-slider-block-parallax-slider-block-editor-styles',
+		plugins_url($editor_css, __FILE__),
+		array('parallax-slider-block-frontend-styles'),
+		filemtime("$dir/$editor_css")
+	);
+
 	$style_css = 'build/style-index.css';
 	wp_register_style(
-		'parallax-slider-block-parallax-slider-block',
+		'parallax-slider-block-frontend-styles',
 		plugins_url( $style_css, __FILE__ ),
 		array(),
 		filemtime( "$dir/$style_css" )
 	);
 
-
 	$frontend_js = 'src/frontend.js';
-	wp_enqueue_script(
+	wp_register_script(
 		'parallax-slider-block-parallax-slider-frontend',
 		plugins_url($frontend_js, __FILE__),
 		array("wp-editor"),
-		true
+		true,
+		true,
 	);
 
 	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/parallax-slider' ) ) {
@@ -69,7 +78,14 @@ function create_block_parallax_slider_block_init() {
 			'parallax-slider-block/parallax-slider-block', 
 			array(
 				'editor_script' => 'parallax-slider-block-parallax-slider-block-editor',
-				'style'         => 'parallax-slider-block-parallax-slider-block',
+				'editor_style'         => 'parallax-slider-block-parallax-slider-block-editor-styles',
+				'render_callback' => function( $attributes, $content ) {
+					if( !is_admin() ) {
+						wp_enqueue_style('parallax-slider-block-frontend-styles');
+						wp_enqueue_script('parallax-slider-block-parallax-slider-frontends');
+					}
+					return $content;
+				}
 			)
 		);
 	}

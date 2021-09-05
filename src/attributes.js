@@ -7,9 +7,10 @@ import {
 	BUTTON_MARGIN,
 	BUTTON_PADDING,
 	BUTTON_BORDER_SHADOW,
-	SLIDE_TO_SHOW,
 	CUSTOM_HEIGHT,
 	SLIDES_GAP,
+	CONTENTS_PADDING,
+	SLIDE_BORDER_RADIUS,
 } from "./constants/constants";
 import * as TYPOGRAPHY from "./constants/typography-constant";
 
@@ -140,6 +141,14 @@ const attributes = {
 	buttonHoverColor: {
 		type: "string",
 	},
+	horizontalAlign: {
+		type: "string",
+		default: "center"
+	},
+	verticalAlign: {
+		type: "string",
+		default: "center"
+	},
 
 
 
@@ -170,6 +179,13 @@ const attributes = {
 		left: 30,
 		isLinked: false,
 	}),
+	...generateDimensionsAttributes(CONTENTS_PADDING, {
+		top: 20,
+		bottom: 20,
+		right: 20,
+		left: 20,
+		isLinked: true,
+	}),
 
 	// border shadow attributes for Wrapper ⬇
 	...generateBorderShadowAttributes(WRAPPER_BORDER_SHADOW, {
@@ -199,20 +215,20 @@ const attributes = {
 		defaultBgGradient: "linear-gradient(45deg,#ffffff,#ffffff)",
 		noOverlay: true,
 	}),
-
-	// range controller Slide to Show
-	...generateResponsiveRangeAttributes(SLIDE_TO_SHOW, {
-		defaultRange: 1,
-	}),
 	
 	// range controller Slider Height
 	...generateResponsiveRangeAttributes(CUSTOM_HEIGHT, {
-		defaultRange: 300,
+		defaultRange: 400,
 	}),
 
 	// range controller Slides Gap
 	...generateResponsiveRangeAttributes(SLIDES_GAP, {
-		defaultRange: 5,
+		// defaultRange: 0,
+	}),
+
+	// range controller Slides Border Radius
+	...generateResponsiveRangeAttributes(SLIDE_BORDER_RADIUS, {
+		// defaultRange: 0,
 	}),
 };
 

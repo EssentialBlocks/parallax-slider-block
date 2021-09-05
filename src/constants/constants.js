@@ -12,10 +12,18 @@ export const BUTTON_BORDER_SHADOW = "buttonBorderShadow";
 export const SLIDE_TO_SHOW = "slideToShow";
 export const CUSTOM_HEIGHT = "sliderHeight";
 export const SLIDES_GAP = "slidesGap";
+export const CONTENTS_PADDING = "contentsPadding";
+export const SLIDE_BORDER_RADIUS = "slideBorderRadius";
 
 export const NORMAL_HOVER = [
 	{ label: "Normal", value: "normal" },
 	{ label: "Hover", value: "hover" },
+];
+
+export const HORIZONTAL_ALIGN = [
+	{ label: __("Left"), value: "flex-start" },
+	{ label: __("Center"), value: "center" },
+	{ label: __("Right"), value: "flex-end" },
 ];
 
 export const VERTICAL_ALIGN = [
@@ -35,6 +43,12 @@ export const UNIT_TYPES = [
 	{ label: "px", value: "px" },
 	{ label: "em", value: "em" },
 	{ label: "vh", value: "vh" },
+];
+
+export const GAP_UNIT_TYPES = [
+	{ label: "px", value: "px" },
+	{ label: "em", value: "em" },
+	{ label: "%", value: "%" },
 ];
 
 export const COLORS = [

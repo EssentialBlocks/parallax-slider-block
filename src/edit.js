@@ -27,9 +27,10 @@ import {
 	BUTTON_MARGIN,
 	BUTTON_PADDING,
 	BUTTON_BORDER_SHADOW,
-	SLIDE_TO_SHOW,
 	CUSTOM_HEIGHT,
 	SLIDES_GAP,
+	CONTENTS_PADDING,
+	SLIDE_BORDER_RADIUS,
 } from "./constants/constants";
 import {TITLE_TYPOGRAPHY, BUTTON_TYPOGRAPHY} from "./constants/typography-constant";
 import {
@@ -68,7 +69,16 @@ export default function Edit(props) {
 		sliderData, 
 		startIndex, 
 		current, 
-		preview 
+		preview,
+		titleColor,
+		titleBackgroundColor,
+		buttonColor,
+		buttonHoverColor,
+		buttonBackgroundColor,
+		buttonHoverBackgroundColor,
+		isCustomHeight,
+		horizontalAlign,
+		verticalAlign,
 	} = attributes;
 
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
@@ -185,6 +195,17 @@ export default function Edit(props) {
 		attributes,
 	});
 
+	/* Content Padding */
+	const {
+		dimensionStylesDesktop: contentPaddingDesktop,
+		dimensionStylesTab: contentPaddingTab,
+		dimensionStylesMobile: contentPaddingMobile,
+	} = generateDimensionsControlStyles({
+		controlName: CONTENTS_PADDING,
+		styleFor: "padding",
+		attributes,
+	});
+
 	// range controller Slider Height
 	const {
 		rangeStylesDesktop: sliderHeightDesktop,
@@ -192,7 +213,7 @@ export default function Edit(props) {
 		rangeStylesMobile: sliderHeightMobile,
 	} = generateResponsiveRangeStyles({
 		controlName: CUSTOM_HEIGHT,
-		property: "height",
+		property: "--slide-size",
 		attributes,
 	});
 
@@ -203,7 +224,18 @@ export default function Edit(props) {
 		rangeStylesMobile: slidesGapMobile,
 	} = generateResponsiveRangeStyles({
 		controlName: SLIDES_GAP,
-		property: "padding",
+		property: "margin",
+		attributes,
+	});
+
+	// range controller Slider Slides Gap
+	const {
+		rangeStylesDesktop: slidesBorderRadiusDesktop,
+		rangeStylesTab: slidesBorderRadiusTab,
+		rangeStylesMobile: slidesBorderRadiusMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: SLIDE_BORDER_RADIUS,
+		property: "border-radius",
 		attributes,
 	});
 
@@ -280,12 +312,50 @@ export default function Edit(props) {
 			${wrapperBackgroundStylesMobile}
 		}
 	`;
-	const sliderControlsStylesDesktop = `
+
+	const sliderStyleDesktop = `
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-slider {
+			${isCustomHeight ? sliderHeightDesktop : ""}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-wrapper li {
+			align-items: ${horizontalAlign};
+			justify-content: ${verticalAlign};
+			${slidesGapDesktop}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .slide__image-wrapper {
+			${slidesBorderRadiusDesktop}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .slide__content {
+			${contentPaddingDesktop}
+		}
+	`;
+	const sliderStyleTab = `
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-slider {
+			${isCustomHeight ? sliderHeightTab : ""}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-wrapper li {
+			${slidesGapTab}
+		}
+	`;
+	const sliderStyleMobile = `
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-slider {
+			${isCustomHeight ? sliderHeightMobile : ""}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-wrapper li {
+			${slidesGapMobile}
+		}
+	`;
+
+	const sliderContentsStylesDesktop = `
 		.eb-parallax-slider-wrapper.${blockId} .slide__headline {
+			color: ${titleColor};
+			background-color: ${titleBackgroundColor};
 			${titleTypographyDesktop}
 			${titleMarginDesktop}
 		}
 		.eb-parallax-slider-wrapper.${blockId} .slide__action {
+			color: ${buttonColor};
+			background-color: ${buttonBackgroundColor};
 			${buttonTypographyDesktop}
 			${buttonMarginDesktop}
 			${buttonPaddingDesktop}
@@ -293,10 +363,14 @@ export default function Edit(props) {
 			${buttonBDShadowTransitionStyle}
 		}
 		.eb-parallax-slider-wrapper.${blockId} .slide__action:hover {
+			color: ${buttonHoverColor};
+			background-color: ${buttonHoverBackgroundColor};
+		}
+		.eb-parallax-slider-wrapper.${blockId} .slide__action:hover {
 			${buttonBDShadowHoverDesktop}
 		}
 	`;
-	const sliderControlsStylesTab = `
+	const sliderContentsStylesTab = `
 		.eb-parallax-slider-wrapper.${blockId} .slide__headline {
 			${titleTypographyTab}
 			${titleMarginTab}
@@ -311,7 +385,7 @@ export default function Edit(props) {
 			${buttonBDShadowHoverTab}
 		}
 	`;
-	const sliderControlsStylesMobile = `
+	const sliderContentsStylesMobile = `
 		.eb-parallax-slider-wrapper.${blockId} .slide__headline {
 			${titleTypographyMobile}
 			${titleMarginMobile}
@@ -330,19 +404,22 @@ export default function Edit(props) {
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStyles = softMinifyCssStrings(`
 		${isCssExists(wrapperStylesDesktop) ? wrapperStylesDesktop : " "}
-		${isCssExists(sliderControlsStylesDesktop) ? sliderControlsStylesDesktop : " "}
+		${isCssExists(sliderStyleDesktop) ? sliderStyleDesktop : " "}
+		${isCssExists(sliderContentsStylesDesktop) ? sliderContentsStylesDesktop : " "}
 	`);
 
 	// all css styles for Tab in strings ⬇
 	const tabAllStyles = softMinifyCssStrings(`
 		${isCssExists(wrapperStylesTab) ? wrapperStylesTab : " "}
-		${isCssExists(sliderControlsStylesTab) ? sliderControlsStylesTab : " "}
+		${isCssExists(sliderStyleTab) ? sliderStyleTab : " "}
+		${isCssExists(sliderContentsStylesTab) ? sliderContentsStylesTab : " "}
 	`);
 
 	// all css styles for Mobile in strings ⬇
 	const mobileAllStyles = softMinifyCssStrings(`
 		${isCssExists(wrapperStylesMobile) ? wrapperStylesMobile : " "}
-		${isCssExists(sliderControlsStylesMobile) ? sliderControlsStylesMobile : " "}
+		${isCssExists(sliderStyleMobile) ? sliderStyleMobile : " "}
+		${isCssExists(sliderContentsStylesMobile) ? sliderContentsStylesMobile : " "}
 	`);
 
 	// Set All Style in "blockMeta" Attribute

@@ -26,8 +26,6 @@ const { select } = wp.data;
 /**
  * Internal dependencies
  */
-import UnitControl from "../util/unit-control";
-import DimensionsControl from "../util/dimensions-control";
 import {
 	WRAPPER_BG,
 	WRAPPER_MARGIN,
@@ -37,13 +35,15 @@ import {
 	BUTTON_MARGIN,
 	BUTTON_PADDING,
 	BUTTON_BORDER_SHADOW,
-	SLIDE_TO_SHOW,
 	CUSTOM_HEIGHT,
 	SLIDES_GAP,
+	CONTENTS_PADDING,
+	SLIDE_BORDER_RADIUS,
 	NORMAL_HOVER,
+	HORIZONTAL_ALIGN,
 	VERTICAL_ALIGN,
-	TEXT_ALIGN,
 	UNIT_TYPES,
+	GAP_UNIT_TYPES,
 	COLORS,
 } from "./constants/constants";
 import { TITLE_TYPOGRAPHY, BUTTON_TYPOGRAPHY } from "./constants/typography-constant";
@@ -77,6 +77,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		prevIcon,
 		nextIcon,
 		iconColor,
+		horizontalAlign,
+		verticalAlign,
 	} = attributes;
 
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
@@ -179,7 +181,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{isCustomHeight && (
 											<ResponsiveRangeController
-												baseLabel={__("Slider Height", "slider-block")}
+												baseLabel={__("Slider Height")}
 												controlName={CUSTOM_HEIGHT}
 												resRequiredProps={resRequiredProps}
 												units={UNIT_TYPES}
@@ -188,7 +190,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 												step={1}
 											/>
 										)}
+
+										<ResponsiveRangeController
+											baseLabel={__("Slides Gap")}
+											controlName={SLIDES_GAP}
+											resRequiredProps={resRequiredProps}
+											units={GAP_UNIT_TYPES}
+											min={1}
+											max={50}
+											step={1}
+										/>
 									</PanelBody>
+
 									<PanelBody title={__("Slides")} initialOpen={false}>
 										{sliderData.map((slide, index) => (
 											<PanelBody
@@ -223,6 +236,52 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 							{tab.name === "styles" && (
 								<>
+									<PanelBody title={__("Slides Style")} initialOpen={true}>
+										<PanelRow>Content Horizontal Align</PanelRow>
+										<ButtonGroup >
+											{HORIZONTAL_ALIGN.map((item) => (
+												<Button
+													isLarge
+													isPrimary={horizontalAlign === item.value}
+													isSecondary={horizontalAlign !== item.value}
+													onClick={() => setAttributes({ horizontalAlign: item.value })}
+												>
+													{item.label}
+												</Button>
+											))}
+										</ButtonGroup>
+
+										<PanelRow>Content Vertical Align</PanelRow>
+										<ButtonGroup>
+											{VERTICAL_ALIGN.map((item) => (
+												<Button
+													isLarge
+													isPrimary={verticalAlign === item.value}
+													isSecondary={verticalAlign !== item.value}
+													onClick={() => setAttributes({ verticalAlign: item.value })}
+												>
+													{item.label}
+												</Button>
+											))}
+										</ButtonGroup>
+
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={CONTENTS_PADDING}
+											baseLabel="Content Padding"
+										/>
+
+										<ResponsiveRangeController
+											baseLabel={__("Slide Border Radius")}
+											controlName={SLIDE_BORDER_RADIUS}
+											resRequiredProps={resRequiredProps}
+											units={GAP_UNIT_TYPES}
+											min={1}
+											max={50}
+											step={1}
+										/>
+									</PanelBody>
+
 									<PanelBody title={__("Title Style")} initialOpen={false}>
 										<PanelRow>Color</PanelRow>
 										<ColorPalette

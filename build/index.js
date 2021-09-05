@@ -1588,6 +1588,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inspector */ "./src/inspector.js");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants/constants */ "./src/constants/constants.js");
+/* harmony import */ var _constants_typography_constant__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./constants/typography-constant */ "./src/constants/typography-constant.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util/helpers */ "./util/helpers/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1632,6 +1635,9 @@ var select = wp.data.select;
 
 
 
+
+
+
 function getPreviousImgData(previousData, image) {
   var prevTitle, prevBtnText, prevLink;
   previousData.map(function (item) {
@@ -1657,10 +1663,205 @@ function Edit(props) {
       sliderData = attributes.sliderData,
       startIndex = attributes.startIndex,
       current = attributes.current,
-      preview = attributes.preview;
+      preview = attributes.preview; // this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
+
+  useEffect(function () {
+    var bodyClasses = document.body.className;
+    setAttributes({
+      resOption: select("core/edit-post").__experimentalGetPreviewDeviceType()
+    });
+  }, []); // this useEffect is for creating a unique id for each block's unique className by a random unique number
+
+  useEffect(function () {
+    var BLOCK_PREFIX = "eb-slider";
+    Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["duplicateBlockIdFix"])({
+      BLOCK_PREFIX: BLOCK_PREFIX,
+      blockId: blockId,
+      setAttributes: setAttributes,
+      select: select,
+      clientId: clientId
+    });
+  }, []); // this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
+
+  useEffect(function () {
+    Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["mimmikCssForPreviewBtnClick"])({
+      domObj: document,
+      select: select
+    });
+  }, []);
   var blockProps = useBlockProps({
     className: "eb-guten-block-main-parent-wrapper"
-  }); // Change start index if image is removed from gallery
+  });
+  /**
+   * CSS/styling Codes Starts from Here
+   */
+  // Title Typography
+
+  var _generateTypographySt = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateTypographyStyles"])({
+    attributes: attributes,
+    prefixConstant: _constants_typography_constant__WEBPACK_IMPORTED_MODULE_4__["TITLE_TYPOGRAPHY"],
+    defaultFontSize: 24
+  }),
+      titleTypographyDesktop = _generateTypographySt.typoStylesDesktop,
+      titleTypographyTab = _generateTypographySt.typoStylesTab,
+      titleTypographyMobile = _generateTypographySt.typoStylesMobile; // Button Typography
+
+
+  var _generateTypographySt2 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateTypographyStyles"])({
+    attributes: attributes,
+    prefixConstant: _constants_typography_constant__WEBPACK_IMPORTED_MODULE_4__["BUTTON_TYPOGRAPHY"],
+    defaultFontSize: 14
+  }),
+      buttonTypographyDesktop = _generateTypographySt2.typoStylesDesktop,
+      buttonTypographyTab = _generateTypographySt2.typoStylesTab,
+      buttonTypographyMobile = _generateTypographySt2.typoStylesMobile;
+  /* Wrapper Margin */
+
+
+  var _generateDimensionsCo = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateDimensionsControlStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_3__["WRAPPER_MARGIN"],
+    styleFor: "margin",
+    attributes: attributes
+  }),
+      wrapperMarginDesktop = _generateDimensionsCo.dimensionStylesDesktop,
+      wrapperMarginTab = _generateDimensionsCo.dimensionStylesTab,
+      wrapperMarginMobile = _generateDimensionsCo.dimensionStylesMobile;
+  /* Wrapper Padding */
+
+
+  var _generateDimensionsCo2 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateDimensionsControlStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_3__["WRAPPER_PADDING"],
+    styleFor: "padding",
+    attributes: attributes
+  }),
+      wrapperPaddingDesktop = _generateDimensionsCo2.dimensionStylesDesktop,
+      wrapperPaddingTab = _generateDimensionsCo2.dimensionStylesTab,
+      wrapperPaddingMobile = _generateDimensionsCo2.dimensionStylesMobile;
+  /* Title Margin */
+
+
+  var _generateDimensionsCo3 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateDimensionsControlStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_3__["TITLE_MARGIN"],
+    styleFor: "margin",
+    attributes: attributes
+  }),
+      titleMarginDesktop = _generateDimensionsCo3.dimensionStylesDesktop,
+      titleMarginTab = _generateDimensionsCo3.dimensionStylesTab,
+      titleMarginMobile = _generateDimensionsCo3.dimensionStylesMobile;
+  /* Button Margin */
+
+
+  var _generateDimensionsCo4 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateDimensionsControlStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_3__["BUTTON_MARGIN"],
+    styleFor: "margin",
+    attributes: attributes
+  }),
+      buttonMarginDesktop = _generateDimensionsCo4.dimensionStylesDesktop,
+      buttonMarginTab = _generateDimensionsCo4.dimensionStylesTab,
+      buttonMarginMobile = _generateDimensionsCo4.dimensionStylesMobile;
+  /* Button Padding */
+
+
+  var _generateDimensionsCo5 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateDimensionsControlStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_3__["BUTTON_PADDING"],
+    styleFor: "padding",
+    attributes: attributes
+  }),
+      buttonPaddingDesktop = _generateDimensionsCo5.dimensionStylesDesktop,
+      buttonPaddingTab = _generateDimensionsCo5.dimensionStylesTab,
+      buttonPaddingMobile = _generateDimensionsCo5.dimensionStylesMobile; // range controller Slider Height
+
+
+  var _generateResponsiveRa = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateResponsiveRangeStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_3__["CUSTOM_HEIGHT"],
+    property: "height",
+    attributes: attributes
+  }),
+      sliderHeightDesktop = _generateResponsiveRa.rangeStylesDesktop,
+      sliderHeightTab = _generateResponsiveRa.rangeStylesTab,
+      sliderHeightMobile = _generateResponsiveRa.rangeStylesMobile; // range controller Slider Slides Gap
+
+
+  var _generateResponsiveRa2 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateResponsiveRangeStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_3__["SLIDES_GAP"],
+    property: "padding",
+    attributes: attributes
+  }),
+      slidesGapDesktop = _generateResponsiveRa2.rangeStylesDesktop,
+      slidesGapTab = _generateResponsiveRa2.rangeStylesTab,
+      slidesGapMobile = _generateResponsiveRa2.rangeStylesMobile; //Generate Background
+
+
+  var _generateBackgroundCo = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateBackgroundControlStyles"])({
+    attributes: attributes,
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_3__["WRAPPER_BG"],
+    noOverlay: true
+  }),
+      wrapperBackgroundStylesDesktop = _generateBackgroundCo.backgroundStylesDesktop,
+      wrapperHoverBackgroundStylesDesktop = _generateBackgroundCo.hoverBackgroundStylesDesktop,
+      wrapperBackgroundStylesTab = _generateBackgroundCo.backgroundStylesTab,
+      wrapperHoverBackgroundStylesTab = _generateBackgroundCo.hoverBackgroundStylesTab,
+      wrapperBackgroundStylesMobile = _generateBackgroundCo.backgroundStylesMobile,
+      wrapperHoverBackgroundStylesMobile = _generateBackgroundCo.hoverBackgroundStylesMobile,
+      wrapperBgTransitionStyle = _generateBackgroundCo.bgTransitionStyle; // generateBorderShadowStyles for Wrapper ⬇
+
+
+  var _generateBorderShadow = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateBorderShadowStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_3__["WRAPPER_BORDER_SHADOW"],
+    attributes: attributes // noShadow: true,
+    // noBorder: true,
+
+  }),
+      wrapperBDShadowDesktop = _generateBorderShadow.styesDesktop,
+      wrapperBDShadowTab = _generateBorderShadow.styesTab,
+      wrapperBDShadowMobile = _generateBorderShadow.styesMobile,
+      wrapperBDShadowHoverDesktop = _generateBorderShadow.stylesHoverDesktop,
+      wrapperBDShadowHoverTab = _generateBorderShadow.stylesHoverTab,
+      wrapperBDShadowHoverMobile = _generateBorderShadow.stylesHoverMobile,
+      wrapperBDShadowTransitionStyle = _generateBorderShadow.transitionStyle; // generateBorderShadowStyles for Button ⬇
+
+
+  var _generateBorderShadow2 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateBorderShadowStyles"])({
+    controlName: _constants_constants__WEBPACK_IMPORTED_MODULE_3__["BUTTON_BORDER_SHADOW"],
+    attributes: attributes // noShadow: true,
+    // noBorder: true,
+
+  }),
+      buttonBDShadowDesktop = _generateBorderShadow2.styesDesktop,
+      buttonBDShadowTab = _generateBorderShadow2.styesTab,
+      buttonBDShadowMobile = _generateBorderShadow2.styesMobile,
+      buttonBDShadowHoverDesktop = _generateBorderShadow2.stylesHoverDesktop,
+      buttonBDShadowHoverTab = _generateBorderShadow2.stylesHoverTab,
+      buttonBDShadowHoverMobile = _generateBorderShadow2.stylesHoverMobile,
+      buttonBDShadowTransitionStyle = _generateBorderShadow2.transitionStyle; // wrapper styles css in strings ⬇
+
+
+  var wrapperStylesDesktop = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, "{\n\t\t\t").concat(wrapperMarginDesktop, "\n\t\t\t").concat(wrapperPaddingDesktop, "\n\t\t\t").concat(wrapperBDShadowDesktop, "\n\t\t\t").concat(wrapperBackgroundStylesDesktop, "\n\t\t\t").concat(wrapperBgTransitionStyle, "\n\t\t}\n\t");
+  var wrapperStylesTab = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, "{\n\t\t\t").concat(wrapperMarginTab, "\n\t\t\t").concat(wrapperPaddingTab, "\n\t\t\t").concat(wrapperBDShadowTab, "\n\t\t\t").concat(wrapperBackgroundStylesTab, "\n\t\t}\n\t");
+  var wrapperStylesMobile = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, "{\n\t\t\t").concat(wrapperMarginMobile, "\n\t\t\t").concat(wrapperPaddingMobile, "\n\t\t\t").concat(wrapperBDShadowMobile, "\n\t\t\t").concat(wrapperBackgroundStylesMobile, "\n\t\t}\n\t");
+  var sliderControlsStylesDesktop = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .slide__headline {\n\t\t\t").concat(titleTypographyDesktop, "\n\t\t\t").concat(titleMarginDesktop, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action {\n\t\t\t").concat(buttonTypographyDesktop, "\n\t\t\t").concat(buttonMarginDesktop, "\n\t\t\t").concat(buttonPaddingDesktop, "\n\t\t\t").concat(buttonBDShadowDesktop, "\n\t\t\t").concat(buttonBDShadowTransitionStyle, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action:hover {\n\t\t\t").concat(buttonBDShadowHoverDesktop, "\n\t\t}\n\t");
+  var sliderControlsStylesTab = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .slide__headline {\n\t\t\t").concat(titleTypographyTab, "\n\t\t\t").concat(titleMarginTab, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action {\n\t\t\t").concat(buttonTypographyTab, "\n\t\t\t").concat(buttonMarginTab, "\n\t\t\t").concat(buttonPaddingTab, "\n\t\t\t").concat(buttonBDShadowTab, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action:hover {\n\t\t\t").concat(buttonBDShadowHoverTab, "\n\t\t}\n\t");
+  var sliderControlsStylesMobile = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .slide__headline {\n\t\t\t").concat(titleTypographyMobile, "\n\t\t\t").concat(titleMarginMobile, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action {\n\t\t\t").concat(buttonTypographyMobile, "\n\t\t\t").concat(buttonMarginMobile, "\n\t\t\t").concat(buttonPaddingMobile, "\n\t\t\t").concat(buttonBDShadowMobile, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action:hover {\n\t\t\t").concat(buttonBDShadowHoverMobile, "\n\t\t}\n\t"); // all css styles for large screen width (desktop/laptop) in strings ⬇
+
+  var desktopAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["softMinifyCssStrings"])("\n\t\t".concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["isCssExists"])(wrapperStylesDesktop) ? wrapperStylesDesktop : " ", "\n\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["isCssExists"])(sliderControlsStylesDesktop) ? sliderControlsStylesDesktop : " ", "\n\t")); // all css styles for Tab in strings ⬇
+
+  var tabAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["softMinifyCssStrings"])("\n\t\t".concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["isCssExists"])(wrapperStylesTab) ? wrapperStylesTab : " ", "\n\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["isCssExists"])(sliderControlsStylesTab) ? sliderControlsStylesTab : " ", "\n\t")); // all css styles for Mobile in strings ⬇
+
+  var mobileAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["softMinifyCssStrings"])("\n\t\t".concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["isCssExists"])(wrapperStylesMobile) ? wrapperStylesMobile : " ", "\n\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["isCssExists"])(sliderControlsStylesMobile) ? sliderControlsStylesMobile : " ", "\n\t")); // Set All Style in "blockMeta" Attribute
+
+  useEffect(function () {
+    var styleObject = {
+      desktop: desktopAllStyles,
+      tab: tabAllStyles,
+      mobile: mobileAllStyles
+    };
+
+    if (JSON.stringify(blockMeta) != JSON.stringify(styleObject)) {
+      setAttributes({
+        blockMeta: styleObject
+      });
+    }
+  }, [attributes]); // Change start index if image is removed from gallery
 
   useEffect(function () {
     if (startIndex > sliderData.length) {
@@ -1742,11 +1943,13 @@ function Edit(props) {
         });
       }
     });
-  }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_slider__WEBPACK_IMPORTED_MODULE_0__["default"], {
+  }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t".concat(desktopAllStyles, "\n\n\t\t\t\t/* mimmikcssStart */ \n\n\t\t\t\t").concat(resOption === "Tablet" ? tabAllStyles : " ", "\n\t\t\t\t").concat(resOption === "Mobile" ? tabAllStyles + mobileAllStyles : " ", "\n\n\t\t\t\t/* mimmikcssEnd */\n\n\t\t\t\t@media all and (max-width: 1024px) {\t\n\n\t\t\t\t\t/* tabcssStart */\t\t\t\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["softMinifyCssStrings"])(tabAllStyles), "\n\t\t\t\t\t/* tabcssEnd */\t\t\t\n\t\t\t\t\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t@media all and (max-width: 767px) {\n\t\t\t\t\t\n\t\t\t\t\t/* mobcssStart */\t\t\t\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["softMinifyCssStrings"])(mobileAllStyles), "\n\t\t\t\t\t/* mobcssEnd */\t\t\t\n\t\t\t\t\n\t\t\t\t}\n\t\t\t\t")), /*#__PURE__*/React.createElement("div", {
+    className: "eb-parallax-slider-wrapper ".concat(blockId)
+  }, /*#__PURE__*/React.createElement(_slider__WEBPACK_IMPORTED_MODULE_0__["default"], {
     slides: sliderData,
     attributes: attributes,
     setAttributes: setAttributes
-  }))];
+  })))];
 }
 ;
 

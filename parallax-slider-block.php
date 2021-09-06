@@ -82,7 +82,7 @@ function create_block_parallax_slider_block_init() {
 				'render_callback' => function( $attributes, $content ) {
 					if( !is_admin() ) {
 						wp_enqueue_style('parallax-slider-block-frontend-styles');
-						wp_enqueue_script('parallax-slider-block-parallax-slider-frontends');
+						wp_enqueue_script('parallax-slider-block-parallax-slider-frontend');
 					}
 					return $content;
 				}

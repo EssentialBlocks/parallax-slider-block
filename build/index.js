@@ -218,55 +218,14 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
   },
   sliderData: {
     type: "array",
-    // source: "query",
-    // selector: ".slide",
-    // query: {
-    // 	src: {
-    // 		type: "string",
-    // 		selector: "img",
-    // 		source: "attribute",
-    // 		attribute: "src",
-    // 	},
-    // 	alt: {
-    // 		type: "string",
-    // 		selector: "img",
-    // 		source: "attribute",
-    // 		attribute: "alt",
-    // 	},
-    // 	title: {
-    // 		type: "string",
-    // 		selector: "h2",
-    // 		source: "text",
-    // 		default: "Add header text here",
-    // 	},
-    // 	btnText: {
-    // 		type: "string",
-    // 		selector: "button",
-    // 		source: "text",
-    // 		default: "Add Text",
-    // 	},
-    // 	link: {
-    // 		type: "string",
-    // 		selector: "button",
-    // 		source: "attribute",
-    // 		attribute: "data-link",
-    // 		default: "",
-    // 	},
-    // },
     "default": []
   },
   intensity: {
     type: "number",
-    // selector: ".eb-parallax-container",
-    // source: "attribute",
-    // attribute: "data-intensity",
     "default": 50
   },
   startIndex: {
     type: "number",
-    // selector: ".eb-parallax-container",
-    // source: "attribute",
-    // attribute: "data-start-index",
     "default": 1
   },
   isCustomHeight: {
@@ -275,37 +234,35 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
   },
   current: {
     type: "number",
-    "default": 0
+    "default": 1
   },
   titleColorType: {
     type: "string",
     "default": "normal"
   },
   titleColor: {
-    type: "string"
+    type: "string",
+    "default": "#ffffff"
   },
   titleBackgroundColor: {
-    type: "string"
-  },
-  iconColor: {
-    type: "string"
-  },
-  preview: {
-    type: "boolean",
-    "default": false
+    type: "string",
+    "default": "rgba(135,92,255,0)"
   },
   buttonColorType: {
     type: "string",
     "default": "normal"
   },
   buttonBackgroundColor: {
-    type: "string"
+    type: "string",
+    "default": "rgba(135,92,255,.8)"
   },
   buttonColor: {
-    type: "string"
+    type: "string",
+    "default": "#fffff"
   },
   buttonHoverBackgroundColor: {
-    type: "string"
+    type: "string",
+    "default": "rgba(135,92,255,.95)"
   },
   buttonHoverColor: {
     type: "string"
@@ -617,12 +574,8 @@ function Edit(props) {
   var resOption = attributes.resOption,
       blockId = attributes.blockId,
       blockMeta = attributes.blockMeta,
-      sliderStyle = attributes.sliderStyle,
-      images = attributes.images,
       sliderData = attributes.sliderData,
       startIndex = attributes.startIndex,
-      current = attributes.current,
-      preview = attributes.preview,
       titleColor = attributes.titleColor,
       titleBackgroundColor = attributes.titleBackgroundColor,
       buttonColor = attributes.buttonColor,
@@ -828,12 +781,12 @@ function Edit(props) {
   var wrapperStylesDesktop = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, "{\n\t\t\t").concat(wrapperMarginDesktop, "\n\t\t\t").concat(wrapperPaddingDesktop, "\n\t\t\t").concat(wrapperBDShadowDesktop, "\n\t\t\t").concat(wrapperBackgroundStylesDesktop, "\n\t\t\t").concat(wrapperBgTransitionStyle, "\n\t\t}\n\t");
   var wrapperStylesTab = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, "{\n\t\t\t").concat(wrapperMarginTab, "\n\t\t\t").concat(wrapperPaddingTab, "\n\t\t\t").concat(wrapperBDShadowTab, "\n\t\t\t").concat(wrapperBackgroundStylesTab, "\n\t\t}\n\t");
   var wrapperStylesMobile = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, "{\n\t\t\t").concat(wrapperMarginMobile, "\n\t\t\t").concat(wrapperPaddingMobile, "\n\t\t\t").concat(wrapperBDShadowMobile, "\n\t\t\t").concat(wrapperBackgroundStylesMobile, "\n\t\t}\n\t");
-  var sliderStyleDesktop = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .eb-parallax-slider {\n\t\t\t").concat(isCustomHeight ? sliderHeightDesktop : "", "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .eb-parallax-wrapper li {\n\t\t\talign-items: ").concat(horizontalAlign, ";\n\t\t\tjustify-content: ").concat(verticalAlign, ";\n\t\t\t").concat(slidesGapDesktop, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__image-wrapper {\n\t\t\t").concat(slidesBorderRadiusDesktop, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__content {\n\t\t\t").concat(contentPaddingDesktop, "\n\t\t}\n\t");
+  var sliderStyleDesktop = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .eb-parallax-container .eb-parallax-slider {\n\t\t\t").concat(isCustomHeight ? sliderHeightDesktop : "", "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .eb-parallax-wrapper li {\n\t\t\talign-items: ").concat(horizontalAlign, ";\n\t\t\tjustify-content: ").concat(verticalAlign, ";\n\t\t\t").concat(slidesGapDesktop, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__image-wrapper {\n\t\t\t").concat(slidesBorderRadiusDesktop, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__content {\n\t\t\t").concat(contentPaddingDesktop, "\n\t\t}\n\t");
   var sliderStyleTab = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .eb-parallax-slider {\n\t\t\t").concat(isCustomHeight ? sliderHeightTab : "", "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .eb-parallax-wrapper li {\n\t\t\t").concat(slidesGapTab, "\n\t\t}\n\t");
   var sliderStyleMobile = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .eb-parallax-slider {\n\t\t\t").concat(isCustomHeight ? sliderHeightMobile : "", "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .eb-parallax-wrapper li {\n\t\t\t").concat(slidesGapMobile, "\n\t\t}\n\t");
-  var sliderContentsStylesDesktop = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .slide__headline {\n\t\t\tcolor: ").concat(titleColor, ";\n\t\t\tbackground-color: ").concat(titleBackgroundColor, ";\n\t\t\t").concat(titleTypographyDesktop, "\n\t\t\t").concat(titleMarginDesktop, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action {\n\t\t\tcolor: ").concat(buttonColor, ";\n\t\t\tbackground-color: ").concat(buttonBackgroundColor, ";\n\t\t\t").concat(buttonTypographyDesktop, "\n\t\t\t").concat(buttonMarginDesktop, "\n\t\t\t").concat(buttonPaddingDesktop, "\n\t\t\t").concat(buttonBDShadowDesktop, "\n\t\t\t").concat(buttonBDShadowTransitionStyle, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action:hover {\n\t\t\tcolor: ").concat(buttonHoverColor, ";\n\t\t\tbackground-color: ").concat(buttonHoverBackgroundColor, ";\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action:hover {\n\t\t\t").concat(buttonBDShadowHoverDesktop, "\n\t\t}\n\t");
-  var sliderContentsStylesTab = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .slide__headline {\n\t\t\t").concat(titleTypographyTab, "\n\t\t\t").concat(titleMarginTab, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action {\n\t\t\t").concat(buttonTypographyTab, "\n\t\t\t").concat(buttonMarginTab, "\n\t\t\t").concat(buttonPaddingTab, "\n\t\t\t").concat(buttonBDShadowTab, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action:hover {\n\t\t\t").concat(buttonBDShadowHoverTab, "\n\t\t}\n\t");
-  var sliderContentsStylesMobile = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .slide__headline {\n\t\t\t").concat(titleTypographyMobile, "\n\t\t\t").concat(titleMarginMobile, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action {\n\t\t\t").concat(buttonTypographyMobile, "\n\t\t\t").concat(buttonMarginMobile, "\n\t\t\t").concat(buttonPaddingMobile, "\n\t\t\t").concat(buttonBDShadowMobile, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action:hover {\n\t\t\t").concat(buttonBDShadowHoverMobile, "\n\t\t}\n\t"); // all css styles for large screen width (desktop/laptop) in strings ⬇
+  var sliderContentsStylesDesktop = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {\n\t\t\tcolor: ").concat(titleColor, ";\n\t\t\tbackground-color: ").concat(titleBackgroundColor, ";\n\t\t\t").concat(titleTypographyDesktop, "\n\t\t\t").concat(titleMarginDesktop, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {\n\t\t\tcolor: ").concat(buttonColor, ";\n\t\t\tbackground-color: ").concat(buttonBackgroundColor, ";\n\t\t\t").concat(buttonTypographyDesktop, "\n\t\t\t").concat(buttonMarginDesktop, "\n\t\t\t").concat(buttonPaddingDesktop, "\n\t\t\t").concat(buttonBDShadowDesktop, "\n\t\t\t").concat(buttonBDShadowTransitionStyle, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {\n\t\t\tcolor: ").concat(buttonHoverColor, ";\n\t\t\tbackground-color: ").concat(buttonHoverBackgroundColor, ";\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .slide__action:hover {\n\t\t\t").concat(buttonBDShadowHoverDesktop, "\n\t\t}\n\t");
+  var sliderContentsStylesTab = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {\n\t\t\t").concat(titleTypographyTab, "\n\t\t\t").concat(titleMarginTab, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {\n\t\t\t").concat(buttonTypographyTab, "\n\t\t\t").concat(buttonMarginTab, "\n\t\t\t").concat(buttonPaddingTab, "\n\t\t\t").concat(buttonBDShadowTab, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {\n\t\t\t").concat(buttonBDShadowHoverTab, "\n\t\t}\n\t");
+  var sliderContentsStylesMobile = "\n\t\t.eb-parallax-slider-wrapper.".concat(blockId, " .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {\n\t\t\t").concat(titleTypographyMobile, "\n\t\t\t").concat(titleMarginMobile, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {\n\t\t\t").concat(buttonTypographyMobile, "\n\t\t\t").concat(buttonMarginMobile, "\n\t\t\t").concat(buttonPaddingMobile, "\n\t\t\t").concat(buttonBDShadowMobile, "\n\t\t}\n\t\t.eb-parallax-slider-wrapper.").concat(blockId, " .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {\n\t\t\t").concat(buttonBDShadowHoverMobile, "\n\t\t}\n\t"); // all css styles for large screen width (desktop/laptop) in strings ⬇
 
   var desktopAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["softMinifyCssStrings"])("\n\t\t".concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["isCssExists"])(wrapperStylesDesktop) ? wrapperStylesDesktop : " ", "\n\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["isCssExists"])(sliderStyleDesktop) ? sliderStyleDesktop : " ", "\n\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["isCssExists"])(sliderContentsStylesDesktop) ? sliderContentsStylesDesktop : " ", "\n\t")); // all css styles for Tab in strings ⬇
 
@@ -900,7 +853,7 @@ function Edit(props) {
     return /*#__PURE__*/React.createElement(MediaPlaceholder, {
       labels: {
         title: __("Images"),
-        instructions: __("Drag images, upload new ones or select files from your library.")
+        instructions: __("Drag images, upload new ones or select files from your library. Upload minimum 3 images for better design.")
       },
       onSelect: function onSelect(images) {
         return onImageSelect(images);
@@ -1129,25 +1082,17 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
  * WordPress dependencies
  */
 var __ = wp.i18n.__;
-var _wp$blockEditor = wp.blockEditor,
-    InspectorControls = _wp$blockEditor.InspectorControls,
-    PanelColorSettings = _wp$blockEditor.PanelColorSettings;
+var InspectorControls = wp.blockEditor.InspectorControls;
 var _wp$components = wp.components,
-    Panel = _wp$components.Panel,
     PanelBody = _wp$components.PanelBody,
     PanelRow = _wp$components.PanelRow,
-    SelectControl = _wp$components.SelectControl,
     ToggleControl = _wp$components.ToggleControl,
     Button = _wp$components.Button,
     ButtonGroup = _wp$components.ButtonGroup,
-    BaseControl = _wp$components.BaseControl,
     TabPanel = _wp$components.TabPanel,
     RangeControl = _wp$components.RangeControl,
     TextControl = _wp$components.TextControl,
-    TextareaControl = _wp$components.TextareaControl,
-    ColorPalette = _wp$components.ColorPalette,
-    Dropdown = _wp$components.Dropdown,
-    ColorPicker = _wp$components.ColorPicker;
+    ColorPalette = _wp$components.ColorPalette;
 var useEffect = wp.element.useEffect;
 var select = wp.data.select;
 /**
@@ -1225,7 +1170,7 @@ var Inspector = function Inspector(_ref) {
   };
 
   var handlePanelClick = function handlePanelClick(index) {
-    var updatedIndex = index !== current ? index : 0;
+    var updatedIndex = index !== current ? index : 1;
     setAttributes({
       current: updatedIndex
     });
@@ -1258,17 +1203,6 @@ var Inspector = function Inspector(_ref) {
     }, tab.name === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
       title: __("General")
     }, /*#__PURE__*/React.createElement(RangeControl, {
-      label: __("Starting Slide"),
-      value: startIndex,
-      allowReset: true,
-      onChange: function onChange(startIndex) {
-        return setAttributes({
-          startIndex: startIndex
-        });
-      },
-      min: 1,
-      max: sliderData.length
-    }), /*#__PURE__*/React.createElement(RangeControl, {
       label: __("Parallax Softness"),
       value: intensity,
       allowReset: true,
@@ -1505,81 +1439,16 @@ var Inspector = function Inspector(_ref) {
 __webpack_require__.r(__webpack_exports__);
 var Save = function Save(_ref) {
   var attributes = _ref.attributes;
-  var sliderData = attributes.sliderData,
-      current = attributes.current,
+  var blockId = attributes.blockId,
+      sliderData = attributes.sliderData,
       intensity = attributes.intensity,
       startIndex = attributes.startIndex,
-      titleColor = attributes.titleColor,
-      titleFontSize = attributes.titleFontSize,
-      titleSizeUnit = attributes.titleSizeUnit,
-      titleFontFamily = attributes.titleFontFamily,
-      titleFontWeight = attributes.titleFontWeight,
-      titleTextDecoration = attributes.titleTextDecoration,
-      titleTextTransform = attributes.titleTextTransform,
-      titleLetterSpacing = attributes.titleLetterSpacing,
-      titleLetterSpacingUnit = attributes.titleLetterSpacingUnit,
-      titleLineHeight = attributes.titleLineHeight,
-      titleLineHeightUnit = attributes.titleLineHeightUnit,
-      btnColor = attributes.btnColor,
-      btnBackgroundColor = attributes.btnBackgroundColor,
-      btnFontFamily = attributes.btnFontFamily,
-      btnFontSize = attributes.btnFontSize,
-      btnSizeUnit = attributes.btnSizeUnit,
-      btnFontWeight = attributes.btnFontWeight,
-      btnTextDecoration = attributes.btnTextDecoration,
-      btnTextTransform = attributes.btnTextTransform,
-      btnLetterSpacing = attributes.btnLetterSpacing,
-      btnLetterSpacingUnit = attributes.btnLetterSpacingUnit,
-      btnLineHeight = attributes.btnLineHeight,
-      btnLineHeightUnit = attributes.btnLineHeightUnit,
-      btnBorderColor = attributes.btnBorderColor,
-      btnBorderWidth = attributes.btnBorderWidth,
-      btnBorderStyle = attributes.btnBorderStyle,
-      btnBorderRadius = attributes.btnBorderRadius,
       hasBtnShadow = attributes.hasBtnShadow,
-      btnMarginTop = attributes.btnMarginTop,
-      btnMarginRight = attributes.btnMarginRight,
-      btnMarginBottom = attributes.btnMarginBottom,
-      btnMarginLeft = attributes.btnMarginLeft,
-      btnMarginUnit = attributes.btnMarginUnit,
-      btnPaddingTop = attributes.btnPaddingTop,
-      btnPaddingRight = attributes.btnPaddingRight,
-      btnPaddingBottom = attributes.btnPaddingBottom,
-      btnPaddingLeft = attributes.btnPaddingLeft,
-      btnPaddingUnit = attributes.btnPaddingUnit,
       prevIcon = attributes.prevIcon,
-      nextIcon = attributes.nextIcon,
-      iconColor = attributes.iconColor; // Style objects
-
-  var titleStyles = {
-    color: titleColor,
-    fontFamily: titleFontFamily,
-    fontSize: titleFontSize + titleSizeUnit,
-    fontWeight: titleFontWeight,
-    textTransform: titleTextTransform,
-    textDecoration: titleTextDecoration,
-    letterSpacing: titleLetterSpacing ? "".concat(titleLetterSpacing).concat(titleLetterSpacingUnit) : undefined,
-    lineHeight: titleLineHeight ? "".concat(titleLineHeight).concat(titleLineHeightUnit) : undefined
-  };
-  var buttonStyles = {
-    color: btnColor,
-    backgroundColor: btnBackgroundColor,
-    fontFamily: btnFontFamily,
-    fontSize: btnFontSize + btnSizeUnit,
-    fontWeight: btnFontWeight,
-    textTransform: btnTextTransform,
-    textDecoration: btnTextDecoration,
-    letterSpacing: btnLetterSpacing ? "".concat(btnLetterSpacing).concat(btnLetterSpacingUnit) : undefined,
-    lineHeight: btnLineHeight ? "".concat(btnLineHeight).concat(btnLineHeightUnit) : undefined,
-    border: "".concat(btnBorderWidth || 0, "px ").concat(btnBorderStyle, " ").concat(btnBorderColor || "black"),
-    borderRadius: btnBorderRadius + "px",
-    margin: "".concat(btnMarginTop).concat(btnMarginUnit, " ").concat(btnMarginRight).concat(btnMarginUnit, " ").concat(btnMarginBottom).concat(btnMarginUnit, " ").concat(btnMarginLeft).concat(btnMarginUnit),
-    padding: "".concat(btnPaddingTop).concat(btnPaddingUnit, " ").concat(btnPaddingRight).concat(btnPaddingUnit, " ").concat(btnPaddingBottom).concat(btnPaddingUnit, " ").concat(btnPaddingLeft).concat(btnPaddingUnit, " ")
-  };
-  var iconStyles = {
-    color: iconColor || "gray"
-  };
+      nextIcon = attributes.nextIcon;
   return /*#__PURE__*/React.createElement("div", {
+    className: "eb-parallax-slider-wrapper ".concat(blockId)
+  }, /*#__PURE__*/React.createElement("div", {
     className: "eb-parallax-container",
     "data-start-index": startIndex,
     "data-intensity": intensity,
@@ -1604,22 +1473,18 @@ var Save = function Save(_ref) {
     })), /*#__PURE__*/React.createElement("article", {
       className: "slide__content"
     }, /*#__PURE__*/React.createElement("h2", {
-      className: "slide__headline",
-      style: titleStyles
+      className: "slide__headline"
     }, slide.title), /*#__PURE__*/React.createElement("button", {
       className: "slide__action btn",
-      style: buttonStyles,
       "data-link": slide.link
     }, slide.btnText)));
   })), /*#__PURE__*/React.createElement("div", {
     className: "eb-slider__controls"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "btn btn--previous ".concat(prevIcon),
-    style: iconStyles
+    className: "btn btn--previous ".concat(prevIcon)
   }), /*#__PURE__*/React.createElement("div", {
-    className: "btn btn--next ".concat(nextIcon),
-    style: iconStyles
-  }))));
+    className: "btn btn--next ".concat(nextIcon)
+  })))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Save);
@@ -1735,34 +1600,8 @@ var Slide = function Slide(_ref) {
     if (link) {
       window.location = link;
     }
-  }; // Style objects
-
-
-  var titleStyles = {
-    color: titleColor,
-    fontFamily: titleFontFamily,
-    fontSize: titleFontSize + titleSizeUnit,
-    fontWeight: titleFontWeight,
-    textTransform: titleTextTransform,
-    textDecoration: titleTextDecoration,
-    letterSpacing: titleLetterSpacing ? "".concat(titleLetterSpacing).concat(titleLetterSpacingUnit) : undefined,
-    lineHeight: titleLineHeight ? "".concat(titleLineHeight).concat(titleLineHeightUnit) : undefined
   };
-  var buttonStyles = {
-    color: btnColor,
-    backgroundColor: btnBackgroundColor,
-    fontFamily: btnFontFamily,
-    fontSize: btnFontSize + btnSizeUnit,
-    fontWeight: btnFontWeight,
-    textTransform: btnTextTransform,
-    textDecoration: btnTextDecoration,
-    letterSpacing: btnLetterSpacing ? "".concat(btnLetterSpacing).concat(btnLetterSpacingUnit) : undefined,
-    lineHeight: btnLineHeight ? "".concat(btnLineHeight).concat(btnLineHeightUnit) : undefined,
-    border: "".concat(btnBorderWidth || 0, "px ").concat(btnBorderStyle, " ").concat(btnBorderColor || "black"),
-    borderRadius: btnBorderRadius + "px",
-    margin: "".concat(btnMarginTop).concat(btnMarginUnit, " ").concat(btnMarginRight).concat(btnMarginUnit, " ").concat(btnMarginBottom).concat(btnMarginUnit, " ").concat(btnMarginLeft).concat(btnMarginUnit),
-    padding: "".concat(btnPaddingTop).concat(btnPaddingUnit, " ").concat(btnPaddingRight).concat(btnPaddingUnit, " ").concat(btnPaddingBottom).concat(btnPaddingUnit, " ").concat(btnPaddingLeft).concat(btnPaddingUnit, " ")
-  };
+
   var classNames = "slide";
   if (current === position) classNames += " slide--current";else if (current - 1 === position) classNames += " slide--previous";else if (current + 1 === position) classNames += " slide--next";
   return /*#__PURE__*/React.createElement("li", {
@@ -1783,14 +1622,12 @@ var Slide = function Slide(_ref) {
   })), /*#__PURE__*/React.createElement("article", {
     className: "slide__content"
   }, /*#__PURE__*/React.createElement("h2", {
-    className: "slide__headline",
-    style: titleStyles
+    className: "slide__headline"
   }, slide.title), /*#__PURE__*/React.createElement("button", {
     onClick: function onClick() {
       return handleButtonClick(slide.link);
     },
-    className: "slide__action btn ".concat(hasBtnShadow ? "btn-has-shadow" : "", " "),
-    style: buttonStyles
+    className: "slide__action btn ".concat(hasBtnShadow ? "btn-has-shadow" : "", " ")
   }, slide.btnText)));
 };
 
@@ -1850,10 +1687,6 @@ var Slider = function Slider(_ref) {
   var wrapperTransform = {
     transform: "translateX(-".concat(current * (100 / slides.length), "%)")
   };
-  var sliderStyles = {
-    color: iconColor || "gray",
-    fontSize: 32
-  };
   return /*#__PURE__*/React.createElement("div", {
     className: "eb-parallax-container"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1873,12 +1706,10 @@ var Slider = function Slider(_ref) {
     className: "eb-slider__controls"
   }, /*#__PURE__*/React.createElement(_slide_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
     type: "previous",
-    style: sliderStyles,
     icon: prevIcon,
     handleClick: handlePreviousClick
   }), /*#__PURE__*/React.createElement(_slide_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
     type: "next",
-    style: sliderStyles,
     icon: nextIcon,
     handleClick: handleNextClick
   }))));

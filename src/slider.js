@@ -30,11 +30,6 @@ const Slider = ({ slides, attributes, setAttributes }) => {
 		transform: `translateX(-${current * (100 / slides.length)}%)`,
 	};
 
-	const sliderStyles = {
-		color: iconColor || "gray",
-		fontSize: 32,
-	};
-
 	return (
 		<div className="eb-parallax-container">
 			<div className="eb-parallax-slider">
@@ -53,14 +48,12 @@ const Slider = ({ slides, attributes, setAttributes }) => {
 				<div className="eb-slider__controls">
 					<SliderControl
 						type="previous"
-						style={sliderStyles}
 						icon={prevIcon}
 						handleClick={handlePreviousClick}
 					/>
 
 					<SliderControl
 						type="next"
-						style={sliderStyles}
 						icon={nextIcon}
 						handleClick={handleNextClick}
 					/>

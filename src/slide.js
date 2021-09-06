@@ -77,44 +77,6 @@ const Slide = ({ slide, position, handleSlideClick, attributes }) => {
 		}
 	};
 
-	// Style objects
-	const titleStyles = {
-		color: titleColor,
-		fontFamily: titleFontFamily,
-		fontSize: titleFontSize + titleSizeUnit,
-		fontWeight: titleFontWeight,
-		textTransform: titleTextTransform,
-		textDecoration: titleTextDecoration,
-		letterSpacing: titleLetterSpacing
-			? `${titleLetterSpacing}${titleLetterSpacingUnit}`
-			: undefined,
-		lineHeight: titleLineHeight
-			? `${titleLineHeight}${titleLineHeightUnit}`
-			: undefined,
-	};
-
-	const buttonStyles = {
-		color: btnColor,
-		backgroundColor: btnBackgroundColor,
-		fontFamily: btnFontFamily,
-		fontSize: btnFontSize + btnSizeUnit,
-		fontWeight: btnFontWeight,
-		textTransform: btnTextTransform,
-		textDecoration: btnTextDecoration,
-		letterSpacing: btnLetterSpacing
-			? `${btnLetterSpacing}${btnLetterSpacingUnit}`
-			: undefined,
-		lineHeight: btnLineHeight
-			? `${btnLineHeight}${btnLineHeightUnit}`
-			: undefined,
-		border: `${btnBorderWidth || 0}px ${btnBorderStyle} ${
-			btnBorderColor || "black"
-		}`,
-		borderRadius: btnBorderRadius + "px",
-		margin: `${btnMarginTop}${btnMarginUnit} ${btnMarginRight}${btnMarginUnit} ${btnMarginBottom}${btnMarginUnit} ${btnMarginLeft}${btnMarginUnit}`,
-		padding: `${btnPaddingTop}${btnPaddingUnit} ${btnPaddingRight}${btnPaddingUnit} ${btnPaddingBottom}${btnPaddingUnit} ${btnPaddingLeft}${btnPaddingUnit} `,
-	};
-
 	let classNames = "slide";
 	if (current === position) classNames += " slide--current";
 	else if (current - 1 === position) classNames += " slide--previous";
@@ -137,7 +99,7 @@ const Slide = ({ slide, position, handleSlideClick, attributes }) => {
 				/>
 			</div>
 			<article className="slide__content">
-				<h2 className="slide__headline" style={titleStyles}>
+				<h2 className="slide__headline">
 					{slide.title}
 				</h2>
 				<button
@@ -145,7 +107,6 @@ const Slide = ({ slide, position, handleSlideClick, attributes }) => {
 					className={`slide__action btn ${
 						hasBtnShadow ? "btn-has-shadow" : ""
 					} `}
-					style={buttonStyles}
 				>
 					{slide.btnText}
 				</button>

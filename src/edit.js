@@ -64,12 +64,8 @@ export default function Edit(props) {
 		resOption,
 		blockId,
 		blockMeta,
-		sliderStyle,
-		images,
 		sliderData, 
-		startIndex, 
-		current, 
-		preview,
+		startIndex,
 		titleColor,
 		titleBackgroundColor,
 		buttonColor,
@@ -314,7 +310,7 @@ export default function Edit(props) {
 	`;
 
 	const sliderStyleDesktop = `
-		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-slider {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider {
 			${isCustomHeight ? sliderHeightDesktop : ""}
 		}
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-wrapper li {
@@ -347,13 +343,13 @@ export default function Edit(props) {
 	`;
 
 	const sliderContentsStylesDesktop = `
-		.eb-parallax-slider-wrapper.${blockId} .slide__headline {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {
 			color: ${titleColor};
 			background-color: ${titleBackgroundColor};
 			${titleTypographyDesktop}
 			${titleMarginDesktop}
 		}
-		.eb-parallax-slider-wrapper.${blockId} .slide__action {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {
 			color: ${buttonColor};
 			background-color: ${buttonBackgroundColor};
 			${buttonTypographyDesktop}
@@ -362,7 +358,7 @@ export default function Edit(props) {
 			${buttonBDShadowDesktop}
 			${buttonBDShadowTransitionStyle}
 		}
-		.eb-parallax-slider-wrapper.${blockId} .slide__action:hover {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {
 			color: ${buttonHoverColor};
 			background-color: ${buttonHoverBackgroundColor};
 		}
@@ -371,32 +367,32 @@ export default function Edit(props) {
 		}
 	`;
 	const sliderContentsStylesTab = `
-		.eb-parallax-slider-wrapper.${blockId} .slide__headline {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {
 			${titleTypographyTab}
 			${titleMarginTab}
 		}
-		.eb-parallax-slider-wrapper.${blockId} .slide__action {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {
 			${buttonTypographyTab}
 			${buttonMarginTab}
 			${buttonPaddingTab}
 			${buttonBDShadowTab}
 		}
-		.eb-parallax-slider-wrapper.${blockId} .slide__action:hover {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {
 			${buttonBDShadowHoverTab}
 		}
 	`;
 	const sliderContentsStylesMobile = `
-		.eb-parallax-slider-wrapper.${blockId} .slide__headline {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {
 			${titleTypographyMobile}
 			${titleMarginMobile}
 		}
-		.eb-parallax-slider-wrapper.${blockId} .slide__action {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {
 			${buttonTypographyMobile}
 			${buttonMarginMobile}
 			${buttonPaddingMobile}
 			${buttonBDShadowMobile}
 		}
-		.eb-parallax-slider-wrapper.${blockId} .slide__action:hover {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {
 			${buttonBDShadowHoverMobile}
 		}
 	`;
@@ -478,7 +474,7 @@ export default function Edit(props) {
 				labels={{
 					title: __("Images"),
 					instructions: __(
-						"Drag images, upload new ones or select files from your library."
+						"Drag images, upload new ones or select files from your library. Upload minimum 3 images for better design."
 					),
 				}}
 				onSelect={(images) => onImageSelect(images)}

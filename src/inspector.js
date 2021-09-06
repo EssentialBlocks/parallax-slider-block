@@ -2,23 +2,17 @@
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
-const { InspectorControls, PanelColorSettings } = wp.blockEditor;
+const { InspectorControls } = wp.blockEditor;
 const {
-	Panel,
 	PanelBody,
 	PanelRow,
-	SelectControl,
 	ToggleControl,
 	Button,
 	ButtonGroup,
-	BaseControl,
 	TabPanel,
 	RangeControl,
 	TextControl,
-	TextareaControl,
 	ColorPalette,
-	Dropdown,
-	ColorPicker,
 } = wp.components;
 const { useEffect } = wp.element;
 const { select } = wp.data;
@@ -122,7 +116,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 
 	const handlePanelClick = (index) => {
-		let updatedIndex = index !== current ? index : 0;
+		let updatedIndex = index !== current ? index : 1;
 		setAttributes({ current: updatedIndex });
 	};
 
@@ -156,14 +150,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 							{tab.name === "general" && (
 								<>
 									<PanelBody title={__("General")}>
-										<RangeControl
+										{/* <RangeControl
 											label={__("Starting Slide")}
 											value={startIndex}
 											allowReset
 											onChange={(startIndex) => setAttributes({ startIndex })}
-											min={1}
-											max={sliderData.length}
-										/>
+											min={0}
+											max={1}
+										/> */}
 
 										<RangeControl
 											label={__("Parallax Softness")}

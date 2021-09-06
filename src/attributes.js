@@ -49,55 +49,14 @@ const attributes = {
 	},
 	sliderData: {
 		type: "array",
-		// source: "query",
-		// selector: ".slide",
-		// query: {
-		// 	src: {
-		// 		type: "string",
-		// 		selector: "img",
-		// 		source: "attribute",
-		// 		attribute: "src",
-		// 	},
-		// 	alt: {
-		// 		type: "string",
-		// 		selector: "img",
-		// 		source: "attribute",
-		// 		attribute: "alt",
-		// 	},
-		// 	title: {
-		// 		type: "string",
-		// 		selector: "h2",
-		// 		source: "text",
-		// 		default: "Add header text here",
-		// 	},
-		// 	btnText: {
-		// 		type: "string",
-		// 		selector: "button",
-		// 		source: "text",
-		// 		default: "Add Text",
-		// 	},
-		// 	link: {
-		// 		type: "string",
-		// 		selector: "button",
-		// 		source: "attribute",
-		// 		attribute: "data-link",
-		// 		default: "",
-		// 	},
-		// },
 		default: [],
 	},
 	intensity: {
 		type: "number",
-		// selector: ".eb-parallax-container",
-		// source: "attribute",
-		// attribute: "data-intensity",
 		default: 50,
 	},
 	startIndex: {
 		type: "number",
-		// selector: ".eb-parallax-container",
-		// source: "attribute",
-		// attribute: "data-start-index",
 		default: 1,
 	},
 	isCustomHeight: {
@@ -106,7 +65,7 @@ const attributes = {
 	},
 	current: {
 		type: "number",
-		default: 0,
+		default: 1,
 	},
 	titleColorType: {
 		type: "string",
@@ -114,16 +73,11 @@ const attributes = {
 	},
 	titleColor: {
 		type: "string",
+		default: "#ffffff"
 	},
 	titleBackgroundColor: {
 		type: "string",
-	},
-	iconColor: {
-		type: "string",
-	},
-	preview: {
-		type: "boolean",
-		default: false,
+		default: "rgba(135,92,255,0)"
 	},
 	buttonColorType: {
 		type: "string",
@@ -131,12 +85,15 @@ const attributes = {
 	},
 	buttonBackgroundColor: {
 		type: "string",
+		default: "rgba(135,92,255,.8)"
 	},
 	buttonColor: {
 		type: "string",
+		default: "#fffff"
 	},
 	buttonHoverBackgroundColor: {
 		type: "string",
+		default: "rgba(135,92,255,.95)"
 	},
 	buttonHoverColor: {
 		type: "string",
@@ -149,8 +106,6 @@ const attributes = {
 		type: "string",
 		default: "center"
 	},
-
-
 
 	// typography attributes ⬇
 	...generateTypographyAttributes(Object.values(TYPOGRAPHY)),

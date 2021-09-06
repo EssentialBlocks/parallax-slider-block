@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		let previousBtn = slider.querySelector(".btn--previous");
 		let nextBtn = slider.querySelector(".btn--next");
 		let count = slides.length;
-		let current = parseInt(startIndex - 1, 10) || 0;
+		let current = parseInt(startIndex, 10) || 0;
 
 		/**
 		 * Function definitions

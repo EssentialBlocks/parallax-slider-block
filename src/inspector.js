@@ -190,7 +190,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 											controlName={SLIDES_GAP}
 											resRequiredProps={resRequiredProps}
 											units={GAP_UNIT_TYPES}
-											min={1}
+											min={0}
 											max={50}
 											step={1}
 										/>

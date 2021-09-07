@@ -313,32 +313,44 @@ export default function Edit(props) {
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider {
 			${isCustomHeight ? sliderHeightDesktop : ""}
 		}
-		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-wrapper li {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
 			align-items: ${horizontalAlign};
 			justify-content: ${verticalAlign};
-			${slidesGapDesktop}
+			${slidesGapDesktop} 
 		}
-		.eb-parallax-slider-wrapper.${blockId} .slide__image-wrapper {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
 			${slidesBorderRadiusDesktop}
 		}
-		.eb-parallax-slider-wrapper.${blockId} .slide__content {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__content {
 			${contentPaddingDesktop}
 		}
 	`;
 	const sliderStyleTab = `
-		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-slider {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider {
 			${isCustomHeight ? sliderHeightTab : ""}
 		}
-		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-wrapper li {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
 			${slidesGapTab}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
+			${slidesBorderRadiusTab}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__content {
+			${contentPaddingTab}
 		}
 	`;
 	const sliderStyleMobile = `
-		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-slider {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider {
 			${isCustomHeight ? sliderHeightMobile : ""}
 		}
-		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-wrapper li {
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
 			${slidesGapMobile}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
+			${slidesBorderRadiusMobile}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__content {
+			${contentPaddingMobile}
 		}
 	`;
 
@@ -361,8 +373,6 @@ export default function Edit(props) {
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {
 			color: ${buttonHoverColor};
 			background-color: ${buttonHoverBackgroundColor};
-		}
-		.eb-parallax-slider-wrapper.${blockId} .slide__action:hover {
 			${buttonBDShadowHoverDesktop}
 		}
 	`;

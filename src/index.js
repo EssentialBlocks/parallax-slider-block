@@ -6,6 +6,7 @@ import Edit from "./edit";
 import save from "./save";
 import attributes from "./attributes";
 import icon from "./icon";
+import Example from "./example";
 
 registerBlockType("parallax-slider-block/parallax-slider-block", {
 	title: __("Parallax Slider", "parallax-slider"),
@@ -18,4 +19,5 @@ registerBlockType("parallax-slider-block/parallax-slider-block", {
 	attributes,
 	edit: Edit,
 	save,
+	example: Example,
 });

@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Parallax Slider Block
  * Description:     Create A Captivating Visual Experience & Impress Your Audience
- * Version:         1.0.1
+ * Version:         1.1.0
  * Author:          WPDeveloper
  * Author URI: 		https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -74,8 +74,8 @@ function create_block_parallax_slider_block_init() {
 	);
 
 	if( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/parallax-slider' ) ) {
-		register_block_type( 
-			'parallax-slider-block/parallax-slider-block', 
+		register_block_type(
+			'parallax-slider-block/parallax-slider-block',
 			array(
 				'editor_script' => 'parallax-slider-block-parallax-slider-block-editor',
 				'editor_style'         => 'parallax-slider-block-parallax-slider-block-editor-styles',

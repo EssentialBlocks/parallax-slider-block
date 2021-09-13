@@ -456,7 +456,7 @@ export default function Edit(props) {
 		let sliderData = [];
 		let previousData = [...attributes.sliderData];
 
-		images.map((image) => {
+		images.map((image, index) => {
 			let item = {};
 
 			// Get previous image info after updating gallary
@@ -468,9 +468,10 @@ export default function Edit(props) {
 			item.id = image.id;
 			item.src = image.url;
 			item.alt = image.alt;
-			item.title = prevTitle || "Slider Title";
+			item.title = prevTitle || `Slider ${index+1}`;
 			item.btnText = prevBtnText || "Button";
 			item.link = prevLink || "";
+			item.openNewTab = image.openNewTab || true;
 
 			sliderData.push(item);
 		});

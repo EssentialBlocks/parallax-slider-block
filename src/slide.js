@@ -7,44 +7,7 @@ const Slide = ({ slide, position, handleSlideClick, attributes }) => {
 	const {
 		current,
 		intensity,
-		titleColor,
-		titleFontFamily,
-		titleFontSize,
-		titleSizeUnit,
-		titleFontWeight,
-		titleTextDecoration,
-		titleTextTransform,
-		titleLetterSpacing,
-		titleLetterSpacingUnit,
-		titleLineHeight,
-		titleLineHeightUnit,
-		btnColor,
-		btnBackgroundColor,
-		btnFontSize,
-		btnSizeUnit,
-		btnFontFamily,
-		btnFontWeight,
-		btnTextDecoration,
-		btnTextTransform,
-		btnLetterSpacing,
-		btnLetterSpacingUnit,
-		btnLineHeight,
-		btnLineHeightUnit,
-		btnBorderColor,
-		btnBorderWidth,
-		btnBorderStyle,
-		btnBorderRadius,
 		hasBtnShadow,
-		btnMarginTop,
-		btnMarginRight,
-		btnMarginBottom,
-		btnMarginLeft,
-		btnMarginUnit,
-		btnPaddingTop,
-		btnPaddingRight,
-		btnPaddingBottom,
-		btnPaddingLeft,
-		btnPaddingUnit,
 	} = attributes;
 	let slideRef = createRef();
 
@@ -70,10 +33,15 @@ const Slide = ({ slide, position, handleSlideClick, attributes }) => {
 
 	const imageLoaded = (event) => (event.target.style.opacity = 1);
 
-	const handleButtonClick = (link) => {
+	const handleButtonClick = (link, openNewTab) => {
 		// Redirect to button link
 		if (link) {
-			window.location = link;
+			if (openNewTab) {
+				window.location = link;
+			}
+			else {
+				window.open(link,"_self");
+			}
 		}
 	};
 
@@ -103,7 +71,7 @@ const Slide = ({ slide, position, handleSlideClick, attributes }) => {
 					{slide.title}
 				</h2>
 				<button
-					onClick={() => handleButtonClick(slide.link)}
+					onClick={() => handleButtonClick(slide.link, slide.openNewTab)}
 					className={`slide__action btn ${
 						hasBtnShadow ? "btn-has-shadow" : ""
 					} `}

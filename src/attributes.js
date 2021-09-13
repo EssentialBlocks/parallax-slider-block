@@ -43,10 +43,6 @@ const attributes = {
 		type: "string",
 		default: "style-1"
 	},
-	images: {
-		type: "array",
-		default: [],
-	},
 	sliderData: {
 		type: "array",
 		default: [],

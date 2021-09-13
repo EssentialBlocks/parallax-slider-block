@@ -36,6 +36,7 @@ const Save = ({ attributes }) => {
 									<button
 										className="slide__action btn"
 										data-link={slide.link}
+										data-new-tab={slide.openNewTab}
 									>
 										{slide.btnText}
 									</button>

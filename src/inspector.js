@@ -59,7 +59,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 		sliderData,
 		current,
 		intensity,
-		startIndex,
 		isCustomHeight,
 		titleColor,
 		titleBackgroundColor,
@@ -68,9 +67,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 		buttonHoverColor,
 		buttonBackgroundColor,
 		buttonHoverBackgroundColor,
-		prevIcon,
-		nextIcon,
-		iconColor,
 		horizontalAlign,
 		verticalAlign,
 	} = attributes;
@@ -150,14 +146,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 							{tab.name === "general" && (
 								<>
 									<PanelBody title={__("General")}>
-										{/* <RangeControl
-											label={__("Starting Slide")}
-											value={startIndex}
-											allowReset
-											onChange={(startIndex) => setAttributes({ startIndex })}
-											min={0}
-											max={1}
-										/> */}
 
 										<RangeControl
 											label={__("Parallax Softness")}
@@ -201,6 +189,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 											<PanelBody
 												key={index}
 												title={`Slide ${index + 1} Settings`}
+												title={slide.title && slide.title.length > 0 ? slide.title : "Slide " + (index+1) + " Settings"}
 												initialOpen={false}
 												onToggle={() => handlePanelClick(index)}
 												className="eb-slider-item-single-panel"
@@ -221,6 +210,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 													label={__("Button Link")}
 													value={slide.link}
 													onChange={(link) => handleTextChange("link", link, index)}
+												/>
+
+												<ToggleControl
+													label={__("Open in New Tab")}
+													checked={slide.openNewTab}
+													onChange={() => handleTextChange( "openNewTab", !slide.openNewTab, index)}
 												/>
 											</PanelBody>
 										))}

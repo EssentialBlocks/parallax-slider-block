@@ -19,8 +19,14 @@ document.addEventListener("DOMContentLoaded", function() {
 		function onButtonClick(event) {
 			event.preventDefault();
 			let link = this.getAttribute("data-link");
+			let openNewTab = this.getAttribute("data-new-tab");
 			if (link) {
-				window.open(link, "_blank");
+				if (openNewTab === "true") {
+					window.open(link, "_blank");
+				}
+				else {
+					window.open(link,"_self");
+				}
 			}
 		}
 

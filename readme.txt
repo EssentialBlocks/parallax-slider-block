@@ -88,6 +88,14 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
+= 1.1.0 - 13-09-2021
+* Added: Responsive and more interactive Controls
+* Added: Margin, Padding, Background, Border, Shadow controls for wrapper
+* Added: Custom Height for Slider
+* Added: Advance and Responsive Typography option
+* Added: More styling Options
+* Improved: Clean code and load resources in optimize way
+
 = 1.0.0 - 09-09-2020 =
 * Fix: Missing css, js files
 

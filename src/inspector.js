@@ -246,7 +246,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 										</ButtonGroup>
 
 										<PanelRow>Content Vertical Align</PanelRow>
-										<ButtonGroup>
+										<ButtonGroup 
+											className = "eb-margin-bottom-20"
+										>
 											{VERTICAL_ALIGN.map((item) => (
 												<Button
 													isLarge

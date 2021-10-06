@@ -4,7 +4,7 @@
  * Description:     Create A Captivating Visual Experience & Impress Your Audience
  * Version:         1.1.0
  * Author:          WPDeveloper
- * Author URI: 		https://wpdeveloper.net
+ * Author URI: 		  https://wpdeveloper.net
  * License:         GPL-3.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:     parallax-slider-block
@@ -66,7 +66,7 @@ function create_block_parallax_slider_block_init() {
 
 	$frontend_js = 'build/frontend.js';
 	wp_register_script(
-		'parallax-slider-block-parallax-slider-frontend', 
+		'parallax-slider-block-parallax-slider-frontend',
 		plugins_url($frontend_js, __FILE__),
 		array("wp-editor"),
 		true,

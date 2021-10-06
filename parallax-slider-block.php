@@ -64,9 +64,9 @@ function create_block_parallax_slider_block_init() {
 		filemtime( "$dir/$style_css" )
 	);
 
-	$frontend_js = 'src/frontend.js';
+	$frontend_js = 'build/frontend.js';
 	wp_register_script(
-		'parallax-slider-block-parallax-slider-frontend',
+		'parallax-slider-block-parallax-slider-frontend', 
 		plugins_url($frontend_js, __FILE__),
 		array("wp-editor"),
 		true,

@@ -15,7 +15,7 @@
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-class-properties": "^7.10.4",
-		"@wordpress/scripts": "^12.1.1"
+		"@wordpress/scripts": "^14.1.0"
 	},
 	"dependencies": {
 		"@fonticonpicker/react-fonticonpicker": "^1.2.0",

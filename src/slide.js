@@ -7,44 +7,7 @@ const Slide = ({ slide, position, handleSlideClick, attributes }) => {
 	const {
 		current,
 		intensity,
-		titleColor,
-		titleFontFamily,
-		titleFontSize,
-		titleSizeUnit,
-		titleFontWeight,
-		titleTextDecoration,
-		titleTextTransform,
-		titleLetterSpacing,
-		titleLetterSpacingUnit,
-		titleLineHeight,
-		titleLineHeightUnit,
-		btnColor,
-		btnBackgroundColor,
-		btnFontSize,
-		btnSizeUnit,
-		btnFontFamily,
-		btnFontWeight,
-		btnTextDecoration,
-		btnTextTransform,
-		btnLetterSpacing,
-		btnLetterSpacingUnit,
-		btnLineHeight,
-		btnLineHeightUnit,
-		btnBorderColor,
-		btnBorderWidth,
-		btnBorderStyle,
-		btnBorderRadius,
 		hasBtnShadow,
-		btnMarginTop,
-		btnMarginRight,
-		btnMarginBottom,
-		btnMarginLeft,
-		btnMarginUnit,
-		btnPaddingTop,
-		btnPaddingRight,
-		btnPaddingBottom,
-		btnPaddingLeft,
-		btnPaddingUnit,
 	} = attributes;
 	let slideRef = createRef();
 
@@ -70,49 +33,16 @@ const Slide = ({ slide, position, handleSlideClick, attributes }) => {
 
 	const imageLoaded = (event) => (event.target.style.opacity = 1);
 
-	const handleButtonClick = (link) => {
+	const handleButtonClick = (link, openNewTab) => {
 		// Redirect to button link
 		if (link) {
-			window.location = link;
+			if (openNewTab) {
+				window.location = link;
+			}
+			else {
+				window.open(link,"_self");
+			}
 		}
-	};
-
-	// Style objects
-	const titleStyles = {
-		color: titleColor,
-		fontFamily: titleFontFamily,
-		fontSize: titleFontSize + titleSizeUnit,
-		fontWeight: titleFontWeight,
-		textTransform: titleTextTransform,
-		textDecoration: titleTextDecoration,
-		letterSpacing: titleLetterSpacing
-			? `${titleLetterSpacing}${titleLetterSpacingUnit}`
-			: undefined,
-		lineHeight: titleLineHeight
-			? `${titleLineHeight}${titleLineHeightUnit}`
-			: undefined,
-	};
-
-	const buttonStyles = {
-		color: btnColor,
-		backgroundColor: btnBackgroundColor,
-		fontFamily: btnFontFamily,
-		fontSize: btnFontSize + btnSizeUnit,
-		fontWeight: btnFontWeight,
-		textTransform: btnTextTransform,
-		textDecoration: btnTextDecoration,
-		letterSpacing: btnLetterSpacing
-			? `${btnLetterSpacing}${btnLetterSpacingUnit}`
-			: undefined,
-		lineHeight: btnLineHeight
-			? `${btnLineHeight}${btnLineHeightUnit}`
-			: undefined,
-		border: `${btnBorderWidth || 0}px ${btnBorderStyle} ${
-			btnBorderColor || "black"
-		}`,
-		borderRadius: btnBorderRadius + "px",
-		margin: `${btnMarginTop}${btnMarginUnit} ${btnMarginRight}${btnMarginUnit} ${btnMarginBottom}${btnMarginUnit} ${btnMarginLeft}${btnMarginUnit}`,
-		padding: `${btnPaddingTop}${btnPaddingUnit} ${btnPaddingRight}${btnPaddingUnit} ${btnPaddingBottom}${btnPaddingUnit} ${btnPaddingLeft}${btnPaddingUnit} `,
 	};
 
 	let classNames = "slide";
@@ -137,15 +67,14 @@ const Slide = ({ slide, position, handleSlideClick, attributes }) => {
 				/>
 			</div>
 			<article className="slide__content">
-				<h2 className="slide__headline" style={titleStyles}>
+				<h2 className="slide__headline">
 					{slide.title}
 				</h2>
 				<button
-					onClick={() => handleButtonClick(slide.link)}
+					onClick={() => handleButtonClick(slide.link, slide.openNewTab)}
 					className={`slide__action btn ${
 						hasBtnShadow ? "btn-has-shadow" : ""
 					} `}
-					style={buttonStyles}
 				>
 					{slide.btnText}
 				</button>

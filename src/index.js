@@ -1,13 +1,14 @@
-import { registerBlockType } from "@wordpress/blocks";
-import { __ } from "@wordpress/i18n";
+const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
 import "./style.scss";
 
 import Edit from "./edit";
 import save from "./save";
 import attributes from "./attributes";
 import icon from "./icon";
+import Example from "./example";
 
-registerBlockType("block/parallax-slider", {
+registerBlockType("parallax-slider-block/parallax-slider-block", {
 	title: __("Parallax Slider", "parallax-slider"),
 	description: __(
 		"Create A Captivating Visual Experience & Impress Your Audience",
@@ -18,4 +19,5 @@ registerBlockType("block/parallax-slider", {
 	attributes,
 	edit: Edit,
 	save,
+	example: Example,
 });

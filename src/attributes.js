@@ -1,217 +1,186 @@
+import {
+	WRAPPER_BG,
+	WRAPPER_MARGIN,
+	WRAPPER_PADDING,
+	WRAPPER_BORDER_SHADOW,
+	TITLE_MARGIN,
+	BUTTON_MARGIN,
+	BUTTON_PADDING,
+	BUTTON_BORDER_SHADOW,
+	CUSTOM_HEIGHT,
+	SLIDES_GAP,
+	CONTENTS_PADDING,
+	SLIDE_BORDER_RADIUS,
+} from "./constants/constants";
+import * as TYPOGRAPHY from "./constants/typography-constant";
+
+import {
+	generateDimensionsAttributes,
+	generateTypographyAttributes,
+	generateBackgroundAttributes,
+	generateBorderShadowAttributes,
+	generateResponsiveRangeAttributes,
+} from "../util/helpers";
+
 const attributes = {
+	resOption: {
+		type: "string",
+		default: "Desktop",
+	},
+
+	// blockId attribute for making unique className and other uniqueness
+	blockId: {
+		type: "string",
+	},
+	blockRoot: {
+		type: "string",
+		default: "essential_block",
+	},
+	blockMeta: {
+		type: "object",
+	},
+	sliderStyle: {
+		type: "string",
+		default: "style-1"
+	},
 	sliderData: {
 		type: "array",
-		source: "query",
-		selector: ".slide",
-		query: {
-			src: {
-				type: "string",
-				selector: "img",
-				source: "attribute",
-				attribute: "src",
-			},
-			alt: {
-				type: "string",
-				selector: "img",
-				source: "attribute",
-				attribute: "alt",
-			},
-			title: {
-				type: "string",
-				selector: "h2",
-				source: "text",
-				default: "Add header text here",
-			},
-			btnText: {
-				type: "string",
-				selector: "button",
-				source: "text",
-				default: "Add Text",
-			},
-			link: {
-				type: "string",
-				selector: "button",
-				source: "attribute",
-				attribute: "data-link",
-				default: "",
-			},
-		},
 		default: [],
 	},
 	intensity: {
-		type: "string",
-		selector: ".eb-parallax-container",
-		source: "attribute",
-		attribute: "data-intensity",
-		default: "50",
+		type: "number",
+		default: 50,
 	},
 	startIndex: {
-		type: "string",
-		selector: ".eb-parallax-container",
-		source: "attribute",
-		attribute: "data-start-index",
-		default: "1",
+		type: "number",
+		default: 1,
+	},
+	isCustomHeight: {
+		type: "boolean",
+		default: true
 	},
 	current: {
 		type: "number",
-		default: 0,
+		default: 1,
 	},
-	titleFontFamily: {
+	titleColorType: {
 		type: "string",
-	},
-	titleFontWeight: {
-		type: "string",
-	},
-	titleFontSize: {
-		type: "number",
-	},
-	titleSizeUnit: {
-		type: "string",
-		default: "px",
-	},
-	titleTextDecoration: {
-		type: "string",
-	},
-	titleTextTransform: {
-		type: "string",
-	},
-	titleLetterSpacing: {
-		type: "number",
-	},
-	titleLetterSpacingUnit: {
-		type: "string",
-		default: "px",
-	},
-	titleLineHeight: {
-		type: "number",
-	},
-	titleLineHeightUnit: {
-		type: "string",
-		default: "px",
+		default: "normal",
 	},
 	titleColor: {
 		type: "string",
+		default: "#ffffff"
 	},
 	titleBackgroundColor: {
 		type: "string",
+		default: "rgba(135,92,255,0)"
 	},
-	btnFontFamily: {
+	buttonColorType: {
+		type: "string",
+		default: "normal",
+	},
+	buttonBackgroundColor: {
+		type: "string",
+		default: "rgba(135,92,255,.8)"
+	},
+	buttonColor: {
+		type: "string",
+		default: "#fffff"
+	},
+	buttonHoverBackgroundColor: {
+		type: "string",
+		default: "rgba(135,92,255,.95)"
+	},
+	buttonHoverColor: {
 		type: "string",
 	},
-	btnFontWeight: {
+	horizontalAlign: {
 		type: "string",
+		default: "center"
 	},
-	btnFontSize: {
-		type: "number",
-	},
-	btnSizeUnit: {
+	verticalAlign: {
 		type: "string",
-		default: "px",
+		default: "center"
 	},
-	btnTextDecoration: {
-		type: "string",
-	},
-	btnTextTransform: {
-		type: "string",
-	},
-	btnLetterSpacing: {
-		type: "number",
-	},
-	btnLetterSpacingUnit: {
-		type: "string",
-		default: "px",
-	},
-	btnLineHeight: {
-		type: "number",
-	},
-	btnLineHeightUnit: {
-		type: "string",
-		default: "px",
-	},
-	btnBorderColor: {
-		type: "string",
-	},
-	btnBorderWidth: {
-		type: "number",
-	},
-	btnBorderStyle: {
-		type: "string",
-		default: "solid",
-	},
-	btnBorderRadius: {
-		type: "number",
-	},
-	hasBtnShadow: {
-		type: "string",
-		selector: ".eb-parallax-container",
-		source: "attribute",
-		attribute: "data-shadow",
-		default: false,
-	},
-	btnMarginTop: {
-		type: "number",
-		default: 0,
-	},
-	btnMarginRight: {
-		type: "number",
-		default: 0,
-	},
-	btnMarginBottom: {
-		type: "number",
-		default: 0,
-	},
-	btnMarginLeft: {
-		type: "number",
-		default: 0,
-	},
-	btnMarginUnit: {
-		type: "string",
-		default: "px",
-	},
-	btnPaddingTop: {
-		type: "number",
-		default: 0,
-	},
-	btnPaddingRight: {
-		type: "number",
-		default: 0,
-	},
-	btnPaddingBottom: {
-		type: "number",
-		default: 0,
-	},
-	btnPaddingLeft: {
-		type: "number",
-		default: 0,
-	},
-	btnPaddingUnit: {
-		type: "string",
-		default: "px",
-	},
-	prevIcon: {
-		type: "string",
-		default: "fas fa-chevron-left",
-	},
-	nextIcon: {
-		type: "string",
-		default: "fas fa-chevron-right",
-	},
-	iconColor: {
-		type: "string",
-		selector: ".eb-parallax-container",
-		source: "attribute",
-		attribute: "data-icon-color",
-	},
-	preview: {
-		type: "boolean",
-		default: false,
-	},
-	btnBackgroundColor: {
-		type: "string",
-	},
-	btnColor: {
-		type: "string",
-	},
+
+	// typography attributes ⬇
+	...generateTypographyAttributes(Object.values(TYPOGRAPHY)),
+
+	// margin padding attributes ⬇
+	...generateDimensionsAttributes(WRAPPER_MARGIN),
+	...generateDimensionsAttributes(WRAPPER_PADDING),
+	...generateDimensionsAttributes(TITLE_MARGIN, {
+		top: 0,
+		bottom: 20,
+		right: 0,
+		left: 0,
+		isLinked: false,
+	}),
+	...generateDimensionsAttributes(BUTTON_MARGIN, {
+		top: 0,
+		bottom: 20,
+		right: 0,
+		left: 0,
+		isLinked: false,
+	}),
+	...generateDimensionsAttributes(BUTTON_PADDING, {
+		top: 10,
+		bottom: 10,
+		right: 30,
+		left: 30,
+		isLinked: false,
+	}),
+	...generateDimensionsAttributes(CONTENTS_PADDING, {
+		top: 20,
+		bottom: 20,
+		right: 20,
+		left: 20,
+		isLinked: true,
+	}),
+
+	// border shadow attributes for Wrapper ⬇
+	...generateBorderShadowAttributes(WRAPPER_BORDER_SHADOW, {
+		bdrDefaults: {
+			top: 0,
+			bottom: 0,
+			right: 0,
+			left: 0,
+		},
+		// noShadow: true,
+		// noBorder: true,
+	}),
+	// border shadow attributes for Button ⬇
+	...generateBorderShadowAttributes(BUTTON_BORDER_SHADOW, {
+		bdrDefaults: {
+			top: 1,
+			bottom: 1,
+			right: 1,
+			left: 1,
+		},
+		// noShadow: true,
+		// noBorder: true,
+	}),
+
+	// background attributes for Wrapper ⬇
+	...generateBackgroundAttributes(WRAPPER_BG, {
+		defaultBgGradient: "linear-gradient(45deg,#ffffff,#ffffff)",
+		noOverlay: true,
+	}),
+	
+	// range controller Slider Height
+	...generateResponsiveRangeAttributes(CUSTOM_HEIGHT, {
+		defaultRange: 400,
+	}),
+
+	// range controller Slides Gap
+	...generateResponsiveRangeAttributes(SLIDES_GAP, {
+		// defaultRange: 0,
+	}),
+
+	// range controller Slides Border Radius
+	...generateResponsiveRangeAttributes(SLIDE_BORDER_RADIUS, {
+		// defaultRange: 0,
+	}),
 };
 
 export default attributes;

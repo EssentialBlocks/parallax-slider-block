@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		let previousBtn = slider.querySelector(".btn--previous");
 		let nextBtn = slider.querySelector(".btn--next");
 		let count = slides.length;
-		let current = parseInt(startIndex - 1, 10) || 0;
+		let current = parseInt(startIndex, 10) || 0;
 
 		/**
 		 * Function definitions
@@ -19,8 +19,14 @@ document.addEventListener("DOMContentLoaded", function() {
 		function onButtonClick(event) {
 			event.preventDefault();
 			let link = this.getAttribute("data-link");
+			let openNewTab = this.getAttribute("data-new-tab");
 			if (link) {
-				window.open(link, "_blank");
+				if (openNewTab === "true") {
+					window.open(link, "_blank");
+				}
+				else {
+					window.open(link,"_self");
+				}
 			}
 		}
 

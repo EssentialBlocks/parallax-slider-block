@@ -1,4 +1,4 @@
-const { __ } = wp.i18n;
+import { __ } from "@wordpress/i18n";
 
 // the consts defined here should be unique from one another
 export const WRAPPER_BG = "wrprBg";
@@ -21,22 +21,22 @@ export const NORMAL_HOVER = [
 ];
 
 export const HORIZONTAL_ALIGN = [
-	{ label: __("Left"), value: "flex-start" },
-	{ label: __("Center"), value: "center" },
-	{ label: __("Right"), value: "flex-end" },
+	{ label: __("Left", "essential-blocks"), value: "flex-start" },
+	{ label: __("Center", "essential-blocks"), value: "center" },
+	{ label: __("Right", "essential-blocks"), value: "flex-end" },
 ];
 
 export const VERTICAL_ALIGN = [
-	{ label: __("Top"), value: "flex-start" },
-	{ label: __("Middle"), value: "center" },
-	{ label: __("Bottom"), value: "flex-end" },
+	{ label: __("Top", "essential-blocks"), value: "flex-start" },
+	{ label: __("Middle", "essential-blocks"), value: "center" },
+	{ label: __("Bottom", "essential-blocks"), value: "flex-end" },
 ];
 
 export const TEXT_ALIGN = [
-	{ label: __("Left"), value: "left" },
-	{ label: __("Right"), value: "right" },
-	{ label: __("Center"), value: "center" },
-	{ label: __("Justify"), value: "justify" },
+	{ label: __("Left", "essential-blocks"), value: "left" },
+	{ label: __("Right", "essential-blocks"), value: "right" },
+	{ label: __("Center", "essential-blocks"), value: "center" },
+	{ label: __("Justify", "essential-blocks"), value: "justify" },
 ];
 
 export const UNIT_TYPES = [

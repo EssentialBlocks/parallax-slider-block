@@ -45,7 +45,6 @@ node_modules export-ignore
 gulpfile.js export-ignore
 .git export-ignore
 node_modules/**/*.* export-ignore
-dist/**/*.* export-ignore
 **/*.zip export-ignore
 src export-ignore
 controls export-ignore

@@ -45,7 +45,6 @@ node_modules
 gulpfile.js
 .git
 node_modules/**/*.*
-dist/**/*.*
 **/*.zip
 src
 controls

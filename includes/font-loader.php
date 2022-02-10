@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class Parallax_Font_Loader
+class Advanced_Heading_Font_Loader
 {
 
     private static $instance;
@@ -91,4 +91,4 @@ class Parallax_Font_Loader
         }
     }
 }
-Parallax_Font_Loader::register();
+Advanced_Heading_Font_Loader::register();

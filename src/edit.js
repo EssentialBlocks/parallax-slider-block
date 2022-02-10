@@ -1,23 +1,24 @@
 /**
  * WordPress dependencies
  */
- const { __ } = wp.i18n;
- const { useEffect } = wp.element;
- const {
-	 MediaUpload,
-	 MediaPlaceholder,
-	 BlockControls,
-	 useBlockProps,
- } = wp.blockEditor;
- const { ToolbarGroup, ToolbarItem, ToolbarButton, Button } = wp.components;
- const { select } = wp.data;
+import { __ } from "@wordpress/i18n";
+import { useEffect } from "@wordpress/element";
+import {
+	MediaUpload,
+	MediaPlaceholder,
+	BlockControls,
+	useBlockProps
+} from "@wordpress/block-editor";
+import { ToolbarGroup, ToolbarItem, ToolbarButton } from "@wordpress/components";
+import { select } from "@wordpress/data";
 
 /**
  * Internal dependencies
- */ 
+ */
 import Slider from "./slider";
+ import classnames from "classnames";
+
 import Inspector from "./inspector";
-import "./editor.scss";
 import {
 	WRAPPER_BG,
 	WRAPPER_MARGIN,
@@ -32,18 +33,24 @@ import {
 	CONTENTS_PADDING,
 	SLIDE_BORDER_RADIUS,
 } from "./constants/constants";
-import {TITLE_TYPOGRAPHY, BUTTON_TYPOGRAPHY} from "./constants/typography-constant";
-import {
+import { TITLE_TYPOGRAPHY, BUTTON_TYPOGRAPHY } from "./constants/typography-constant";
+
+const {
 	softMinifyCssStrings,
-	isCssExists,
 	generateTypographyStyles,
 	generateDimensionsControlStyles,
 	generateBorderShadowStyles,
 	generateResponsiveRangeStyles,
 	generateBackgroundControlStyles,
-	mimmikCssForPreviewBtnClick,
+	// mimmikCssForPreviewBtnClick,
 	duplicateBlockIdFix,
-} from "../util/helpers";
+} = window.EBParallaxSliderControls;
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
+
 
 function getPreviousImgData(previousData, image) {
 	let prevTitle, prevBtnText, prevLink;
@@ -59,12 +66,12 @@ function getPreviousImgData(previousData, image) {
 }
 
 export default function Edit(props) {
-	const { attributes, setAttributes, clientId, isSelected } = props;
+	const { attributes, setAttributes, className, clientId, isSelected } = props;
 	const {
 		resOption,
 		blockId,
 		blockMeta,
-		sliderData, 
+		sliderData,
 		startIndex,
 		titleColor,
 		titleBackgroundColor,
@@ -79,10 +86,9 @@ export default function Edit(props) {
 
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
 	useEffect(() => {
-		const bodyClasses = document.body.className;
 
 		setAttributes({
-			resOption: select("core/edit-post").__experimentalGetPreviewDeviceType(),
+			resOption: select(editorStoreForGettingPreivew).__experimentalGetPreviewDeviceType(),
 		});
 	}, []);
 
@@ -98,16 +104,16 @@ export default function Edit(props) {
 		});
 	}, []);
 
-	// this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
-	useEffect(() => {
-		mimmikCssForPreviewBtnClick({
-			domObj: document,
-			select,
-		});
-	}, []);
+	// // this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
+	// useEffect(() => {
+	// 	mimmikCssForPreviewBtnClick({
+	// 		domObj: document,
+	// 		select,
+	// 	});
+	// }, []);
 
 	const blockProps = useBlockProps({
-		className: `eb-guten-block-main-parent-wrapper`,
+		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
 	});
 
 	/**
@@ -288,8 +294,12 @@ export default function Edit(props) {
 			${wrapperMarginDesktop}
 			${wrapperPaddingDesktop}
 			${wrapperBDShadowDesktop}
+			${wrapperBDShadowDesktop}
+			transition: ${wrapperBDShadowTransitionStyle}, ${wrapperBgTransitionStyle};
 			${wrapperBackgroundStylesDesktop}
-			${wrapperBgTransitionStyle}
+		}
+		.eb-slider-wrapper.${blockId}:hover {
+			${wrapperBDShadowHoverDesktop}
 		}
 	`;
 	const wrapperStylesTab = `
@@ -299,6 +309,9 @@ export default function Edit(props) {
 			${wrapperBDShadowTab}
 			${wrapperBackgroundStylesTab}
 		}
+		.eb-slider-wrapper.${blockId}:hover {
+			${wrapperBDShadowHoverTab}
+		}
 	`;
 	const wrapperStylesMobile = `
 		.eb-parallax-slider-wrapper.${blockId}{
@@ -306,6 +319,9 @@ export default function Edit(props) {
 			${wrapperPaddingMobile}
 			${wrapperBDShadowMobile}
 			${wrapperBackgroundStylesMobile}
+		}
+		.eb-slider-wrapper.${blockId}:hover {
+			${wrapperBDShadowHoverMobile}
 		}
 	`;
 
@@ -368,7 +384,7 @@ export default function Edit(props) {
 			${buttonMarginDesktop}
 			${buttonPaddingDesktop}
 			${buttonBDShadowDesktop}
-			${buttonBDShadowTransitionStyle}
+			transition: ${buttonBDShadowTransitionStyle};
 		}
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {
 			color: ${buttonHoverColor};
@@ -409,23 +425,23 @@ export default function Edit(props) {
 
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStyles = softMinifyCssStrings(`
-		${isCssExists(wrapperStylesDesktop) ? wrapperStylesDesktop : " "}
-		${isCssExists(sliderStyleDesktop) ? sliderStyleDesktop : " "}
-		${isCssExists(sliderContentsStylesDesktop) ? sliderContentsStylesDesktop : " "}
+		${wrapperStylesDesktop}
+		${sliderStyleDesktop}
+		${sliderContentsStylesDesktop}
 	`);
 
 	// all css styles for Tab in strings ⬇
 	const tabAllStyles = softMinifyCssStrings(`
-		${isCssExists(wrapperStylesTab) ? wrapperStylesTab : " "}
-		${isCssExists(sliderStyleTab) ? sliderStyleTab : " "}
-		${isCssExists(sliderContentsStylesTab) ? sliderContentsStylesTab : " "}
+		${wrapperStylesTab}
+		${sliderStyleTab}
+		${sliderContentsStylesTab}
 	`);
 
 	// all css styles for Mobile in strings ⬇
 	const mobileAllStyles = softMinifyCssStrings(`
-		${isCssExists(wrapperStylesMobile) ? wrapperStylesMobile : " "}
-		${isCssExists(sliderStyleMobile) ? sliderStyleMobile : " "}
-		${isCssExists(sliderContentsStylesMobile) ? sliderContentsStylesMobile : " "}
+		${wrapperStylesMobile}
+		${sliderStyleMobile}
+		${sliderContentsStylesMobile}
 	`);
 
 	// Set All Style in "blockMeta" Attribute
@@ -468,7 +484,7 @@ export default function Edit(props) {
 			item.id = image.id;
 			item.src = image.url;
 			item.alt = image.alt;
-			item.title = prevTitle || `Slider ${index+1}`;
+			item.title = prevTitle || `Slider ${index + 1}`;
 			item.btnText = prevBtnText || "Button";
 			item.link = prevLink || "";
 			item.openNewTab = image.openNewTab || true;
@@ -483,7 +499,7 @@ export default function Edit(props) {
 		return (
 			<MediaPlaceholder
 				labels={{
-					title: __("Images"),
+					title: __("Images", "essential-blocks"),
 					instructions: __(
 						"Drag images, upload new ones or select files from your library. Upload minimum 3 images for better design."
 					),
@@ -516,7 +532,7 @@ export default function Edit(props) {
 							render={({ open }) => (
 								<ToolbarButton
 									className="components-toolbar__control"
-									label={__("Edit gallery")}
+									label={__("Edit gallery", "essential-blocks")}
 									icon="edit"
 									onClick={open}
 								/>
@@ -563,7 +579,7 @@ export default function Edit(props) {
 					setAttributes={setAttributes}
 				/>
 			</div>
-			
+
 		</div>
 	]
 };

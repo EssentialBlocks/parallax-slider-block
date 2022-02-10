@@ -1,5 +1,5 @@
-const { registerBlockType } = wp.blocks;
-const { __ } = wp.i18n;
+import { __ } from "@wordpress/i18n";
+
 import "./style.scss";
 
 import Edit from "./edit";
@@ -7,17 +7,20 @@ import save from "./save";
 import attributes from "./attributes";
 import icon from "./icon";
 import Example from "./example";
+import deprecated from "./deprecated";
+import metadata from "../block.json";
+const { ebConditionalRegisterBlockType } = EBParallaxSliderControls;
 
-registerBlockType("parallax-slider-block/parallax-slider-block", {
-	title: __("Parallax Slider", "parallax-slider"),
-	description: __(
-		"Create A Captivating Visual Experience & Impress Your Audience",
-		"parallax-slider"
-	),
-	category: "widgets",
+ebConditionalRegisterBlockType(metadata, {
 	icon,
 	attributes,
 	edit: Edit,
 	save,
+	keywords: [
+		__("Parallax", "essential-blocks"),
+		__("Slider", "essential-blocks"),
+		__("eb Parallax Slider", "essential-blocks"),
+	],
 	example: Example,
+	deprecated,
 });

@@ -1,9 +1,4 @@
 /**
- * WordPress dependencies
- */
-const { useState } = wp.element;
-
-/**
  * Internal dependencies
  */
 import Slide from "./slide";

@@ -9,6 +9,8 @@ export { default as ResponsiveRangeController } from "../controls/src/controls/r
 export { default as TypographyDropdown } from "../controls/src/controls/typography-control-v2";
 export { default as ColorControl } from "../controls/src/controls/color-control";
 
+import "../controls/src/group-controls";
+export { default as AdvancedControls } from "../controls/src/group-controls/components/advanced-controls";
 
 //Export Helper Functions
 export {
@@ -29,5 +31,5 @@ export {
 	generateResponsiveRangeAttributes,
 	textInsideForEdit,
 	getFlipTransform,
-	ebConditionalRegisterBlockType
+	ebConditionalRegisterBlockType,
 } from "../controls/src/helpers";

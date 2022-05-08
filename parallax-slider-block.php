@@ -1,8 +1,9 @@
 <?php
+
 /**
  * Plugin Name:     Parallax Slider Block
  * Description:     Create A Captivating Visual Experience & Impress Your Audience
- * Version:         1.2.0
+ * Version:         1.2.1
  * Author:          WPDeveloper
  * Author URI: 		https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -26,7 +27,7 @@ require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
 function create_block_parallax_slider_block_init()
 {
-  define('PARALLAX_SLIDER_BLOCK_VERSION', "1.2.0");
+  define('PARALLAX_SLIDER_BLOCK_VERSION', "1.2.1");
   define('PARALLAX_SLIDER_BLOCK_ADMIN_URL', plugin_dir_url(__FILE__));
   define('PARALLAX_SLIDER_BLOCK_ADMIN_PATH', dirname(__FILE__));
 
@@ -43,7 +44,8 @@ function create_block_parallax_slider_block_init()
     'wp-i18n',
     'wp-element',
     'wp-block-editor',
-    'parallax-slider-block-controls-util'
+    'parallax-slider-block-controls-util',
+    'essential-blocks-eb-animation'
   ));
 
   wp_register_script(
@@ -54,13 +56,30 @@ function create_block_parallax_slider_block_init()
     true
   );
 
+  $animate_css = PARALLAX_SLIDER_BLOCK_ADMIN_URL . 'lib/css/animate.min.css';
+  wp_register_style(
+    'essential-blocks-animation',
+    $animate_css,
+    array(),
+    PARALLAX_SLIDER_BLOCK_VERSION
+  );
+
   $style_css = PARALLAX_SLIDER_BLOCK_ADMIN_URL . 'dist/style.css';
   //Frontend & Editor Style
   wp_register_style(
     'create-block-parallax-slider-block-frontend-style',
     $style_css,
-    array(),
+    array('essential-blocks-animation'),
     PARALLAX_SLIDER_BLOCK_VERSION
+  );
+
+  $load_animation_js = PARALLAX_SLIDER_BLOCK_ADMIN_URL . 'lib/js/eb-animation-load.js';
+  wp_register_script(
+    'essential-blocks-eb-animation',
+    $load_animation_js,
+    array(),
+    PARALLAX_SLIDER_BLOCK_VERSION,
+    true
   );
 
   //Frontend Style
@@ -76,7 +95,7 @@ function create_block_parallax_slider_block_init()
 
   if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/parallax-slider')) {
     register_block_type(
-		Parallax_Slider_Helper::get_block_register_path("parallax-slider-block/parallax-slider-block", PARALLAX_SLIDER_BLOCK_ADMIN_PATH),
+      Parallax_Slider_Helper::get_block_register_path("parallax-slider-block/parallax-slider-block", PARALLAX_SLIDER_BLOCK_ADMIN_PATH),
       array(
         'editor_script'  => 'create-block-parallax-slider-block-editor-script',
         'editor_style'   => 'create-block-parallax-slider-block-frontend-style',
@@ -84,6 +103,7 @@ function create_block_parallax_slider_block_init()
           if (!is_admin()) {
             wp_enqueue_style('create-block-parallax-slider-block-frontend-style');
             wp_enqueue_script('parallax-slider-block-frontend-js');
+            wp_enqueue_script('essential-blocks-eb-animation');
           }
           return $content;
         }

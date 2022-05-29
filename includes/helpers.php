@@ -59,6 +59,16 @@ class Parallax_Slider_Helper
                 'rest_rootURL' => get_rest_url(),
             ));
 
+            if ($hook == 'post-new.php' || $hook == 'post.php') {
+                wp_localize_script('parallax-slider-block-controls-util', 'eb_conditional_localize', array(
+                    'editor_type' => 'edit-post'
+                ));
+            } else if ($hook == 'site-editor.php') {
+                wp_localize_script('parallax-slider-block-controls-util', 'eb_conditional_localize', array(
+                    'editor_type' => 'edit-site'
+                ));
+            }
+
             wp_enqueue_style(
                 'essential-blocks-editor-css',
                 PARALLAX_SLIDER_BLOCK_ADMIN_URL . '/dist/controls.css',
@@ -70,7 +80,7 @@ class Parallax_Slider_Helper
     }
     public static function get_block_register_path($blockname, $blockPath)
     {
-        if ( (float) get_bloginfo('version') <= 5.6) {
+        if ((float) get_bloginfo('version') <= 5.6) {
             return $blockname;
         } else {
             return $blockPath;

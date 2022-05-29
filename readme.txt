@@ -88,6 +88,11 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
+= 1.2.1 - dev =
+* Added: Animation, responsive control and custom CSS option 
+* Fixed: Duplicate class name error 
+* Improved: Update controls
+
 = 1.2.0 - 10/02/2022 =
 * Fixed: Block Base theme support
 * Improved: Font Library Updated

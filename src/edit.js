@@ -290,195 +290,195 @@ export default function Edit(props) {
 
 	// wrapper styles css in strings ⬇
 	const wrapperStylesDesktop = `
-		 .eb-parallax-slider-wrapper.${blockId}{
-			 ${wrapperMarginDesktop}
-			 ${wrapperPaddingDesktop}
-			 ${wrapperBDShadowDesktop}
-			 ${wrapperBDShadowDesktop}
-			 transition: ${wrapperBDShadowTransitionStyle}, ${wrapperBgTransitionStyle};
-			 ${wrapperBackgroundStylesDesktop}
-		 }
-		 .eb-slider-wrapper.${blockId}:hover {
-			 ${wrapperBDShadowHoverDesktop}
-		 }
-	 `;
+		.eb-parallax-slider-wrapper.${blockId}{
+			${wrapperMarginDesktop}
+			${wrapperPaddingDesktop}
+			${wrapperBDShadowDesktop}
+			${wrapperBDShadowDesktop}
+			transition: ${wrapperBDShadowTransitionStyle}, ${wrapperBgTransitionStyle};
+			${wrapperBackgroundStylesDesktop}
+		}
+		.eb-slider-wrapper.${blockId}:hover {
+			${wrapperBDShadowHoverDesktop}
+		}
+	`;
 	const wrapperStylesTab = `
-		 .eb-parallax-slider-wrapper.${blockId}{
-			 ${wrapperMarginTab}
-			 ${wrapperPaddingTab}
-			 ${wrapperBDShadowTab}
-			 ${wrapperBackgroundStylesTab}
-		 }
-		 .eb-slider-wrapper.${blockId}:hover {
-			 ${wrapperBDShadowHoverTab}
-		 }
-	 `;
+		.eb-parallax-slider-wrapper.${blockId}{
+			${wrapperMarginTab}
+			${wrapperPaddingTab}
+			${wrapperBDShadowTab}
+			${wrapperBackgroundStylesTab}
+		}
+		.eb-slider-wrapper.${blockId}:hover {
+			${wrapperBDShadowHoverTab}
+		}
+	`;
 	const wrapperStylesMobile = `
-		 .eb-parallax-slider-wrapper.${blockId}{
-			 ${wrapperMarginMobile}
-			 ${wrapperPaddingMobile}
-			 ${wrapperBDShadowMobile}
-			 ${wrapperBackgroundStylesMobile}
-		 }
-		 .eb-slider-wrapper.${blockId}:hover {
-			 ${wrapperBDShadowHoverMobile}
-		 }
-	 `;
+		.eb-parallax-slider-wrapper.${blockId}{
+			${wrapperMarginMobile}
+			${wrapperPaddingMobile}
+			${wrapperBDShadowMobile}
+			${wrapperBackgroundStylesMobile}
+		}
+		.eb-slider-wrapper.${blockId}:hover {
+			${wrapperBDShadowHoverMobile}
+		}
+	`;
 
 	const sliderStyleDesktop = `
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider {
-			 ${isCustomHeight ? sliderHeightDesktop : ""}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
-			 align-items: ${horizontalAlign};
-			 justify-content: ${verticalAlign};
-			 margin-left: ${
-					slidesGapDesktop.replace(/\D/g, "") / 2
-				}${slidesGapDesktop.match(/px|em|%/g)};
-					 margin-right: ${
-							slidesGapDesktop.replace(/\D/g, "") / 2
-						}${slidesGapDesktop.match(/px|em|%/g)};
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper {
-			 padding: initial;
-			 margin-left: -${
-					slidesGapDesktop.replace(/\D/g, "") / 2
-				}${slidesGapDesktop.match(/px|em|%/g)}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
-			 ${slidesBorderRadiusDesktop}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__content {
-			 ${contentPaddingDesktop}
-		 }
-	 `;
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider {
+			${isCustomHeight ? sliderHeightDesktop : ""}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
+			align-items: ${horizontalAlign};
+			justify-content: ${verticalAlign};
+			margin-left: ${slidesGapDesktop.replace(/\D/g, "") / 2}${
+		slidesGapDesktop.match(/px|em|%/g) || "px"
+	};
+					margin-right: ${slidesGapDesktop.replace(/\D/g, "") / 2}${
+		slidesGapDesktop.match(/px|em|%/g) || "px"
+	};
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper {
+			padding: initial;
+			margin-left: -${slidesGapDesktop.replace(/\D/g, "") / 2}${
+		slidesGapDesktop.match(/px|em|%/g) || "px"
+	}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
+			${slidesBorderRadiusDesktop}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__content {
+			${contentPaddingDesktop}
+		}
+	`;
 	const sliderStyleTab = `
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container {
-			 height: auto;
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider {
-			 ${isCustomHeight ? sliderHeightTab : ""}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
-			 margin-left: ${slidesGapTab.replace(/\D/g, "") / 2}${slidesGapTab.match(
-		/px|em|%/g
-	)};
-					 margin-right: ${slidesGapTab.replace(/\D/g, "") / 2}${slidesGapTab.match(
-		/px|em|%/g
-	)};
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper {
-			 padding: initial;
-			 margin-left: -${slidesGapTab.replace(/\D/g, "") / 2}${slidesGapTab.match(
-		/px|em|%/g
-	)}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
-			 ${slidesBorderRadiusTab}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__content {
-			 ${contentPaddingTab}
-		 }
-	 `;
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container {
+			height: auto;
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider {
+			${isCustomHeight ? sliderHeightTab : ""}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
+			margin-left: ${slidesGapTab.replace(/\D/g, "") / 2}${
+		slidesGapTab.match(/px|em|%/g) || "px"
+	};
+					margin-right: ${slidesGapTab.replace(/\D/g, "") / 2}${
+		slidesGapTab.match(/px|em|%/g) || "px"
+	};
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper {
+			padding: initial;
+			margin-left: -${slidesGapTab.replace(/\D/g, "") / 2}${
+		slidesGapTab.match(/px|em|%/g) || "px"
+	}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
+			${slidesBorderRadiusTab}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__content {
+			${contentPaddingTab}
+		}
+	`;
 	const sliderStyleMobile = `
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider {
-			 ${isCustomHeight ? sliderHeightMobile : ""}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
-			 margin-left: ${slidesGapMobile.replace(/\D/g, "") / 2}${slidesGapMobile.match(
-		/px|em|%/g
-	)};
-					 margin-right: ${slidesGapMobile.replace(/\D/g, "") / 2}${slidesGapMobile.match(
-		/px|em|%/g
-	)};
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper {
-			 padding: initial;
-			 margin-left: -${slidesGapMobile.replace(/\D/g, "") / 2}${slidesGapMobile.match(
-		/px|em|%/g
-	)}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
-			 ${slidesBorderRadiusMobile}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__content {
-			 ${contentPaddingMobile}
-		 }
-	 `;
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider {
+			${isCustomHeight ? sliderHeightMobile : ""}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
+			margin-left: ${slidesGapMobile.replace(/\D/g, "") / 2}${
+		slidesGapMobile.match(/px|em|%/g) || "px"
+	};
+					margin-right: ${slidesGapMobile.replace(/\D/g, "") / 2}${
+		slidesGapMobile.match(/px|em|%/g) || "px"
+	};
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper {
+			padding: initial;
+			margin-left: -${slidesGapMobile.replace(/\D/g, "") / 2}${
+		slidesGapMobile.match(/px|em|%/g) || "px"
+	}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
+			${slidesBorderRadiusMobile}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__content {
+			${contentPaddingMobile}
+		}
+	`;
 
 	const sliderContentsStylesDesktop = `
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {
-			 color: ${titleColor};
-			 background-color: ${titleBackgroundColor};
-			 ${titleTypographyDesktop}
-			 ${titleMarginDesktop}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {
-			 color: ${buttonColor};
-			 background-color: ${buttonBackgroundColor};
-			 ${buttonTypographyDesktop}
-			 ${buttonMarginDesktop}
-			 ${buttonPaddingDesktop}
-			 ${buttonBDShadowDesktop}
-			 transition: ${buttonBDShadowTransitionStyle};
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {
-			 color: ${buttonHoverColor};
-			 background-color: ${buttonHoverBackgroundColor};
-			 ${buttonBDShadowHoverDesktop}
-		 }
-	 `;
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {
+			color: ${titleColor};
+			background-color: ${titleBackgroundColor};
+			${titleTypographyDesktop}
+			${titleMarginDesktop}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {
+			color: ${buttonColor};
+			background-color: ${buttonBackgroundColor};
+			${buttonTypographyDesktop}
+			${buttonMarginDesktop}
+			${buttonPaddingDesktop}
+			${buttonBDShadowDesktop}
+			transition: ${buttonBDShadowTransitionStyle};
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {
+			color: ${buttonHoverColor};
+			background-color: ${buttonHoverBackgroundColor};
+			${buttonBDShadowHoverDesktop}
+		}
+	`;
 	const sliderContentsStylesTab = `
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {
-			 ${titleTypographyTab}
-			 ${titleMarginTab}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {
-			 ${buttonTypographyTab}
-			 ${buttonMarginTab}
-			 ${buttonPaddingTab}
-			 ${buttonBDShadowTab}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {
-			 ${buttonBDShadowHoverTab}
-		 }
-	 `;
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {
+			${titleTypographyTab}
+			${titleMarginTab}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {
+			${buttonTypographyTab}
+			${buttonMarginTab}
+			${buttonPaddingTab}
+			${buttonBDShadowTab}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {
+			${buttonBDShadowHoverTab}
+		}
+	`;
 	const sliderContentsStylesMobile = `
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {
-			 ${titleTypographyMobile}
-			 ${titleMarginMobile}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {
-			 ${buttonTypographyMobile}
-			 ${buttonMarginMobile}
-			 ${buttonPaddingMobile}
-			 ${buttonBDShadowMobile}
-		 }
-		 .eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {
-			 ${buttonBDShadowHoverMobile}
-		 }
-	 `;
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__headline {
+			${titleTypographyMobile}
+			${titleMarginMobile}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action {
+			${buttonTypographyMobile}
+			${buttonMarginMobile}
+			${buttonPaddingMobile}
+			${buttonBDShadowMobile}
+		}
+		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__action:hover {
+			${buttonBDShadowHoverMobile}
+		}
+	`;
 
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStyles = softMinifyCssStrings(`
-		 ${wrapperStylesDesktop}
-		 ${sliderStyleDesktop}
-		 ${sliderContentsStylesDesktop}
-	 `);
+		${wrapperStylesDesktop}
+		${sliderStyleDesktop}
+		${sliderContentsStylesDesktop}
+	`);
 
 	// all css styles for Tab in strings ⬇
 	const tabAllStyles = softMinifyCssStrings(`
-		 ${wrapperStylesTab}
-		 ${sliderStyleTab}
-		 ${sliderContentsStylesTab}
-	 `);
+		${wrapperStylesTab}
+		${sliderStyleTab}
+		${sliderContentsStylesTab}
+	`);
 
 	// all css styles for Mobile in strings ⬇
 	const mobileAllStyles = softMinifyCssStrings(`
-		 ${wrapperStylesMobile}
-		 ${sliderStyleMobile}
-		 ${sliderContentsStylesMobile}
-	 `);
+		${wrapperStylesMobile}
+		${sliderStyleMobile}
+		${sliderContentsStylesMobile}
+	`);
 
 	// Set All Style in "blockMeta" Attribute
 	useEffect(() => {
@@ -579,31 +579,31 @@ export default function Edit(props) {
 			<div {...blockProps}>
 				<style>
 					{`
-				 ${desktopAllStyles}
- 
-				 /* mimmikcssStart */ 
- 
-				 ${resOption === "Tablet" ? tabAllStyles : " "}
-				 ${resOption === "Mobile" ? tabAllStyles + mobileAllStyles : " "}
- 
-				 /* mimmikcssEnd */
- 
-				 @media all and (max-width: 1024px) {	
- 
-					 /* tabcssStart */			
-					 ${softMinifyCssStrings(tabAllStyles)}
-					 /* tabcssEnd */			
-				 
-				 }
-				 
-				 @media all and (max-width: 767px) {
-					 
-					 /* mobcssStart */			
-					 ${softMinifyCssStrings(mobileAllStyles)}
-					 /* mobcssEnd */			
-				 
-				 }
-				 `}
+				${desktopAllStyles}
+
+				/* mimmikcssStart */ 
+
+				${resOption === "Tablet" ? tabAllStyles : " "}
+				${resOption === "Mobile" ? tabAllStyles + mobileAllStyles : " "}
+
+				/* mimmikcssEnd */
+
+				@media all and (max-width: 1024px) {	
+
+					/* tabcssStart */			
+					${softMinifyCssStrings(tabAllStyles)}
+					/* tabcssEnd */			
+				
+				}
+				
+				@media all and (max-width: 767px) {
+					
+					/* mobcssStart */			
+					${softMinifyCssStrings(mobileAllStyles)}
+					/* mobcssEnd */			
+				
+				}
+				`}
 				</style>
 				<div className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}>
 					<div className={`eb-parallax-slider-wrapper ${blockId}`}>

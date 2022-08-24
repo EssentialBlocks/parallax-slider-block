@@ -57,11 +57,6 @@ const {
 	AdvancedControls,
 } = window.EBParallaxSliderControls;
 
-const editorStoreForGettingPreivew =
-	eb_conditional_localize.editor_type === "edit-site"
-		? "core/edit-site"
-		: "core/edit-post";
-
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		resOption,
@@ -79,35 +74,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 		horizontalAlign,
 		verticalAlign,
 	} = attributes;
-
-	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
-	useEffect(() => {
-		setAttributes({
-			resOption: select(
-				editorStoreForGettingPreivew
-			).__experimentalGetPreviewDeviceType(),
-		});
-	}, []);
-
-	// // this useEffect is for mimmiking css for all the eb blocks on resOption changing
-	// useEffect(() => {
-	// 	mimmikCssForResBtns({
-	// 		domObj: document,
-	// 		resOption,
-	// 	});
-	// }, [resOption]);
-
-	// // this useEffect is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
-	// useEffect(() => {
-	// 	const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
-	// 		domObj: document,
-	// 		select,
-	// 		setAttributes,
-	// 	});
-	// 	return () => {
-	// 		cleanUp();
-	// 	};
-	// }, []);
 
 	const resRequiredProps = {
 		setAttributes,
@@ -204,7 +170,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 										{sliderData.map((slide, index) => (
 											<PanelBody
 												key={index}
-												title={`Slide ${index + 1} Settings`}
 												title={
 													slide.title && slide.title.length > 0
 														? slide.title
@@ -405,8 +370,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 										<BorderShadowControl
 											controlName={BUTTON_BORDER_SHADOW}
 											resRequiredProps={resRequiredProps}
-											// noShadow
-											// noBorder
+										// noShadow
+										// noBorder
 										/>
 										<TypographyDropdown
 											baseLabel={__("Typography", "essential-blocks")}
@@ -455,8 +420,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 										<BorderShadowControl
 											controlName={WRAPPER_BORDER_SHADOW}
 											resRequiredProps={resRequiredProps}
-											// noShadow
-											// noBorder
+										// noShadow
+										// noBorder
 										/>
 									</PanelBody>
 

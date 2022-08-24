@@ -53,11 +53,6 @@ const {
 	duplicateBlockIdFix,
 } = window.EBParallaxSliderControls;
 
-const editorStoreForGettingPreivew =
-	eb_conditional_localize.editor_type === "edit-site"
-		? "core/edit-site"
-		: "core/edit-post";
-
 function getPreviousImgData(previousData, image) {
 	let prevTitle, prevBtnText, prevLink;
 	previousData.map((item) => {
@@ -90,15 +85,6 @@ export default function Edit(props) {
 		verticalAlign,
 		classHook,
 	} = attributes;
-
-	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
-	useEffect(() => {
-		setAttributes({
-			resOption: select(
-				editorStoreForGettingPreivew
-			).__experimentalGetPreviewDeviceType(),
-		});
-	}, []);
 
 	// this useEffect is for creating a unique id for each block's unique className by a random unique number
 	useEffect(() => {
@@ -332,18 +318,18 @@ export default function Edit(props) {
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
 			align-items: ${horizontalAlign};
 			justify-content: ${verticalAlign};
-			margin-left: ${slidesGapDesktop.replace(/\D/g, "") / 2}${
-		slidesGapDesktop.match(/px|em|%/g) || "px"
-	};
-					margin-right: ${slidesGapDesktop.replace(/\D/g, "") / 2}${
-		slidesGapDesktop.match(/px|em|%/g) || "px"
-	};
+			margin-left: ${slidesGapDesktop.replace(/\D/g, "") / 2}${slidesGapDesktop.match(
+		/px|em|%/g
+	)};
+					margin-right: ${
+						slidesGapDesktop.replace(/\D/g, "") / 2
+					}${slidesGapDesktop.match(/px|em|%/g)};
 		}
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper {
 			padding: initial;
-			margin-left: -${slidesGapDesktop.replace(/\D/g, "") / 2}${
-		slidesGapDesktop.match(/px|em|%/g) || "px"
-	}
+			margin-left: -${
+				slidesGapDesktop.replace(/\D/g, "") / 2
+			}${slidesGapDesktop.match(/px|em|%/g)}
 		}
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
 			${slidesBorderRadiusDesktop}
@@ -360,18 +346,18 @@ export default function Edit(props) {
 			${isCustomHeight ? sliderHeightTab : ""}
 		}
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
-			margin-left: ${slidesGapTab.replace(/\D/g, "") / 2}${
-		slidesGapTab.match(/px|em|%/g) || "px"
-	};
-					margin-right: ${slidesGapTab.replace(/\D/g, "") / 2}${
-		slidesGapTab.match(/px|em|%/g) || "px"
-	};
+			margin-left: ${slidesGapTab.replace(/\D/g, "") / 2}${slidesGapTab.match(
+		/px|em|%/g
+	)};
+					margin-right: ${slidesGapTab.replace(/\D/g, "") / 2}${slidesGapTab.match(
+		/px|em|%/g
+	)};
 		}
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper {
 			padding: initial;
-			margin-left: -${slidesGapTab.replace(/\D/g, "") / 2}${
-		slidesGapTab.match(/px|em|%/g) || "px"
-	}
+			margin-left: -${slidesGapTab.replace(/\D/g, "") / 2}${slidesGapTab.match(
+		/px|em|%/g
+	)}
 		}
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
 			${slidesBorderRadiusTab}
@@ -385,18 +371,18 @@ export default function Edit(props) {
 			${isCustomHeight ? sliderHeightMobile : ""}
 		}
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper li {
-			margin-left: ${slidesGapMobile.replace(/\D/g, "") / 2}${
-		slidesGapMobile.match(/px|em|%/g) || "px"
-	};
-					margin-right: ${slidesGapMobile.replace(/\D/g, "") / 2}${
-		slidesGapMobile.match(/px|em|%/g) || "px"
-	};
+			margin-left: ${slidesGapMobile.replace(/\D/g, "") / 2}${slidesGapMobile.match(
+		/px|em|%/g
+	)};
+					margin-right: ${slidesGapMobile.replace(/\D/g, "") / 2}${slidesGapMobile.match(
+		/px|em|%/g
+	)};
 		}
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper {
 			padding: initial;
-			margin-left: -${slidesGapMobile.replace(/\D/g, "") / 2}${
-		slidesGapMobile.match(/px|em|%/g) || "px"
-	}
+			margin-left: -${slidesGapMobile.replace(/\D/g, "") / 2}${slidesGapMobile.match(
+		/px|em|%/g
+	)}
 		}
 		.eb-parallax-slider-wrapper.${blockId} .eb-parallax-container .eb-parallax-slider .eb-parallax-wrapper .slide .slide__image-wrapper {
 			${slidesBorderRadiusMobile}

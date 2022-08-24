@@ -90,7 +90,7 @@ Yes, it will work with any standard WordPress theme.
 
 = 1.2.2 - dev =
 * Fixed: Slides gap issue
-* Added: Converted style-handler to php for working perfectly with Reusable blocks and FSE
+* Improved: Controls and structure
 
 = 1.2.1 - 29/05/2022 =
 * Added: Animation, responsive control and custom CSS option

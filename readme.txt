@@ -88,7 +88,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.2 - dev =
+= 1.2.2 - 13/09/2022 =
 * Fixed: Slides gap issue
 * Improved: Controls and structure
 

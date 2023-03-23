@@ -49,7 +49,7 @@ const attributes = {
 	},
 	sliderStyle: {
 		type: "string",
-		default: "style-1"
+		default: "style-1",
 	},
 	sliderData: {
 		type: "array",
@@ -65,7 +65,7 @@ const attributes = {
 	},
 	isCustomHeight: {
 		type: "boolean",
-		default: true
+		default: true,
 	},
 	current: {
 		type: "number",
@@ -77,11 +77,11 @@ const attributes = {
 	},
 	titleColor: {
 		type: "string",
-		default: "#ffffff"
+		default: "#ffffff",
 	},
 	titleBackgroundColor: {
 		type: "string",
-		default: "rgba(135,92,255,0)"
+		default: "rgba(135,92,255,0)",
 	},
 	buttonColorType: {
 		type: "string",
@@ -89,26 +89,26 @@ const attributes = {
 	},
 	buttonBackgroundColor: {
 		type: "string",
-		default: "rgba(135,92,255,.8)"
+		default: "rgba(135,92,255,.8)",
 	},
 	buttonColor: {
 		type: "string",
-		default: "#fffff"
+		default: "#fffff",
 	},
 	buttonHoverBackgroundColor: {
 		type: "string",
-		default: "rgba(135,92,255,.95)"
+		default: "rgba(135,92,255,.95)",
 	},
 	buttonHoverColor: {
 		type: "string",
 	},
 	horizontalAlign: {
 		type: "string",
-		default: "center"
+		default: "center",
 	},
 	verticalAlign: {
 		type: "string",
-		default: "center"
+		default: "center",
 	},
 
 	// typography attributes ⬇
@@ -174,7 +174,7 @@ const attributes = {
 		defaultBgGradient: "linear-gradient(45deg,#ffffff,#ffffff)",
 		noOverlay: true,
 	}),
-	
+
 	// range controller Slider Height
 	...generateResponsiveRangeAttributes(CUSTOM_HEIGHT, {
 		defaultRange: 400,

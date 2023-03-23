@@ -370,8 +370,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 										<BorderShadowControl
 											controlName={BUTTON_BORDER_SHADOW}
 											resRequiredProps={resRequiredProps}
-										// noShadow
-										// noBorder
+											// noShadow
+											// noBorder
 										/>
 										<TypographyDropdown
 											baseLabel={__("Typography", "essential-blocks")}
@@ -420,8 +420,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 										<BorderShadowControl
 											controlName={WRAPPER_BORDER_SHADOW}
 											resRequiredProps={resRequiredProps}
-										// noShadow
-										// noBorder
+											// noShadow
+											// noBorder
 										/>
 									</PanelBody>
 

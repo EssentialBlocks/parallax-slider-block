@@ -567,27 +567,27 @@ export default function Edit(props) {
 					{`
 				${desktopAllStyles}
 
-				/* mimmikcssStart */ 
+				/* mimmikcssStart */
 
 				${resOption === "Tablet" ? tabAllStyles : " "}
 				${resOption === "Mobile" ? tabAllStyles + mobileAllStyles : " "}
 
 				/* mimmikcssEnd */
 
-				@media all and (max-width: 1024px) {	
+				@media all and (max-width: 1024px) {
 
-					/* tabcssStart */			
+					/* tabcssStart */
 					${softMinifyCssStrings(tabAllStyles)}
-					/* tabcssEnd */			
-				
+					/* tabcssEnd */
+
 				}
-				
+
 				@media all and (max-width: 767px) {
-					
-					/* mobcssStart */			
+
+					/* mobcssStart */
 					${softMinifyCssStrings(mobileAllStyles)}
-					/* mobcssEnd */			
-				
+					/* mobcssEnd */
+
 				}
 				`}
 				</style>

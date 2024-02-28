@@ -44,7 +44,7 @@ function create_block_parallax_slider_block_init() {
         'wp-element',
         'wp-block-editor',
         'parallax-slider-block-controls-util',
-        'essential-blocks-eb-animation'
+        'essential-blocks-eb-animation',
     ] );
 
     wp_register_script(

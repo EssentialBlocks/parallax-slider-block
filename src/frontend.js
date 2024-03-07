@@ -1,7 +1,7 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 	let sliders = document.querySelectorAll(".eb-parallax-container");
 
-	sliders.forEach(function(slider) {
+	sliders.forEach(function (slider) {
 		let startIndex = parseInt(slider.getAttribute("data-start-index"), 10) || 1;
 		let intensity = slider.getAttribute("data-intensity");
 		let hasShadow = slider.getAttribute("data-shadow");
@@ -19,13 +19,14 @@ document.addEventListener("DOMContentLoaded", function() {
 		function onButtonClick(event) {
 			event.preventDefault();
 			let link = this.getAttribute("data-link");
+			link = link.replace('javascript:', '');
 			let openNewTab = this.getAttribute("data-new-tab");
 			if (link) {
 				if (openNewTab === "true") {
 					window.open(link, "_blank");
 				}
 				else {
-					window.open(link,"_self");
+					window.open(link, "_self");
 				}
 			}
 		}
@@ -36,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 
 		function removeAllClasses() {
-			slides.forEach(function(slide) {
+			slides.forEach(function (slide) {
 				slide.classList.remove(
 					"slide--previous",
 					"slide--current",
@@ -116,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		 * Dom manipulation
 		 */
 
-		slides.forEach(function(slide) {
+		slides.forEach(function (slide) {
 			// Set current, next, previous classes
 			addCssClasses(current - 1, current, current + 1);
 
@@ -139,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 
 		// Button click event
-		buttons.forEach(function(button) {
+		buttons.forEach(function (button) {
 			button.addEventListener("click", onButtonClick);
 		});
 	});

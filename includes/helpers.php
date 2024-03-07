@@ -47,11 +47,11 @@ class Parallax_Slider_Helper
          */
         if ($pagenow == 'post-new.php' || $pagenow == 'post.php' || $pagenow == 'site-editor.php' || ($pagenow == 'themes.php' && !empty($_SERVER['QUERY_STRING']) && str_contains($_SERVER['QUERY_STRING'], 'gutenberg-edit-site'))) {
 
-            $controls_dependencies = include_once PARALLAX_SLIDER_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
+            $controls_dependencies = include_once PARALLAX_SLIDER_BLOCK_ADMIN_PATH . '/dist/modules.asset.php';
             wp_register_script(
                 "parallax-slider-block-controls-util",
-                PARALLAX_SLIDER_BLOCK_ADMIN_URL . '/dist/controls.js',
-                array_merge($controls_dependencies['dependencies']),
+                PARALLAX_SLIDER_BLOCK_ADMIN_URL . '/dist/modules.js',
+                array_merge($controls_dependencies['dependencies'],['lodash']),
                 $controls_dependencies['version'],
                 true
             );
@@ -73,7 +73,7 @@ class Parallax_Slider_Helper
 
             wp_enqueue_style(
                 'essential-blocks-editor-css',
-                PARALLAX_SLIDER_BLOCK_ADMIN_URL . '/dist/controls.css',
+                PARALLAX_SLIDER_BLOCK_ADMIN_URL . '/dist/modules.css',
                 array(),
                 $controls_dependencies['version'],
                 'all'

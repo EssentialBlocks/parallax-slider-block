@@ -1,5 +1,5 @@
 //Export All Controls
-import "../controls/src/backend-css";
+import "../controls/src/backend.scss";
 
 //Export All Controls
 export { default as BackgroundControl } from "../controls/src/controls/background-control";
@@ -32,4 +32,5 @@ export {
 	textInsideForEdit,
 	getFlipTransform,
 	ebConditionalRegisterBlockType,
+	StyleComponent
 } from "../controls/src/helpers";

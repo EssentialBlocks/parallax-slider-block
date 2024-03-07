@@ -13,7 +13,6 @@ import {
 	TabPanel,
 	RangeControl,
 	TextControl,
-	ColorPalette,
 } from "@wordpress/components";
 import { select } from "@wordpress/data";
 
@@ -40,10 +39,7 @@ import {
 	GAP_UNIT_TYPES,
 	COLORS,
 } from "./constants/constants";
-import {
-	TITLE_TYPOGRAPHY,
-	BUTTON_TYPOGRAPHY,
-} from "./constants/typography-constant";
+import { TITLE_TYPOGRAPHY, BUTTON_TYPOGRAPHY } from "./constants/typography-constant";
 
 import objAttributes from "./attributes";
 
@@ -88,6 +84,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 		setAttributes({ sliderData: updatedData });
 	};
+
+	const validUrl = (type, value, index) => {
+		let updatedData = [...sliderData];
+		if ('link' === type) {
+			value = value.replace('javascript:', '');
+		}
+		updatedData[index][type] = value;
+
+		setAttributes({ sliderData: updatedData });
+	}
 
 	const handlePanelClick = (index) => {
 		let updatedIndex = index !== current ? index : 1;
@@ -136,7 +142,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 											label={__("Custom Height", "essential-blocks")}
 											checked={isCustomHeight}
 											onChange={() =>
-												setAttributes({ isCustomHeight: !isCustomHeight })
+												setAttributes({
+													isCustomHeight: !isCustomHeight,
+												})
 											}
 										/>
 
@@ -163,10 +171,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										/>
 									</PanelBody>
 
-									<PanelBody
-										title={__("Slides", "essential-blocks")}
-										initialOpen={false}
-									>
+									<PanelBody title={__("Slides", "essential-blocks")} initialOpen={false}>
 										{sliderData.map((slide, index) => (
 											<PanelBody
 												key={index}
@@ -182,36 +187,27 @@ const Inspector = ({ attributes, setAttributes }) => {
 												<TextControl
 													label={__("Title Text", "essential-blocks")}
 													value={slide.title}
-													onChange={(title) =>
-														handleTextChange("title", title, index)
-													}
+													onChange={(title) => handleTextChange("title", title, index)}
 												/>
 
 												<TextControl
 													label={__("Button Text", "essential-blocks")}
 													value={slide.btnText}
-													onChange={(btnText) =>
-														handleTextChange("btnText", btnText, index)
-													}
+													onChange={(btnText) => handleTextChange("btnText", btnText, index)}
 												/>
 
 												<TextControl
 													label={__("Button Link", "essential-blocks")}
 													value={slide.link}
-													onChange={(link) =>
-														handleTextChange("link", link, index)
-													}
+													onChange={(link) => handleTextChange("link", link, index)}
+													onBlur={(val) => validUrl('link', val.target.value, index)}
 												/>
 
 												<ToggleControl
 													label={__("Open in New Tab", "essential-blocks")}
 													checked={slide.openNewTab}
 													onChange={() =>
-														handleTextChange(
-															"openNewTab",
-															!slide.openNewTab,
-															index
-														)
+														handleTextChange("openNewTab", !slide.openNewTab, index)
 													}
 												/>
 											</PanelBody>
@@ -222,10 +218,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 							{tab.name === "styles" && (
 								<>
-									<PanelBody
-										title={__("Slides Style", "essential-blocks")}
-										initialOpen={true}
-									>
+									<PanelBody title={__("Slides Style", "essential-blocks")} initialOpen={true}>
 										<PanelRow>Content Horizontal Align</PanelRow>
 										<ButtonGroup>
 											{HORIZONTAL_ALIGN.map((item, index) => (
@@ -234,7 +227,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 													isPrimary={horizontalAlign === item.value}
 													isSecondary={horizontalAlign !== item.value}
 													onClick={() =>
-														setAttributes({ horizontalAlign: item.value })
+														setAttributes({
+															horizontalAlign: item.value,
+														})
 													}
 												>
 													{item.label}
@@ -250,7 +245,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 													isPrimary={verticalAlign === item.value}
 													isSecondary={verticalAlign !== item.value}
 													onClick={() =>
-														setAttributes({ verticalAlign: item.value })
+														setAttributes({
+															verticalAlign: item.value,
+														})
 													}
 												>
 													{item.label}
@@ -275,21 +272,23 @@ const Inspector = ({ attributes, setAttributes }) => {
 										/>
 									</PanelBody>
 
-									<PanelBody
-										title={__("Title Style", "essential-blocks")}
-										initialOpen={false}
-									>
-										<PanelRow>Color</PanelRow>
-										<ColorPalette
-											colors={COLORS}
-											value={titleColor}
-											onChange={(color) => setAttributes({ titleColor: color })}
+									<PanelBody title={__("Title Style", "essential-blocks")} initialOpen={false}>
+										<ColorControl
+											label={__("Color", "essential-blocks")}
+											color={titleColor}
+											onChange={(color) =>
+												setAttributes({
+													titleColor: color,
+												})
+											}
 										/>
 										<ColorControl
 											label={__("Background Color", "essential-blocks")}
 											color={titleBackgroundColor}
 											onChange={(color) =>
-												setAttributes({ titleBackgroundColor: color })
+												setAttributes({
+													titleBackgroundColor: color,
+												})
 											}
 										/>
 
@@ -305,10 +304,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										/>
 									</PanelBody>
 
-									<PanelBody
-										title={__("Button Styles", "essential-blocks")}
-										initialOpen={false}
-									>
+									<PanelBody title={__("Button Styles", "essential-blocks")} initialOpen={false}>
 										<ButtonGroup className="eb-inspector-btn-group">
 											{NORMAL_HOVER.map((item, index) => (
 												<Button
@@ -316,7 +312,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 													isPrimary={buttonColorType === item.value}
 													isSecondary={buttonColorType !== item.value}
 													onClick={() =>
-														setAttributes({ buttonColorType: item.value })
+														setAttributes({
+															buttonColorType: item.value,
+														})
 													}
 												>
 													{item.label}
@@ -326,19 +324,22 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{buttonColorType === "normal" && (
 											<>
-												<PanelRow>Color</PanelRow>
-												<ColorPalette
-													colors={COLORS}
-													value={buttonColor}
+												<ColorControl
+													label={__("Color", "essential-blocks")}
+													color={buttonColor}
 													onChange={(color) =>
-														setAttributes({ buttonColor: color })
+														setAttributes({
+															buttonColor: color,
+														})
 													}
 												/>
 												<ColorControl
 													label={__("Background Color", "essential-blocks")}
 													color={buttonBackgroundColor}
 													onChange={(color) =>
-														setAttributes({ buttonBackgroundColor: color })
+														setAttributes({
+															buttonBackgroundColor: color,
+														})
 													}
 												/>
 											</>
@@ -346,22 +347,22 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{buttonColorType === "hover" && (
 											<>
-												<PanelRow>Hover Color</PanelRow>
-												<ColorPalette
-													colors={COLORS}
-													value={buttonHoverColor}
+												<ColorControl
+													label={__("Hover Color", "essential-blocks")}
+													color={buttonHoverColor}
 													onChange={(color) =>
-														setAttributes({ buttonHoverColor: color })
+														setAttributes({
+															buttonHoverColor: color,
+														})
 													}
 												/>
 												<ColorControl
-													label={__(
-														"Hover Background Color",
-														"essential-blocks"
-													)}
+													label={__("Hover Background Color", "essential-blocks")}
 													color={buttonHoverBackgroundColor}
 													onChange={(color) =>
-														setAttributes({ buttonHoverBackgroundColor: color })
+														setAttributes({
+															buttonHoverBackgroundColor: color,
+														})
 													}
 												/>
 											</>
@@ -370,8 +371,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 										<BorderShadowControl
 											controlName={BUTTON_BORDER_SHADOW}
 											resRequiredProps={resRequiredProps}
-											// noShadow
-											// noBorder
+										// noShadow
+										// noBorder
 										/>
 										<TypographyDropdown
 											baseLabel={__("Typography", "essential-blocks")}
@@ -406,10 +407,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 											baseLabel="Padding"
 										/>
 									</PanelBody>
-									<PanelBody
-										title={__("Background", "essential-blocks")}
-										initialOpen={false}
-									>
+									<PanelBody title={__("Background", "essential-blocks")} initialOpen={false}>
 										<BackgroundControl
 											controlName={WRAPPER_BG}
 											resRequiredProps={resRequiredProps}
@@ -420,15 +418,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 										<BorderShadowControl
 											controlName={WRAPPER_BORDER_SHADOW}
 											resRequiredProps={resRequiredProps}
-											// noShadow
-											// noBorder
+										// noShadow
+										// noBorder
 										/>
 									</PanelBody>
 
-									<AdvancedControls
-										attributes={attributes}
-										setAttributes={setAttributes}
-									/>
+									<AdvancedControls attributes={attributes} setAttributes={setAttributes} />
 								</>
 							)}
 						</div>

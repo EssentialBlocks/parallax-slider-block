@@ -47,7 +47,7 @@ class Parallax_Slider_Helper
          */
         if ($pagenow == 'post-new.php' || $pagenow == 'post.php' || $pagenow == 'site-editor.php' || ($pagenow == 'themes.php' && !empty($_SERVER['QUERY_STRING']) && str_contains($_SERVER['QUERY_STRING'], 'gutenberg-edit-site'))) {
 
-            $controls_dependencies = include_once PARALLAX_SLIDER_BLOCK_ADMIN_PATH . '/dist/modules.asset.php';
+            $controls_dependencies = require PARALLAX_SLIDER_BLOCK_ADMIN_PATH . '/dist/modules.asset.php';
             wp_register_script(
                 "parallax-slider-block-controls-util",
                 PARALLAX_SLIDER_BLOCK_ADMIN_URL . '/dist/modules.js',

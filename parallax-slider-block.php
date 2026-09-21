@@ -3,7 +3,10 @@
 /**
  * Plugin Name:     Parallax Slider Block
  * Description:     Create A Captivating Visual Experience & Impress Your Audience
- * Version:         1.2.7
+ * Version:         1.2.8
+ * Requires at least: 6.0
+ * Tested up to:    7.1
+ * Requires PHP:    7.4
  * Author:          WPDeveloper
  * Author URI:         https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -12,6 +15,11 @@
  *
  * @package         parallax-slider-block
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 
 /**
  * Registers all block assets so that they can be enqueued through the block editor
@@ -23,10 +31,13 @@
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
 require_once __DIR__ . '/includes/helpers.php';
-require_once __DIR__ . '/lib/style-handler/style-handler.php';
+// Git submodule: may be empty in a fresh clone until `git submodule update --init` is run.
+if ( file_exists( __DIR__ . '/lib/style-handler/style-handler.php' ) ) {
+    require_once __DIR__ . '/lib/style-handler/style-handler.php';
+}
 
 function create_block_parallax_slider_block_init() {
-    define( 'PARALLAX_SLIDER_BLOCK_VERSION', "1.2.7" );
+    define( 'PARALLAX_SLIDER_BLOCK_VERSION', "1.2.8" );
     define( 'PARALLAX_SLIDER_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
     define( 'PARALLAX_SLIDER_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 

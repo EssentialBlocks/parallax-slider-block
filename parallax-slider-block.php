@@ -119,6 +119,22 @@ function create_block_parallax_slider_block_init() {
                 }
             ]
         );
+
+        // Blocks saved by 1.0.x use the "block/parallax-slider" name. The editor
+        // migrates them (src/legacy-block.js); until a post is re-saved, keep them
+        // working on the frontend. Current styles are scoped to the wrapper class.
+        register_block_type(
+            'block/parallax-slider',
+            [
+                'render_callback' => function ( $attributes, $content ) {
+                    if ( ! is_admin() ) {
+                        wp_enqueue_style( 'create-block-parallax-slider-block-frontend-style' );
+                        wp_enqueue_script( 'parallax-slider-block-frontend-js' );
+                    }
+                    return '<div class="eb-parallax-slider-wrapper">' . $content . '</div>';
+                }
+            ]
+        );
     }
 }
 add_action( 'init', 'create_block_parallax_slider_block_init', 99 );

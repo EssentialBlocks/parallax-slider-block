@@ -136,7 +136,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		// Add button shadow class
 		if (hasShadow == "true") {
-			buttons.classList.add("btn-has-shadow");
+			buttons.forEach(function (button) {
+				button.classList.add("btn-has-shadow");
+			});
 		}
 
 		// Button click event

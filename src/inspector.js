@@ -7,6 +7,7 @@ import { InspectorControls } from "@wordpress/block-editor";
 import {
 	PanelBody,
 	PanelRow,
+	BaseControl,
 	ToggleControl,
 	Button,
 	ButtonGroup,
@@ -220,40 +221,44 @@ const Inspector = ({ attributes, setAttributes }) => {
 								<>
 									<PanelBody title={__("Slides Style", "essential-blocks")} initialOpen={true}>
 										<PanelRow>Content Horizontal Align</PanelRow>
-										<ButtonGroup>
-											{HORIZONTAL_ALIGN.map((item, index) => (
-												<Button
-													key={index}
-													isPrimary={horizontalAlign === item.value}
-													isSecondary={horizontalAlign !== item.value}
-													onClick={() =>
-														setAttributes({
-															horizontalAlign: item.value,
-														})
-													}
-												>
-													{item.label}
-												</Button>
-											))}
-										</ButtonGroup>
+										<BaseControl>
+											<ButtonGroup>
+												{HORIZONTAL_ALIGN.map((item, index) => (
+													<Button
+														key={index}
+														isPrimary={horizontalAlign === item.value}
+														isSecondary={horizontalAlign !== item.value}
+														onClick={() =>
+															setAttributes({
+																horizontalAlign: item.value,
+															})
+														}
+													>
+														{item.label}
+													</Button>
+												))}
+											</ButtonGroup>
+										</BaseControl>
 
 										<PanelRow>Content Vertical Align</PanelRow>
-										<ButtonGroup className="eb-margin-bottom-20">
-											{VERTICAL_ALIGN.map((item, index) => (
-												<Button
-													key={index}
-													isPrimary={verticalAlign === item.value}
-													isSecondary={verticalAlign !== item.value}
-													onClick={() =>
-														setAttributes({
-															verticalAlign: item.value,
-														})
-													}
-												>
-													{item.label}
-												</Button>
-											))}
-										</ButtonGroup>
+										<BaseControl>
+											<ButtonGroup className="eb-margin-bottom-20">
+												{VERTICAL_ALIGN.map((item, index) => (
+													<Button
+														key={index}
+														isPrimary={verticalAlign === item.value}
+														isSecondary={verticalAlign !== item.value}
+														onClick={() =>
+															setAttributes({
+																verticalAlign: item.value,
+															})
+														}
+													>
+														{item.label}
+													</Button>
+												))}
+											</ButtonGroup>
+										</BaseControl>
 
 										<ResponsiveDimensionsControl
 											resRequiredProps={resRequiredProps}

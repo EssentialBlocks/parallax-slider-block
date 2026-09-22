@@ -56,9 +56,20 @@ class Parallax_Slider_Helper
                 true
             );
 
+            // The editor wraps tablet/mobile styles in media queries built from these;
+            // use the same breakpoints the style handler uses for the frontend CSS.
+            $responsive_breakpoints = array('tablet' => 1024, 'mobile' => 767);
+            if (class_exists('EbStyleHandlerParseCss')) {
+                $responsive_breakpoints = array(
+                    'tablet' => EbStyleHandlerParseCss::get_responsive_breakpoints('tablet'),
+                    'mobile' => EbStyleHandlerParseCss::get_responsive_breakpoints('mobile'),
+                );
+            }
+
             wp_localize_script('parallax-slider-block-controls-util', 'EssentialBlocksLocalize', array(
                 'eb_wp_version' => (float) get_bloginfo('version'),
                 'rest_rootURL' => get_rest_url(),
+                'responsiveBreakpoints' => $responsive_breakpoints,
             ));
 
             if ($pagenow == 'post-new.php' || $pagenow == 'post.php') {

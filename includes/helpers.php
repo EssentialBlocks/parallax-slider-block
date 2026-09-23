@@ -58,8 +58,10 @@ class Parallax_Slider_Helper
 
             // The editor wraps tablet/mobile styles in media queries built from these;
             // use the same breakpoints the style handler uses for the frontend CSS.
+            // EbStyleHandlerParseCss is shared (class_exists-guarded) across EB-family
+            // plugins, so an older copy loaded by another plugin may lack this method.
             $responsive_breakpoints = array('tablet' => 1024, 'mobile' => 767);
-            if (class_exists('EbStyleHandlerParseCss')) {
+            if (method_exists('EbStyleHandlerParseCss', 'get_responsive_breakpoints')) {
                 $responsive_breakpoints = array(
                     'tablet' => EbStyleHandlerParseCss::get_responsive_breakpoints('tablet'),
                     'mobile' => EbStyleHandlerParseCss::get_responsive_breakpoints('mobile'),

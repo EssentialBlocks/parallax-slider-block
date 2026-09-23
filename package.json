@@ -1,10 +1,12 @@
 {
 	"name": "parallax-slider",
-	"version": "1.2.6",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
-	"author": "The WordPress Contributors",
-	"license": "GPL-2.0-or-later",
-	"main": "Gruntfile.js",
+	"version": "1.2.8",
+	"description": "Create A Captivating Visual Experience & Impress Your Audience",
+	"author": "WPDeveloper",
+	"license": "GPL-3.0-or-later",
+	"engines": {
+		"node": ">=24"
+	},
 	"scripts": {
 		"start": "wp-scripts start",
 		"build": "wp-scripts build",

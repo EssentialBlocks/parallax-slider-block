@@ -3,6 +3,5 @@
 	"title": "Parallax Slider",
 	"category": "widgets",
 	"description": "Create A Captivating Visual Experience & Impress Your Audience",
-	"textdomain": "parallax-slider-block",
-	"editorScript": "file:./dist/index.js"
+	"textdomain": "parallax-slider-block"
 }

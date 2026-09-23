@@ -1,9 +1,10 @@
 === Parallax Slider Block ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, jamilbd07, rahat89
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89, RahatSheikhLeon
 Tags: gutenberg, block, blocks, editor, progress, progress bar, skill bar, responsive progress bar, animated skillbar, animated progress bar, skill-bars, percentage bar, chart bar, graph bar, gutenberg blocks
-Requires at least: 5.6
-Tested up to: 6.4
-Stable tag: 1.2.6
+Requires at least: 6.0
+Tested up to: 7.1
+Requires PHP: 7.4
+Stable tag: 1.2.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,11 +83,21 @@ Visit [WPDeveloper](https://wpdeveloper.com/) to learn more about how to do bett
 
 Yes, it will work with any standard WordPress theme.
 
-
 == Screenshots ==
 
 
 == Changelog ==
+
+= 1.2.8 - 23/09/2026 =
+* Fixed: PHP 8.0–8.5 compatibility issues
+* Fixed: WordPress version detection
+* Fixed: Asset loading issues on newer WordPress versions
+* Improved: Asset loading and overall stability
+* Tested up to WordPress 7.1.2
+
+= 1.2.7 - 15/04/2024 =
+* Fixed: compatibility support with wordpress 6.5 version
+* Improved: controls
 
 = 1.2.6 - 07/03/2024 =
 * Improved: Security enhancement

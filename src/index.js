@@ -8,6 +8,7 @@ import attributes from "./attributes";
 import icon from "./icon";
 import Example from "./example";
 import deprecated from "./deprecated";
+import "./legacy-block";
 import metadata from "../block.json";
 const { ebConditionalRegisterBlockType } = EBParallaxSliderControls;
 

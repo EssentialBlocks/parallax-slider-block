@@ -47,7 +47,7 @@ class Parallax_Slider_Helper
          */
         if ($pagenow == 'post-new.php' || $pagenow == 'post.php' || $pagenow == 'site-editor.php' || ($pagenow == 'themes.php' && !empty($_SERVER['QUERY_STRING']) && str_contains($_SERVER['QUERY_STRING'], 'gutenberg-edit-site'))) {
 
-            $controls_dependencies = include_once PARALLAX_SLIDER_BLOCK_ADMIN_PATH . '/dist/modules.asset.php';
+            $controls_dependencies = require PARALLAX_SLIDER_BLOCK_ADMIN_PATH . '/dist/modules.asset.php';
             wp_register_script(
                 "parallax-slider-block-controls-util",
                 PARALLAX_SLIDER_BLOCK_ADMIN_URL . '/dist/modules.js',
@@ -56,9 +56,22 @@ class Parallax_Slider_Helper
                 true
             );
 
+            // The editor wraps tablet/mobile styles in media queries built from these;
+            // use the same breakpoints the style handler uses for the frontend CSS.
+            // EbStyleHandlerParseCss is shared (class_exists-guarded) across EB-family
+            // plugins, so an older copy loaded by another plugin may lack this method.
+            $responsive_breakpoints = array('tablet' => 1024, 'mobile' => 767);
+            if (method_exists('EbStyleHandlerParseCss', 'get_responsive_breakpoints')) {
+                $responsive_breakpoints = array(
+                    'tablet' => EbStyleHandlerParseCss::get_responsive_breakpoints('tablet'),
+                    'mobile' => EbStyleHandlerParseCss::get_responsive_breakpoints('mobile'),
+                );
+            }
+
             wp_localize_script('parallax-slider-block-controls-util', 'EssentialBlocksLocalize', array(
                 'eb_wp_version' => (float) get_bloginfo('version'),
                 'rest_rootURL' => get_rest_url(),
+                'responsiveBreakpoints' => $responsive_breakpoints,
             ));
 
             if ($pagenow == 'post-new.php' || $pagenow == 'post.php') {

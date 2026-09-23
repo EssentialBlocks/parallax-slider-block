@@ -227,8 +227,9 @@ export default function Style(props) {
 			transition: ${wrapperBDShadowTransitionStyle}, ${wrapperBgTransitionStyle};
 			${wrapperBackgroundStylesDesktop}
 		}
-		.eb-slider-wrapper.${blockId}:hover {
+		.eb-parallax-slider-wrapper.${blockId}:hover {
 			${wrapperBDShadowHoverDesktop}
+			${wrapperHoverBackgroundStylesDesktop}
 		}
 	`;
     const wrapperStylesTab = `
@@ -238,8 +239,9 @@ export default function Style(props) {
 			${wrapperBDShadowTab}
 			${wrapperBackgroundStylesTab}
 		}
-		.eb-slider-wrapper.${blockId}:hover {
+		.eb-parallax-slider-wrapper.${blockId}:hover {
 			${wrapperBDShadowHoverTab}
+			${wrapperHoverBackgroundStylesTab}
 		}
 	`;
     const wrapperStylesMobile = `
@@ -249,8 +251,9 @@ export default function Style(props) {
 			${wrapperBDShadowMobile}
 			${wrapperBackgroundStylesMobile}
 		}
-		.eb-slider-wrapper.${blockId}:hover {
+		.eb-parallax-slider-wrapper.${blockId}:hover {
 			${wrapperBDShadowHoverMobile}
+			${wrapperHoverBackgroundStylesMobile}
 		}
 	`;
 

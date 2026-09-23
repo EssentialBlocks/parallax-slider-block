@@ -229,6 +229,7 @@ export default function Style(props) {
 		}
 		.eb-parallax-slider-wrapper.${blockId}:hover {
 			${wrapperBDShadowHoverDesktop}
+			${wrapperHoverBackgroundStylesDesktop}
 		}
 	`;
     const wrapperStylesTab = `
@@ -240,6 +241,7 @@ export default function Style(props) {
 		}
 		.eb-parallax-slider-wrapper.${blockId}:hover {
 			${wrapperBDShadowHoverTab}
+			${wrapperHoverBackgroundStylesTab}
 		}
 	`;
     const wrapperStylesMobile = `
@@ -251,6 +253,7 @@ export default function Style(props) {
 		}
 		.eb-parallax-slider-wrapper.${blockId}:hover {
 			${wrapperBDShadowHoverMobile}
+			${wrapperHoverBackgroundStylesMobile}
 		}
 	`;
 

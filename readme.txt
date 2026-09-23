@@ -88,8 +88,13 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.8 - 21/09/2026 =
-* Fixed: PHP 8.x and WordPress 7.1 compatibility issues
+= 1.2.8 - 23/09/2026 =
+* Fixed: PHP 8.0–8.5 compatibility issues
+* Fixed: WordPress version detection
+* Fixed: PHP 7.x compatibility
+* Fixed: Asset loading issues on newer WordPress versions
+* Improved: Asset loading and overall stability
+* Tested up to WordPress 7.1
 
 = 1.2.7 - 15/04/2024 =
 * Fixed: compatibility support with wordpress 6.5 version

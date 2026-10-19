@@ -1,3 +1,5 @@
+import isAllowedLink from "./allowed-link";
+
 document.addEventListener("DOMContentLoaded", function () {
 	let sliders = document.querySelectorAll(".eb-parallax-container");
 
@@ -19,11 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		function onButtonClick(event) {
 			event.preventDefault();
 			let link = this.getAttribute("data-link");
-			link = link.replace('javascript:', '');
 			let openNewTab = this.getAttribute("data-new-tab");
-			if (link) {
+			if (link && isAllowedLink(link)) {
 				if (openNewTab === "true") {
-					window.open(link, "_blank");
+					window.open(link, "_blank", "noopener");
 				}
 				else {
 					window.open(link, "_self");

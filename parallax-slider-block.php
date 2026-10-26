@@ -3,7 +3,7 @@
 /**
  * Plugin Name:     Parallax Slider Block
  * Description:     Create A Captivating Visual Experience & Impress Your Audience
- * Version:         1.2.8
+ * Version:         1.2.9
  * Requires at least: 6.0
  * Tested up to:    7.1
  * Requires PHP:    7.4
@@ -29,7 +29,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 
 require_once __DIR__ . '/includes/font-loader.php';
-require_once __DIR__ . '/includes/post-meta.php';
 require_once __DIR__ . '/includes/helpers.php';
 // Git submodule: may be empty in a fresh clone until `git submodule update --init` is run.
 if ( file_exists( __DIR__ . '/lib/style-handler/style-handler.php' ) ) {
@@ -37,7 +36,7 @@ if ( file_exists( __DIR__ . '/lib/style-handler/style-handler.php' ) ) {
 }
 
 function create_block_parallax_slider_block_init() {
-    define( 'PARALLAX_SLIDER_BLOCK_VERSION', "1.2.8" );
+    define( 'PARALLAX_SLIDER_BLOCK_VERSION', "1.2.9" );
     define( 'PARALLAX_SLIDER_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
     define( 'PARALLAX_SLIDER_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
@@ -115,7 +114,7 @@ function create_block_parallax_slider_block_init() {
                         wp_enqueue_script( 'parallax-slider-block-frontend-js' );
                         wp_enqueue_script( 'essential-blocks-eb-animation' );
                     }
-                    return $content;
+                    return Parallax_Slider_Helper::sanitize_links( $content );
                 }
             ]
         );
@@ -131,7 +130,7 @@ function create_block_parallax_slider_block_init() {
                         wp_enqueue_style( 'create-block-parallax-slider-block-frontend-style' );
                         wp_enqueue_script( 'parallax-slider-block-frontend-js' );
                     }
-                    return '<div class="eb-parallax-slider-wrapper">' . $content . '</div>';
+                    return '<div class="eb-parallax-slider-wrapper">' . Parallax_Slider_Helper::sanitize_links( $content ) . '</div>';
                 }
             ]
         );

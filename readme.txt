@@ -4,7 +4,7 @@ Tags: gutenberg, block, blocks, editor, progress, progress bar, skill bar, respo
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -64,6 +64,16 @@ Consider checking out our other WordPress solutions & boost your WordPress websi
 
 Visit [WPDeveloper](https://wpdeveloper.com/) to learn more about how to do better in WordPress with [Help Tutorial, Tips & Tricks](https://wpdeveloper.com/blog).
 
+== External services ==
+
+This plugin connects to Google Fonts to load the fonts you pick in a Parallax Slider block's typography settings.
+
+* What it is used for: displaying the selected font on the front end of your site.
+* When data is sent: on every front-end page that contains a Parallax Slider block whose typography uses any font family other than Default.
+* What is sent: the visitor's browser requests the stylesheet from fonts.googleapis.com and the font files from fonts.gstatic.com, so Google receives the visitor's IP address, user agent and the referring page, together with the requested font family names.
+
+The service is provided by Google: [Terms of Service](https://policies.google.com/terms), [Privacy Policy](https://policies.google.com/privacy).
+
 == Installation ==
 
 = Modern Way: =
@@ -87,6 +97,13 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.2.9 - 19/10/2026 =
+* Security: Hardened slide button links and block style generation
+* Fixed: Animation stylesheet replaced with animate.css 3.7.2 (MIT licence)
+* Removed: Unused `_eb_attr` post meta registration
+* Improved: Release package no longer includes source maps, build tooling or the unused frontend helper script
+* Added: External services section documenting Google Fonts
 
 = 1.2.8 - 23/09/2026 =
 * Fixed: PHP 8.0–8.5 compatibility issues

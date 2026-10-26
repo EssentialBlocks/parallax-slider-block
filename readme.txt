@@ -98,12 +98,9 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.9 - 19/10/2026 =
-* Security: Hardened slide button links and block style generation
-* Fixed: Animation stylesheet replaced with animate.css 3.7.2 (MIT licence)
-* Removed: Unused `_eb_attr` post meta registration
-* Improved: Release package no longer includes source maps, build tooling or the unused frontend helper script
-* Added: External services section documenting Google Fonts
+= 1.2.9 - 26/10/2026 =
+* Improved: Security enhancements
+* Few minor bug fixes & improvements
 
 = 1.2.8 - 23/09/2026 =
 * Fixed: PHP 8.0–8.5 compatibility issues

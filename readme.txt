@@ -98,7 +98,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.2.9 - 26/10/2026 =
+= 1.2.9 - 27/10/2026 =
 * Improved: Security enhancements
 * Few minor bug fixes & improvements
 

@@ -102,39 +102,47 @@ function create_block_parallax_slider_block_init() {
         true
     );
 
-    if ( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/parallax-slider' ) ) {
-        register_block_type(
-            Parallax_Slider_Helper::get_block_register_path( "parallax-slider-block/parallax-slider-block", PARALLAX_SLIDER_BLOCK_ADMIN_PATH ),
-            [
-                'editor_script'   => 'create-block-parallax-slider-block-editor-script',
-                'editor_style'    => 'create-block-parallax-slider-block-frontend-style',
-                'render_callback' => function ( $attributes, $content ) {
-                    if ( ! is_admin() ) {
-                        wp_enqueue_style( 'create-block-parallax-slider-block-frontend-style' );
-                        wp_enqueue_script( 'parallax-slider-block-frontend-js' );
-                        wp_enqueue_script( 'essential-blocks-eb-animation' );
-                    }
-                    return Parallax_Slider_Helper::sanitize_links( $content );
-                }
-            ]
-        );
+    $eb_has_block = WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/parallax-slider' );
+    $block_args   = [
+        'editor_script'   => 'create-block-parallax-slider-block-editor-script',
+        'editor_style'    => 'create-block-parallax-slider-block-frontend-style',
+        'render_callback' => function ( $attributes, $content ) {
+            if ( ! is_admin() ) {
+                wp_enqueue_style( 'create-block-parallax-slider-block-frontend-style' );
+                wp_enqueue_script( 'parallax-slider-block-frontend-js' );
+                wp_enqueue_script( 'essential-blocks-eb-animation' );
+            }
+            return Parallax_Slider_Helper::sanitize_links( $content );
+        }
+    ];
 
-        // Blocks saved by 1.0.x use the "block/parallax-slider" name. The editor
-        // migrates them (src/legacy-block.js); until a post is re-saved, keep them
-        // working on the frontend. Current styles are scoped to the wrapper class.
-        register_block_type(
-            'block/parallax-slider',
-            [
-                'render_callback' => function ( $attributes, $content ) {
-                    if ( ! is_admin() ) {
-                        wp_enqueue_style( 'create-block-parallax-slider-block-frontend-style' );
-                        wp_enqueue_script( 'parallax-slider-block-frontend-js' );
-                    }
-                    return '<div class="eb-parallax-slider-wrapper">' . Parallax_Slider_Helper::sanitize_links( $content ) . '</div>';
-                }
-            ]
-        );
+    // Essential Blocks has its own version of this block under another name. Posts saved
+    // with this one still need its render callback and front-end assets, so keep it
+    // registered, but leave out the editor bundle, which can't run beside Essential Blocks.
+    if ( $eb_has_block ) {
+        unset( $block_args['editor_script'], $block_args['editor_style'] );
     }
+
+    register_block_type(
+        Parallax_Slider_Helper::get_block_register_path( "parallax-slider-block/parallax-slider-block", PARALLAX_SLIDER_BLOCK_ADMIN_PATH ),
+        $block_args
+    );
+
+    // Blocks saved by 1.0.x use the "block/parallax-slider" name. The editor
+    // migrates them (src/legacy-block.js); until a post is re-saved, keep them
+    // working on the frontend. Current styles are scoped to the wrapper class.
+    register_block_type(
+        'block/parallax-slider',
+        [
+            'render_callback' => function ( $attributes, $content ) {
+                if ( ! is_admin() ) {
+                    wp_enqueue_style( 'create-block-parallax-slider-block-frontend-style' );
+                    wp_enqueue_script( 'parallax-slider-block-frontend-js' );
+                }
+                return '<div class="eb-parallax-slider-wrapper">' . Parallax_Slider_Helper::sanitize_links( $content ) . '</div>';
+            }
+        ]
+    );
 }
 add_action( 'init', 'create_block_parallax_slider_block_init', 99 );
 

@@ -98,6 +98,13 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
+= 1.2.10 - 02/11/2026 =
+* Improved: Security enhancements
+* Fixed: Existing Parallax Slider blocks stopped working on the front end when Essential Blocks is active
+* Fixed: Animated blocks appeared without playing their animation when Essential Blocks is active
+* Fixed: Legacy Parallax Slider blocks not registering when Essential Blocks is active
+* Fixed: Editor sidebar controls conflicting with other plugins' styles
+
 = 1.2.9 - 27/10/2026 =
 * Improved: Security enhancements
 * Few minor bug fixes & improvements

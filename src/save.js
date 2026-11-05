@@ -34,13 +34,15 @@ const Save = ({ attributes }) => {
 										</div>
 										<article className="slide__content">
 											<h2 className="slide__headline">{slide.title}</h2>
-											<button
-												className="slide__action btn"
-												data-link={slide.link}
-												data-new-tab={slide.openNewTab}
-											>
-												{slide.btnText}
-											</button>
+											{slide.showBtn !== false && (
+												<button
+													className="slide__action btn"
+													data-link={slide.link}
+													data-new-tab={slide.openNewTab}
+												>
+													{slide.btnText}
+												</button>
+											)}
 										</article>
 									</li>
 								))}

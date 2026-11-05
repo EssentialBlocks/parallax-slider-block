@@ -31,16 +31,17 @@ const {
 } = window.EBParallaxSliderControls;
 
 function getPreviousImgData(previousData, image) {
-	let prevTitle, prevBtnText, prevLink;
+	let prevTitle, prevBtnText, prevLink, prevShowBtn;
 	previousData.map((item) => {
 		if (item.id === image.id) {
 			prevTitle = item.title;
 			prevBtnText = item.btnText;
 			prevLink = item.link;
+			prevShowBtn = item.showBtn;
 		}
 	});
 
-	return [prevTitle, prevBtnText, prevLink];
+	return [prevTitle, prevBtnText, prevLink, prevShowBtn];
 }
 
 export default function Edit(props) {
@@ -90,10 +91,8 @@ export default function Edit(props) {
 			let item = {};
 
 			// Get previous image info after updating gallary
-			let [prevTitle, prevBtnText, prevLink] = getPreviousImgData(
-				previousData,
-				image
-			);
+			let [prevTitle, prevBtnText, prevLink, prevShowBtn] =
+				getPreviousImgData(previousData, image);
 
 			item.id = image.id;
 			item.src = image.url;
@@ -101,6 +100,7 @@ export default function Edit(props) {
 			item.title = prevTitle || `Slider ${index + 1}`;
 			item.btnText = prevBtnText || "Button";
 			item.link = prevLink || "";
+			item.showBtn = prevShowBtn !== false;
 			item.openNewTab = image.openNewTab || true;
 
 			sliderData.push(item);

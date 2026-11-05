@@ -191,26 +191,38 @@ const Inspector = ({ attributes, setAttributes }) => {
 													onChange={(title) => handleTextChange("title", title, index)}
 												/>
 
-												<TextControl
-													label={__("Button Text", "essential-blocks")}
-													value={slide.btnText}
-													onChange={(btnText) => handleTextChange("btnText", btnText, index)}
-												/>
-
-												<TextControl
-													label={__("Button Link", "essential-blocks")}
-													value={slide.link}
-													onChange={(link) => handleTextChange("link", link, index)}
-													onBlur={(val) => validUrl('link', val.target.value, index)}
-												/>
-
 												<ToggleControl
-													label={__("Open in New Tab", "essential-blocks")}
-													checked={slide.openNewTab}
+													label={__("Show Button", "essential-blocks")}
+													checked={slide.showBtn !== false}
 													onChange={() =>
-														handleTextChange("openNewTab", !slide.openNewTab, index)
+														handleTextChange("showBtn", slide.showBtn === false, index)
 													}
 												/>
+
+												{slide.showBtn !== false && (
+													<>
+														<TextControl
+															label={__("Button Text", "essential-blocks")}
+															value={slide.btnText}
+															onChange={(btnText) => handleTextChange("btnText", btnText, index)}
+														/>
+
+														<TextControl
+															label={__("Button Link", "essential-blocks")}
+															value={slide.link}
+															onChange={(link) => handleTextChange("link", link, index)}
+															onBlur={(val) => validUrl('link', val.target.value, index)}
+														/>
+
+														<ToggleControl
+															label={__("Open in New Tab", "essential-blocks")}
+															checked={slide.openNewTab}
+															onChange={() =>
+																handleTextChange("openNewTab", !slide.openNewTab, index)
+															}
+														/>
+													</>
+												)}
 											</PanelBody>
 										))}
 									</PanelBody>

@@ -58,12 +58,14 @@ const Slide = ({ slide, position, handleSlideClick, attributes }) => {
 				<h2 className="slide__headline">
 					{slide.title}
 				</h2>
-				<button
-					className={`slide__action btn ${hasBtnShadow ? "btn-has-shadow" : ""
-						} `}
-				>
-					{slide.btnText}
-				</button>
+				{slide.showBtn !== false && (
+					<button
+						className={`slide__action btn ${hasBtnShadow ? "btn-has-shadow" : ""
+							} `}
+					>
+						{slide.btnText}
+					</button>
+				)}
 			</article>
 		</li>
 	);

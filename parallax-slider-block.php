@@ -3,7 +3,7 @@
 /**
  * Plugin Name:     Parallax Slider Block
  * Description:     Create A Captivating Visual Experience & Impress Your Audience
- * Version:         1.2.9
+ * Version:         1.2.10
  * Requires at least: 6.0
  * Tested up to:    7.1
  * Requires PHP:    7.4
@@ -36,7 +36,7 @@ if ( file_exists( __DIR__ . '/lib/style-handler/style-handler.php' ) ) {
 }
 
 function create_block_parallax_slider_block_init() {
-    define( 'PARALLAX_SLIDER_BLOCK_VERSION', "1.2.9" );
+    define( 'PARALLAX_SLIDER_BLOCK_VERSION', "1.2.10" );
     define( 'PARALLAX_SLIDER_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
     define( 'PARALLAX_SLIDER_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 

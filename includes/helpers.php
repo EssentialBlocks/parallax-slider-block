@@ -85,7 +85,7 @@ class Parallax_Slider_Helper
             }
 
             wp_enqueue_style(
-                'essential-blocks-editor-css',
+                'parallax-slider-block-controls-css',
                 PARALLAX_SLIDER_BLOCK_ADMIN_URL . '/dist/modules.css',
                 array(),
                 $controls_dependencies['version'],
